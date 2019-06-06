@@ -46,8 +46,8 @@ class InputSpinner extends Component {
      * @param num
      * @returns {*}
      */
-    parseNum(num){
-        if(this.props.type === 'float'){
+    parseNum(num) {
+        if (this.props.type === 'float') {
             num = parseFloat(num);
             num = parseFloat(num.toFixed(this.props.precision));
         } else {
@@ -79,15 +79,6 @@ class InputSpinner extends Component {
      * @returns {*}
      */
     render() {
-
-        let inputStyle = {
-            color: this.props.textColor,
-            fontSize: this.props.fontSize,
-            borderColor: this.props.showBorder ? this.props.color : 'transparent',
-            backgroundColor: this.props.background,
-            height: this.props.height
-        };
-
         return (
             <View style={[SpinnerStyle.container, this.props.style,
                 {borderColor: this.props.showBorder ? this.props.color : 'transparent'},
@@ -105,10 +96,17 @@ class InputSpinner extends Component {
 
                 </TouchableOpacity>
 
-                <TextInput style={[SpinnerStyle.numberText, this.props.inputStyle, inputStyle]}
-                           value={String(this.state.value)}
-                           keyboardType={'numeric'}
-                           onChangeText={this.onChange.bind(this)}/>
+                <TextInput
+                    style={[SpinnerStyle.numberText, this.props.inputStyle,
+                        {color: this.props.textColor},
+                        {fontSize: this.props.fontSize},
+                        {borderColor: this.props.showBorder ? this.props.color : 'transparent'},
+                        {backgroundColor: this.props.background},
+                        {height: this.props.height}]}
+                    value={String(this.state.value)}
+                    editable={!this.props.disabled}
+                    keyboardType={'numeric'}
+                    onChangeText={this.onChange.bind(this)}/>
 
                 <TouchableOpacity
                     style={[SpinnerStyle.button, this.props.buttonStyle,

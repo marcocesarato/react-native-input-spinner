@@ -16,7 +16,7 @@ react-native-input-spinner
 
 ## Description
 
-An extendible input number spinner component for react-native. 
+An extendible input number spinner component for react-native.
 
 This component enhance a text input for entering numeric values, with increase and decrease buttons.
 
@@ -34,13 +34,11 @@ npm install react-native-input-spinner --save
 include InputSpinner from 'react-native-input-spinner';
 
 // Use
-<InputSpinner 
-		max={10}
-        min={2}
-        value={5}
-        color="#f60"
-        numColor="#f60"
-        onChange={(num)=>{console.log(num)}}
+<InputSpinner
+	max={10}
+	min={2}
+	value={this.state.number}
+	onChange={(num)=>{console.log(num)}}
 ```
 
 ## Screenshot
@@ -53,22 +51,21 @@ Property          | Description | Type | Default | Note
 ------------------|-------------|------|---------|-------
 max               | Max number permitted | Number | 0  |
 min               | Min value permitted | Number | 99 |
-type            | Type of spinner | Number | Int | Can be `float` or `int` 
+type            | Type of spinner | Number | Int | Can be `float` or `int`
 precision            | Max numbers permitted after comma | Integer | 2 |
 offset            | Value to increment or decrement the current spinner value | Number | 1 |
-value             | Controlled value of the Spinner | Number | 0 | If `value` is defined, then the value can change only via the property. This means that `onNumChange` must be defined and change external state.
-color             | Custom color of the Spinner | String | ‘#3e525f' |
-textColor          | Custom number color | String | ‘#000000' |
-background        | Background color of number button | String | ’transparent' |
-onChange       | Get the number of the Spinner | Function | |
-showBorder        | Show the border of the Spinner or not | Boolean | false |
+value             | Controlled value of the Spinner | Number | 0 | If `value` is defined, then the value can change only via the property. This means that `onChange` must be defined and change external state. |
 disabled          | Disable the Spinner or not | Boolean | false |
-fontSize          | Custom fontSize of the text input in the Spinner | Number | 14 |
-buttonFontSize        | Custom fontSize of buttons in the Spinner | Number | 14 |
-buttonTextColor   | Custom color of the button in the Spinner | String | 'white' |
+onChange       | Get the number of the Spinner | Function | |
 width             | Custom width of the Spinner | Number | 150 |
 height            | Custom height of the Spinner | Number | 50 |
 style | Container style | Object |  |
 buttonStyle | Button Style | Object |  |
 inputStyle | InputStyle | Object |  |
-
+color             | Custom color of the Spinner | String | ‘#3e525f' |
+textColor          | Custom number color | String | ‘#000000' |
+background        | Background color of number button | String | ’transparent' |
+showBorder        | Show the border of the Spinner or not | Boolean | false |
+fontSize          | Custom fontSize of the text input in the Spinner | Number | 14 |
+buttonFontSize        | Custom fontSize of buttons in the Spinner | Number | 14 |
+buttonTextColor   | Custom color of the button in the Spinner | String | 'white' |
