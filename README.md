@@ -18,7 +18,7 @@ react-native-input-spinner
 
 An extendible input number spinner component for react-native. 
 
-This componenr enhance a text input for entering numeric values, with up/down buttons and arrow key handling.
+This component enhance a text input for entering numeric values, with increase and decrease buttons.
 
 
 ## Install
