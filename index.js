@@ -15,10 +15,17 @@ class InputSpinner extends Component {
      */
     constructor(props) {
         super(props);
+
+        let spinner_offset = this.parseNum(this.props.offset);
+        if(!this.typeDecimal() && spinner_offset < 1){
+            spinner_offset = 1;
+        }
+
         this.state = {
             min: this.parseNum(this.props.min),
             max: this.parseNum(this.props.max),
-            value: this.parseNum(this.props.value)
+            value: this.parseNum(this.props.value),
+            offset: spinner_offset,
         };
     }
 
@@ -28,9 +35,13 @@ class InputSpinner extends Component {
      */
     onChange(num) {
         if (this.state.disabled) return;
-        if (this.state.min <= this.state.value && num >= this.state.min) {
-            num = this.parseNum(String(num).replace(/^0+/, ''), 10) || 0;
-            if (this.state.max <= num) num = this.state.max;
+        num = this.parseNum(String(num).replace(/^0+/, '')) || 0;
+        if (num >= this.state.min) {
+
+            if (this.state.max <= num) {
+                num = this.state.max;
+            }
+
             this.setState({value: num});
             if (this.props.onChange) {
                 this.props.onChange(num);
@@ -42,14 +53,23 @@ class InputSpinner extends Component {
     };
 
     /**
+     * Detect if type is decimal
+     * @returns {boolean}
+     */
+    typeDecimal() {
+        return (this.props.type === 'float' ||
+            this.props.type === 'double' ||
+            this.props.type === 'decimal');
+    }
+
+    /**
      * Parse number type
      * @param num
      * @returns {*}
      */
     parseNum(num) {
-        if (this.props.type === 'float') {
+        if (this.typeDecimal()) {
             num = parseFloat(num);
-            num = parseFloat(num.toFixed(this.props.precision));
         } else {
             num = parseInt(num);
         }
@@ -57,22 +77,33 @@ class InputSpinner extends Component {
     }
 
     /**
+     * Convert value to string
+     * @returns {string}
+     */
+    getValue() {
+        if (this.typeDecimal()) {
+            return this.parseNum(this.state.value).toFixed(this.props.precision);
+        }
+        return String(this.parseNum(this.state.value));
+    }
+
+    /**
      * Increase
      */
     increase() {
         if (this.state.disabled) return;
-        let num = this.parseNum(this.state.value) + this.props.offset;
+        let num = this.parseNum(this.state.value) + this.parseNum(this.state.offset);
         this.onChange(num);
-    };
+    }
 
     /**
      * Decrease
      */
     decrease() {
         if (this.state.disabled) return;
-        let num = this.parseNum(this.state.value) - this.props.offset;
+        let num = this.parseNum(this.state.value) - this.parseNum(this.state.offset);
         this.onChange(num);
-    };
+    }
 
     /**
      * Render
@@ -103,7 +134,7 @@ class InputSpinner extends Component {
                         {borderColor: this.props.showBorder ? this.props.color : 'transparent'},
                         {backgroundColor: this.props.background},
                         {height: this.props.height}]}
-                    value={String(this.state.value)}
+                    value={this.getValue()}
                     editable={!this.props.disabled}
                     keyboardType={'numeric'}
                     onChangeText={this.onChange.bind(this)}/>
