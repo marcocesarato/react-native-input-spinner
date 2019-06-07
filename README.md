@@ -43,6 +43,7 @@ include InputSpinner from 'react-native-input-spinner';
 <InputSpinner
 	max={10}
 	min={2}
+	step={2}
 	value={this.state.number}
 	onChange={(num)=>{console.log(num)}}
 ```
@@ -57,12 +58,16 @@ Property          | Description | Type | Default | Note
 ------------------|-------------|------|---------|-------
 max               | Max number permitted | Number | 0  |
 min               | Min value permitted | Number | 99 |
-type            | Type of spinner | Number | Int | Can be `float` or `int`
+type            | Type of spinner | String | 'int' | Can be `real` or `int`
 precision            | Max numbers permitted after comma | Integer | 2 |
-offset            | Value to increment or decrement the current spinner value | Number | 1 |
-value             | Controlled value of the Spinner | Number | 0 | If `value` is defined, then the value can change only via the property. This means that `onChange` must be defined and change external state. |
+step            | Value to increment or decrement the current spinner value | Number | 1 |
+value             | Controlled value of the Spinner | String | 0 | If `value` is defined, then the value can change only via the property. This means that `onChange` must be defined and change external state. |
 disabled          | Disable the Spinner or not | Boolean | false |
 onChange       | Get the number of the Spinner | Function | |
+onReachMax       | When max is reached get max number permitted | Function | |
+onReachMin       | When min is reached get min number permitted | Function | |
+onIncrease       | When increase button is clicked get value increased | Function | |
+onDecrease       | When decrease button is clicked get value decreased | Function | |
 width             | Custom width of the Spinner | Number | 150 |
 height            | Custom height of the Spinner | Number | 50 |
 style | Container style | Object |  |

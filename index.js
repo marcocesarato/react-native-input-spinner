@@ -16,16 +16,16 @@ class InputSpinner extends Component {
     constructor(props) {
         super(props);
 
-        let spinner_offset = this.parseNum(this.props.offset);
-        if (!this.isTypeDecimal() && spinner_offset < 1) {
-            spinner_offset = 1;
+        let spinner_step = this.parseNum(this.props.step);
+        if (!this.isTypeDecimal() && spinner_step < 1) {
+            spinner_step = 1;
         }
 
         this.state = {
             min: this.parseNum(this.props.min),
             max: this.parseNum(this.props.max),
             value: this.parseNum(this.props.value),
-            offset: spinner_offset,
+            step: spinner_step,
             disabled: this.props.disabled,
             width: this.props.width,
             height: this.props.height,
@@ -65,19 +65,24 @@ class InputSpinner extends Component {
      */
     onChange(num) {
         if (this.state.disabled) return;
+        let current_value = this.state.value;
         num = this.parseNum(String(num).replace(/^0+/, '')) || 0;
         if (num >= this.state.min) {
-
             if (this.state.max <= num) {
                 num = this.state.max;
+                if (this.props.onReachMax) {
+                    this.props.onReachMax(this.state.max);
+                }
             }
-
             this.setState({value: num});
-            if (this.props.onChange) {
-                this.props.onChange(num);
+        } else {
+            if (this.props.onReachMin) {
+                this.props.onReachMin(this.state.min);
             }
+            num = this.state.min;
+            this.setState({value: num});
         }
-        if (this.props.onChange) {
+        if (current_value !== num && this.props.onChange) {
             this.props.onChange(num);
         }
     };
@@ -88,7 +93,7 @@ class InputSpinner extends Component {
      */
     isTypeDecimal() {
         let type = this.getType();
-        return (type === 'float' || type === 'double' || type === 'decimal');
+        return (type === 'float' || type === 'double' || type === 'decimal' || type === 'real' );
     }
 
     /**
@@ -101,6 +106,9 @@ class InputSpinner extends Component {
             num = parseFloat(num);
         } else {
             num = parseInt(num);
+        }
+        if(isNaN(num)){
+            num = 0;
         }
         return num;
     }
@@ -125,7 +133,7 @@ class InputSpinner extends Component {
         if(this.state instanceof Object && this.state.type != null){
             type = this.state.type;
         }
-        return type;
+        return String(type).toLowerCase();
     }
 
     /**
@@ -133,7 +141,10 @@ class InputSpinner extends Component {
      */
     increase() {
         if (this.state.disabled) return;
-        let num = this.parseNum(this.state.value) + this.parseNum(this.state.offset);
+        let num = this.parseNum(this.state.value) + this.parseNum(this.state.step);
+        if (this.props.onIncrease) {
+            this.props.onIncrease(num);
+        }
         this.onChange(num);
     }
 
@@ -142,7 +153,10 @@ class InputSpinner extends Component {
      */
     decrease() {
         if (this.state.disabled) return;
-        let num = this.parseNum(this.state.value) - this.parseNum(this.state.offset);
+        let num = this.parseNum(this.state.value) - this.parseNum(this.state.step);
+        if (this.props.onDecrease) {
+            this.props.onDecrease(num);
+        }
         this.onChange(num);
     }
 
@@ -210,7 +224,7 @@ InputSpinner.propTypes = {
     min: PropTypes.number,
     max: PropTypes.number,
     type: PropTypes.string,
-    value: PropTypes.number,
+    value: PropTypes.isRequired,
     color: PropTypes.string,
     background: PropTypes.string,
     textColor: PropTypes.string,
@@ -221,9 +235,13 @@ InputSpinner.propTypes = {
     disabled: PropTypes.bool,
     width: PropTypes.number,
     height: PropTypes.number,
-    offset: PropTypes.number,
+    step: PropTypes.number,
     precision: PropTypes.number,
     onChange: PropTypes.func,
+    onReachMin: PropTypes.func,
+    onReachMax: PropTypes.func,
+    onIncrease: PropTypes.func,
+    onDecrease: PropTypes.func,
     buttonStyle: PropTypes.object,
     inputStyle: PropTypes.object,
     style: PropTypes.object,
@@ -244,7 +262,7 @@ InputSpinner.defaultProps = {
     disabled: false,
     width: 150,
     height: 50,
-    offset: 1,
+    step: 1,
     precision: 2,
     buttonStyle: {},
     inputStyle: {},
