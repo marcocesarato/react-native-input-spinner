@@ -1,6 +1,6 @@
 import React, {Component} from "react";
+import {Platform, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import Style from './style';
 
 /**
@@ -17,7 +17,7 @@ class InputSpinner extends Component {
         super(props);
 
         let spinner_offset = this.parseNum(this.props.offset);
-        if(!this.typeDecimal() && spinner_offset < 1){
+        if (!this.isTypeDecimal() && spinner_offset < 1) {
             spinner_offset = 1;
         }
 
@@ -30,6 +30,7 @@ class InputSpinner extends Component {
             width: this.props.width,
             height: this.props.height,
             color: this.props.color,
+            type: this.props.type,
         };
     }
 
@@ -53,6 +54,8 @@ class InputSpinner extends Component {
             this.setState({height: this.props.height});
         } else if (this.props.color !== prevProps.color) {
             this.setState({color: this.props.color});
+        } else if (this.props.type !== prevProps.type) {
+            this.setState({type: this.props.type});
         }
     }
 
@@ -83,10 +86,9 @@ class InputSpinner extends Component {
      * Detect if type is decimal
      * @returns {boolean}
      */
-    typeDecimal() {
-        return (this.props.type === 'float' ||
-            this.props.type === 'double' ||
-            this.props.type === 'decimal');
+    isTypeDecimal() {
+        let type = this.getType();
+        return (type === 'float' || type === 'double' || type === 'decimal');
     }
 
     /**
@@ -95,7 +97,7 @@ class InputSpinner extends Component {
      * @returns {*}
      */
     parseNum(num) {
-        if (this.typeDecimal()) {
+        if (this.isTypeDecimal()) {
             num = parseFloat(num);
         } else {
             num = parseInt(num);
@@ -108,10 +110,22 @@ class InputSpinner extends Component {
      * @returns {string}
      */
     getValue() {
-        if (this.typeDecimal()) {
+        if (this.isTypeDecimal()) {
             return this.parseNum(this.state.value).toFixed(this.props.precision);
         }
         return String(this.parseNum(this.state.value));
+    }
+
+    /**
+     * Get Type
+     * @returns {String}
+     */
+    getType(){
+        let type = this.props.type;
+        if(this.state instanceof Object && this.state.type != null){
+            type = this.state.type;
+        }
+        return type;
     }
 
     /**
@@ -137,6 +151,16 @@ class InputSpinner extends Component {
      * @returns {*}
      */
     render() {
+
+        let keyboardType = "numeric";
+        if (Platform.OS) {
+            if (this.isTypeDecimal()) {
+                keyboardType = "number-pad"
+            } else {
+                keyboardType = "decimal-pad"
+            }
+        }
+
         return (
             <View style={[Style.container, this.props.style,
                 {borderColor: this.props.showBorder ? this.state.color : 'transparent'},
@@ -162,8 +186,8 @@ class InputSpinner extends Component {
                         {backgroundColor: this.props.background},
                         {height: this.props.height}]}
                     value={this.getValue()}
-                    editable={!this.props.disabled}
-                    keyboardType={'numeric'}
+                    editable={!this.state.disabled}
+                    keyboardType={keyboardType}
                     onChangeText={this.onChange.bind(this)}/>
 
                 <TouchableOpacity
