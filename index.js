@@ -26,7 +26,34 @@ class InputSpinner extends Component {
             max: this.parseNum(this.props.max),
             value: this.parseNum(this.props.value),
             offset: spinner_offset,
+            disabled: this.props.disabled,
+            width: this.props.width,
+            height: this.props.height,
+            color: this.props.color,
         };
+    }
+
+    /**
+     * Component did update
+     * @param prevProps
+     * @returns {*}
+     */
+    componentDidUpdate(prevProps) {
+        if (this.props.disabled !== prevProps.disabled) {
+            this.setState({disabled: this.props.disabled});
+        } else if (this.props.min !== prevProps.min) {
+            this.setState({min: this.parseNum(this.props.min)});
+        } else if (this.props.max !== prevProps.max) {
+            this.setState({max: this.parseNum(this.props.max)});
+        } else if (this.props.value !== prevProps.value) {
+            this.setState({value: this.parseNum(this.props.value)});
+        } else if (this.props.width !== prevProps.width) {
+            this.setState({width: this.props.width});
+        } else if (this.props.height !== prevProps.height) {
+            this.setState({height: this.props.height});
+        } else if (this.props.color !== prevProps.color) {
+            this.setState({color: this.props.color});
+        }
     }
 
     /**
@@ -112,14 +139,14 @@ class InputSpinner extends Component {
     render() {
         return (
             <View style={[Style.container, this.props.style,
-                {borderColor: this.props.showBorder ? this.props.color : 'transparent'},
-                {width: this.props.width}]}>
+                {borderColor: this.props.showBorder ? this.state.color : 'transparent'},
+                {width: this.state.width}]}>
 
                 <TouchableOpacity
                     style={[Style.button, this.props.buttonStyle,
-                        {backgroundColor: this.props.color},
-                        {borderColor: this.props.showBorder ? this.props.color : 'transparent'},
-                        {height: this.props.height, width: this.props.height}]}
+                        {backgroundColor: this.state.color},
+                        {borderColor: this.props.showBorder ? this.state.color : 'transparent'},
+                        {height: this.state.height, width: this.state.height}]}
                     onPress={() => this.decrease()}>
 
                     <Text style={[Style.buttonText,
@@ -131,7 +158,7 @@ class InputSpinner extends Component {
                     style={[Style.numberText, this.props.inputStyle,
                         {color: this.props.textColor},
                         {fontSize: this.props.fontSize},
-                        {borderColor: this.props.showBorder ? this.props.color : 'transparent'},
+                        {borderColor: this.props.showBorder ? this.state.color : 'transparent'},
                         {backgroundColor: this.props.background},
                         {height: this.props.height}]}
                     value={this.getValue()}
@@ -141,9 +168,9 @@ class InputSpinner extends Component {
 
                 <TouchableOpacity
                     style={[Style.button, this.props.buttonStyle,
-                        {backgroundColor: this.props.color},
-                        {borderColor: this.props.showBorder ? this.props.color : 'transparent'},
-                        {height: this.props.height, width: this.props.height}]}
+                        {backgroundColor: this.state.color},
+                        {borderColor: this.props.showBorder ? this.state.color : 'transparent'},
+                        {height: this.state.height, width: this.state.height}]}
                     onPress={() => this.increase()}>
 
                     <Text style={[Style.buttonText,
