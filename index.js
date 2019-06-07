@@ -221,10 +221,12 @@ class InputSpinner extends Component {
 }
 
 InputSpinner.propTypes = {
-    min: PropTypes.number,
-    max: PropTypes.number,
     type: PropTypes.string,
-    value: PropTypes.isRequired,
+    min: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    max: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    step: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    precision: PropTypes.number,
     color: PropTypes.string,
     background: PropTypes.string,
     textColor: PropTypes.string,
@@ -235,8 +237,6 @@ InputSpinner.propTypes = {
     disabled: PropTypes.bool,
     width: PropTypes.number,
     height: PropTypes.number,
-    step: PropTypes.number,
-    precision: PropTypes.number,
     onChange: PropTypes.func,
     onReachMin: PropTypes.func,
     onReachMax: PropTypes.func,
@@ -248,10 +248,12 @@ InputSpinner.propTypes = {
 };
 
 InputSpinner.defaultProps = {
+    type: 'int',
     min: 0,
     max: 999,
-    type: 'int',
     value: 0,
+    step: 1,
+    precision: 2,
     color: '#3e525f',
     background: 'transparent',
     textColor: '#000000',
@@ -262,8 +264,6 @@ InputSpinner.defaultProps = {
     disabled: false,
     width: 150,
     height: 50,
-    step: 1,
-    precision: 2,
     buttonStyle: {},
     inputStyle: {},
     style: {},

@@ -56,12 +56,12 @@ include InputSpinner from 'react-native-input-spinner';
 
 Property          | Description | Type | Default | Note
 ------------------|-------------|------|---------|-------
-max               | Max number permitted | Number | 0  |
-min               | Min value permitted | Number | 99 |
+max               | Max number permitted | String<br>Number  | 0  |
+min               | Min value permitted | String<br>Number  | 99 |
 type            | Type of spinner | String | 'int' | Can be `real` or `int`
-precision            | Max numbers permitted after comma | Integer | 2 |
-step            | Value to increment or decrement the current spinner value | Number | 1 |
-value             | Controlled value of the Spinner | String | 0 | If `value` is defined, then the value can change only via the property. This means that `onChange` must be defined and change external state. |
+precision            | Max numbers permitted after comma | Integer  | 2 |
+step            | Value to increment or decrement the current spinner value | String<br>Number   | 1 |
+value             | Controlled value of the Spinner | String<br>Number | 0 | If `value` is defined, then the value can change only via the property. This means that `onChange` must be defined and change external state. |
 disabled          | Disable the Spinner or not | Boolean | false |
 onChange       | Get the number of the Spinner | Function | |
 onReachMax       | When max is reached get max number permitted | Function | |
