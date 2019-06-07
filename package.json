@@ -1,6 +1,6 @@
 {
   "name": "react-native-input-spinner",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "React native input with increase and decrease buttons",
   "main": "index.js",
   "scripts": {
@@ -11,11 +11,23 @@
     "url": "git+https://github.com/marcocesarato/react-native-input-spinner.git"
   },
   "keywords": [
+    "react-native-component",
+    "react-component",
+    "react-native",
+    "android",
+    "ios",
+    "windows",
     "reactnative",
     "spinner",
     "number",
-    "input"
+    "input",
+    "integer",
+    "decimal"
   ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "readmeFilename": "README.md",
   "author": "Marco Cesarato <cesarato.developer@gmail.com>",
   "bugs": {
     "url": "https://github.com/marcocesarato/react-native-input-spinner/issues"

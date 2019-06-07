@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import {StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
-import SpinnerStyle from './style';
+import Style from './style';
 
 /**
  * Input Spinner
@@ -111,24 +111,24 @@ class InputSpinner extends Component {
      */
     render() {
         return (
-            <View style={[SpinnerStyle.container, this.props.style,
+            <View style={[Style.container, this.props.style,
                 {borderColor: this.props.showBorder ? this.props.color : 'transparent'},
                 {width: this.props.width}]}>
 
                 <TouchableOpacity
-                    style={[SpinnerStyle.button, this.props.buttonStyle,
+                    style={[Style.button, this.props.buttonStyle,
                         {backgroundColor: this.props.color},
                         {borderColor: this.props.showBorder ? this.props.color : 'transparent'},
                         {height: this.props.height, width: this.props.height}]}
                     onPress={() => this.decrease()}>
 
-                    <Text style={[SpinnerStyle.buttonText,
+                    <Text style={[Style.buttonText,
                         {color: this.props.buttonTextColor, fontSize: this.props.buttonFontSize}]}>-</Text>
 
                 </TouchableOpacity>
 
                 <TextInput
-                    style={[SpinnerStyle.numberText, this.props.inputStyle,
+                    style={[Style.numberText, this.props.inputStyle,
                         {color: this.props.textColor},
                         {fontSize: this.props.fontSize},
                         {borderColor: this.props.showBorder ? this.props.color : 'transparent'},
@@ -140,13 +140,13 @@ class InputSpinner extends Component {
                     onChangeText={this.onChange.bind(this)}/>
 
                 <TouchableOpacity
-                    style={[SpinnerStyle.button, this.props.buttonStyle,
+                    style={[Style.button, this.props.buttonStyle,
                         {backgroundColor: this.props.color},
                         {borderColor: this.props.showBorder ? this.props.color : 'transparent'},
                         {height: this.props.height, width: this.props.height}]}
                     onPress={() => this.increase()}>
 
-                    <Text style={[SpinnerStyle.buttonText,
+                    <Text style={[Style.buttonText,
                         {color: this.props.buttonTextColor, fontSize: this.props.buttonFontSize}]}>+</Text>
 
                 </TouchableOpacity>

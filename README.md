@@ -23,8 +23,14 @@ This component enhance a text input for entering numeric values, with increase a
 
 ## Install
 
+### NPM
 ```shell
 npm install react-native-input-spinner --save
+```
+
+### Yarn
+```shell
+yarn add react-native-input-spinner
 ```
 
 ## Usage
