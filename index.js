@@ -127,7 +127,7 @@ class InputSpinner extends Component {
     onChange(num) {
         if (this.state.disabled) return;
         const current_value = this.state.value;
-        if(String(num).endsWith('.')){
+        if(String(num).endsWith('.') && !this.getValue().endsWith('.0')){
             this.decimalInput = true;
         }
         num = this.parseNum(String(num).replace(/^0+/, '')) || 0;

@@ -50,13 +50,23 @@ include InputSpinner from 'react-native-input-spinner';
 	onChange={(num)=>{console.log(num)}}
 ```
 
-## Screenshot
+## Run example
+Clone or download repo and after:
+```
+cd Example
+yarn install
+expo start
+```
 
+Open Expo Client on your device. Use it to scan the QR code printed by `expo start`. You may have to wait a minute while your project bundles and loads for the first time.
+
+## Screenshots
 
 Default props + Min & Max colors         | Not rounded, showBorder, Min & Max colors |
 ------------------|-------------|
-<img src="example.png" />       | <img src="example_2.png" /> |
-
+<img src="screenshots/example.png" />       | <img src="screenshots/example_2.png" /> |
+### Example app
+<img src="screenshots/example_app.png" />
 ## Handlers
 
 Handler          | Description | Type | Default |
