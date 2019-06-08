@@ -65,8 +65,10 @@ Open Expo Client on your device. Use it to scan the QR code printed by `expo sta
 Default props + Min & Max colors         | Not rounded, showBorder, Min & Max colors |
 ------------------|-------------|
 <img src="screenshots/example.png" />       | <img src="screenshots/example_2.png" /> |
+
 ### Example app
 <img src="screenshots/example_app.png" />
+
 ## Handlers
 
 Handler          | Description | Type | Default |
