@@ -17,7 +17,7 @@ class InputSpinner extends Component {
         super(props);
 
         let spinnerStep = this.parseNum(this.props.step);
-        if (!this.isRealType() && spinnerStep < 1) {
+        if (!this.typeReal() && spinnerStep < 1) {
             spinnerStep = 1;
         }
 
@@ -98,11 +98,11 @@ class InputSpinner extends Component {
         if (this.props.color !== prevProps.color) {
             let newState = {color: this.props.color};
 
-            if(prevProps.color == prevProps.colorMin){
+            if(prevProps.color === prevProps.colorMin){
                 newState.colorMin = this.props.color;
             }
 
-            if(prevProps.color == prevProps.colorMax){
+            if(prevProps.color === prevProps.colorMax){
                 newState.colorMax = this.props.color;
             }
             this.setState(newState);
@@ -122,11 +122,11 @@ class InputSpinner extends Component {
         if (this.state.disabled) return;
         const current_value = this.state.value;
         if(String(num).endsWith('.')){
-            this.end_point = true;
+            this.decimalInput = true;
         }
         num = this.parseNum(String(num).replace(/^0+/, '')) || 0;
-        if (num >= this.state.min) {
-            if (this.state.max <= num) {
+        if (!this.minReached(num)) {
+            if (this.maxReached(num)) {
                 num = this.state.max;
                 if (this.props.onMax) {
                     this.props.onMax(this.state.max);
@@ -150,7 +150,10 @@ class InputSpinner extends Component {
      * @param num
      */
     roundNum(num){
-        return Number(Math.round(num + "e+" + this.props.precision) + "e-" + this.props.precision);
+        if (this.typeReal()) {
+            return Number(Math.round(num + "e+" + this.props.precision) + "e-" + this.props.precision);
+        }
+        return num;
     }
 
     /**
@@ -159,7 +162,7 @@ class InputSpinner extends Component {
      * @returns {*}
      */
     parseNum(num) {
-        if (this.isRealType()) {
+        if (this.typeReal()) {
             num = parseFloat(num);
         } else {
             num = parseInt(num);
@@ -167,9 +170,7 @@ class InputSpinner extends Component {
         if(isNaN(num)){
             num = 0;
         }
-        if (this.isRealType()) {
-            num = this.roundNum(num);
-        }
+        this.roundNum(num);
         return num;
     }
 
@@ -179,8 +180,8 @@ class InputSpinner extends Component {
      */
     getValue() {
         let value = this.state.value;
-        if (this.isRealType() && this.end_point) {
-            this.end_point = false;
+        if (this.typeReal() && this.decimalInput) {
+            this.decimalInput = false;
             return this.parseNum(value).toFixed(1);
         }
         return String(this.parseNum(value));
@@ -202,7 +203,7 @@ class InputSpinner extends Component {
      * Detect if type is decimal
      * @returns {boolean}
      */
-    isRealType() {
+    typeReal() {
         let type = this.getType();
         return (type === 'float' || type === 'double' || type === 'decimal' || type === 'real' );
     }
@@ -215,7 +216,7 @@ class InputSpinner extends Component {
         let num = this.parseNum(this.state.value) + this.parseNum(this.state.step);
         if (this.props.onIncrease) {
             let increased_num = num;
-            if (num > this.state.max) {
+            if (this.maxReached(num)) {
                 increased_num = this.state.max;
             }
             this.props.onIncrease(increased_num);
@@ -231,12 +232,36 @@ class InputSpinner extends Component {
         let num = this.parseNum(this.state.value) - this.parseNum(this.state.step);
         if (this.props.onDecrease) {
             let decreased_num = num;
-            if (num < this.state.min) {
+            if (this.minReached(num)) {
                 decreased_num = this.state.min;
             }
             this.props.onDecrease(decreased_num);
         }
         this.onChange(num);
+    }
+
+    /**
+     * Max is reached
+     * @param num
+     * @returns {boolean}
+     */
+    maxReached(num = null){
+        if(num == null){
+            num = this.state.value;
+        }
+        return (num >= this.state.max);
+    }
+
+    /**
+     * Min is reached
+     * @param num
+     * @returns {boolean}
+     */
+    minReached(num = null){
+        if(num == null){
+            num = this.state.value;
+        }
+        return (num <= this.state.min);
     }
 
     /**
@@ -247,17 +272,14 @@ class InputSpinner extends Component {
 
         let keyboardType = "numeric";
         if (Platform.OS) {
-            if (this.isRealType()) {
+            if (this.typeReal()) {
                 keyboardType = "number-pad"
             } else {
                 keyboardType = "decimal-pad"
             }
         }
 
-        let isMax = (this.state.value === this.state.max);
-        let isMin = (this.state.value === this.state.min);
-
-        let color = (isMax ? this.state.colorMax : (isMin ? this.state.colorMin : this.state.color));
+        let color = (this.maxReached() ? this.state.colorMax : (this.minReached() ? this.state.colorMin : this.state.color));
 
         return (
             <View style={[Style.container, this.props.style,
