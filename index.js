@@ -16,20 +16,33 @@ class InputSpinner extends Component {
     constructor(props) {
         super(props);
 
-        let spinner_step = this.parseNum(this.props.step);
-        if (!this.isRealType() && spinner_step < 1) {
-            spinner_step = 1;
+        let spinnerStep = this.parseNum(this.props.step);
+        if (!this.isRealType() && spinnerStep < 1) {
+            spinnerStep = 1;
+        }
+
+        let colorMin = this.props.colorMin;
+        let colorMax = this.props.colorMax;
+
+        if(colorMin == null){
+            colorMin = this.props.color;
+        }
+
+        if(colorMax == null){
+            colorMax = this.props.color;
         }
 
         this.state = {
             min: this.parseNum(this.props.min),
             max: this.parseNum(this.props.max),
             value: this.parseNum(this.props.value),
-            step: spinner_step,
+            step: spinnerStep,
             disabled: this.props.disabled,
             width: this.props.width,
             height: this.props.height,
             color: this.props.color,
+            colorMin: colorMin,
+            colorMax: colorMax,
             type: this.props.type,
         };
     }
@@ -40,21 +53,63 @@ class InputSpinner extends Component {
      * @returns {*}
      */
     componentDidUpdate(prevProps) {
+
+        // Disabled
         if (this.props.disabled !== prevProps.disabled) {
             this.setState({disabled: this.props.disabled});
-        } else if (this.props.min !== prevProps.min) {
+        }
+
+        // Min
+        if (this.props.min !== prevProps.min) {
             this.setState({min: this.parseNum(this.props.min)});
-        } else if (this.props.max !== prevProps.max) {
+        }
+
+        // Max
+        if (this.props.max !== prevProps.max) {
             this.setState({max: this.parseNum(this.props.max)});
-        } else if (this.props.value !== prevProps.value) {
+        }
+
+        // Value
+        if (this.props.value !== prevProps.value) {
             this.setState({value: this.parseNum(this.props.value)});
-        } else if (this.props.width !== prevProps.width) {
+        }
+
+        // Width
+        if (this.props.width !== prevProps.width) {
             this.setState({width: this.props.width});
-        } else if (this.props.height !== prevProps.height) {
+        }
+
+        // Height
+        if (this.props.height !== prevProps.height) {
             this.setState({height: this.props.height});
-        } else if (this.props.color !== prevProps.color) {
-            this.setState({color: this.props.color});
-        } else if (this.props.type !== prevProps.type) {
+        }
+
+        // Color Min
+        if (this.props.colorMin !== prevProps.colorMin) {
+            this.setState({colorMin: this.props.colorMin});
+        }
+
+        // Color Max
+        if (this.props.colorMax !== prevProps.colorMax) {
+            this.setState({colorMax: this.props.colorMax});
+        }
+
+        // Color
+        if (this.props.color !== prevProps.color) {
+            let newState = {color: this.props.color};
+
+            if(prevProps.color == prevProps.colorMin){
+                newState.colorMin = this.props.color;
+            }
+
+            if(prevProps.color == prevProps.colorMax){
+                newState.colorMax = this.props.color;
+            }
+            this.setState(newState);
+        }
+
+        // Type
+        if (this.props.type !== prevProps.type) {
             this.setState({type: this.props.type});
         }
     }
@@ -202,7 +257,7 @@ class InputSpinner extends Component {
         let isMax = (this.state.value === this.state.max);
         let isMin = (this.state.value === this.state.min);
 
-        let color = (isMax ? this.props.colorMax : (isMin ? this.props.colorMin : this.state.color));
+        let color = (isMax ? this.state.colorMax : (isMin ? this.state.colorMin : this.state.color));
 
         return (
             <View style={[Style.container, this.props.style,
@@ -289,8 +344,6 @@ InputSpinner.defaultProps = {
     precision: 2,
     rounded: true,
     color: '#3e525f',
-    colorMin: '#3e525f',
-    colorMax: '#3e525f',
     background: 'transparent',
     textColor: '#000000',
     showBorder: false,

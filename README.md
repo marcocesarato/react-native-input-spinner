@@ -85,8 +85,8 @@ style | Container style | Object |  |
 buttonStyle | Button Style | Object |  |
 inputStyle | InputStyle | Object |  |
 color             | Custom color of the Spinner | String | ‘#3e525f' | |
-colorMin             | Custom color of the Spinner when reach min value | String | ‘#3e525f' | |
-colorMax             | Custom color of the Spinner when reach max value | String | ‘#3e525f' | |
+colorMin             | Custom color of the Spinner when reach min value | String | | |
+colorMax             | Custom color of the Spinner when reach max value | String | | |
 textColor          | Custom number color | String | ‘#000000' | |
 background        | Background color of number button | String | ’transparent' | |
 rounded        | Use circular button | Boolean | true | |
