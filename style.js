@@ -16,6 +16,11 @@ export default style = StyleSheet.create({
     button: {
         alignItems: 'center',
         justifyContent: 'center',
+        borderRadius: 2,
+    },
+    buttonRounded: {
+        alignItems: 'center',
+        justifyContent: 'center',
         borderRadius: 50,
     },
     buttonText: {

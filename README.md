@@ -39,18 +39,33 @@ yarn add react-native-input-spinner
 // Require
 include InputSpinner from 'react-native-input-spinner';
 
-// Use
+// Example
 <InputSpinner
 	max={10}
 	min={2}
 	step={2}
+	colorMax={"#f04048"}
+	colorMin={"#40c5f4"}
 	value={this.state.number}
 	onChange={(num)=>{console.log(num)}}
 ```
 
 ## Screenshot
 
-<img src="example.png" />
+
+Default props          | Not rounded, showBorder, Min & Max colors |
+------------------|-------------|
+<img src="example.png" />       | <img src="example2.png" /> |
+
+## Handlers
+
+Handler          | Description | Type | Default |
+------------------|-------------|------|---------|
+onChange       | Get the number of the Spinner | Function |
+onMax       | When max is reached get max number permitted | Function |
+onMin       | When min is reached get min number permitted | Function |
+onIncrease       | When increase button is clicked get value increased | Function |
+onDecrease       | When decrease button is clicked get value decreased | Function |
 
 ## Props
 
@@ -61,22 +76,21 @@ min               | Min value permitted | String<br>Number  | 99 |
 type            | Type of spinner | String | 'int' | Can be `real` or `int`
 precision            | Max numbers permitted after comma | Integer  | 2 |
 step            | Value to increment or decrement the current spinner value | String<br>Number   | 1 |
-value             | Controlled value of the Spinner | String<br>Number | 0 | If `value` is defined, then the value can change only via the property. This means that `onChange` must be defined and change external state. |
-disabled          | Disable the Spinner or not | Boolean | false |
-onChange       | Get the number of the Spinner | Function | |
-onReachMax       | When max is reached get max number permitted | Function | |
-onReachMin       | When min is reached get min number permitted | Function | |
-onIncrease       | When increase button is clicked get value increased | Function | |
-onDecrease       | When decrease button is clicked get value decreased | Function | |
-width             | Custom width of the Spinner | Number | 150 |
-height            | Custom height of the Spinner | Number | 50 |
+value             | Controlled value of the Spinner | String<br>Number | 0 | |
+disabled          | Disable the Spinner or not | Boolean | false | |
+editable          | Set if input number field is editable or not | Boolean | true | |
+width             | Custom width of the Spinner | Number | 150 | |
+height            | Custom height of the Spinner | Number | 50 | |
 style | Container style | Object |  |
 buttonStyle | Button Style | Object |  |
 inputStyle | InputStyle | Object |  |
-color             | Custom color of the Spinner | String | ‘#3e525f' |
-textColor          | Custom number color | String | ‘#000000' |
-background        | Background color of number button | String | ’transparent' |
-showBorder        | Show the border of the Spinner or not | Boolean | false |
-fontSize          | Custom fontSize of the text input in the Spinner | Number | 14 |
-buttonFontSize        | Custom fontSize of buttons in the Spinner | Number | 14 |
-buttonTextColor   | Custom color of the button in the Spinner | String | 'white' |
+color             | Custom color of the Spinner | String | ‘#3e525f' | |
+colorMin             | Custom color of the Spinner when reach min value | String | ‘#3e525f' | |
+colorMax             | Custom color of the Spinner when reach max value | String | ‘#3e525f' | |
+textColor          | Custom number color | String | ‘#000000' | |
+background        | Background color of number button | String | ’transparent' | |
+rounded        | Use circular button | Boolean | true | |
+showBorder        | Show the border of the Spinner or not | Boolean | false | Use with `rounded={false}` |
+fontSize          | Custom fontSize of the text input in the Spinner | Number | 14 | |
+buttonFontSize        | Custom fontSize of buttons in the Spinner | Number | 14 | |
+buttonTextColor   | Custom color of the button in the Spinner | String | 'white' | |
