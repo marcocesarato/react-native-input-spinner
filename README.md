@@ -53,8 +53,8 @@ include InputSpinner from 'react-native-input-spinner';
 ## Screenshot
 
 
-Default props + Min & Max colors          | Not rounded + showBorder + Min & Max colors |
-------------------|-------------|-------------
+Default props + Min & Max colors         | Not rounded, showBorder, Min & Max colors |
+------------------|-------------|
 <img src="example.png" />       | <img src="example_2.png" /> |
 
 ## Handlers
