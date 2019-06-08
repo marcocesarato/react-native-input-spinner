@@ -40,6 +40,7 @@ class InputSpinner extends Component {
             disabled: this.props.disabled,
             width: this.props.width,
             height: this.props.height,
+            textColor: this.props.textColor,
             color: this.props.color,
             colorMin: colorMin,
             colorMax: colorMax,
@@ -106,6 +107,11 @@ class InputSpinner extends Component {
                 newState.colorMax = this.props.color;
             }
             this.setState(newState);
+        }
+
+        // Text Color
+        if (this.props.textColor !== prevProps.textColor) {
+            this.setState({textColor: this.props.textColor});
         }
 
         // Type
@@ -300,7 +306,7 @@ class InputSpinner extends Component {
 
                 <TextInput
                     style={[Style.numberText, this.props.inputStyle,
-                        {color: this.props.textColor},
+                        {color: this.state.textColor},
                         {fontSize: this.props.fontSize},
                         {borderColor: this.props.showBorder ? color : 'transparent'},
                         {backgroundColor: this.props.background},

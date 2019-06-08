@@ -53,9 +53,9 @@ include InputSpinner from 'react-native-input-spinner';
 ## Screenshot
 
 
-Default props          | Not rounded, showBorder, Min & Max colors |
-------------------|-------------|
-<img src="example.png" />       | <img src="example2.png" /> |
+Default props + Min & Max colors          | Not rounded + showBorder + Min & Max colors |
+------------------|-------------|-------------
+<img src="example.png" />       | <img src="example_2.png" /> |
 
 ## Handlers
 
@@ -79,18 +79,23 @@ step            | Value to increment or decrement the current spinner value | St
 value             | Controlled value of the Spinner | String<br>Number | 0 | |
 disabled          | Disable the Spinner or not | Boolean | false | |
 editable          | Set if input number field is editable or not | Boolean | true | |
+
+## Props style
+
+Property          | Description | Type | Default | Note
+------------------|-------------|------|---------|-------
+style | Container style | Object |  |
 width             | Custom width of the Spinner | Number | 150 | |
 height            | Custom height of the Spinner | Number | 50 | |
-style | Container style | Object |  |
-buttonStyle | Button Style | Object |  |
-inputStyle | InputStyle | Object |  |
 color             | Custom color of the Spinner | String | ‘#3e525f' | |
 colorMin             | Custom color of the Spinner when reach min value | String | | |
 colorMax             | Custom color of the Spinner when reach max value | String | | |
-textColor          | Custom number color | String | ‘#000000' | |
 background        | Background color of number button | String | ’transparent' | |
 rounded        | Use circular button | Boolean | true | |
 showBorder        | Show the border of the Spinner or not | Boolean | false | Use with `rounded={false}` |
+textColor          | Custom number color | String | ‘#000000' | |
+inputStyle | InputStyle | Object |  |
 fontSize          | Custom fontSize of the text input in the Spinner | Number | 14 | |
 buttonFontSize        | Custom fontSize of buttons in the Spinner | Number | 14 | |
 buttonTextColor   | Custom color of the button in the Spinner | String | 'white' | |
+buttonStyle | Button Style | Object |  |
