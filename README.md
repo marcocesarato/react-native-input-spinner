@@ -23,7 +23,7 @@ This component enhance a text input for entering numeric values, with increase a
 
 ## Install
 
-### NPM
+### npm
 ```shell
 npm install react-native-input-spinner --save
 ```
@@ -52,9 +52,9 @@ include InputSpinner from 'react-native-input-spinner';
 
 ## Run example
 Clone or download repo and after:
-```
+```shell
 cd Example
-yarn install
+yarn install # or npm install
 expo start
 ```
 
@@ -71,13 +71,13 @@ Default props + Min & Max colors         | Not rounded, showBorder, Min & Max co
 
 ## Handlers
 
-Handler          | Description | Type | Default |
-------------------|-------------|------|---------|
-onChange       | Get the number of the Spinner | Function |
-onMax       | When max is reached get max number permitted | Function |
-onMin       | When min is reached get min number permitted | Function |
-onIncrease       | When increase button is clicked get value increased | Function |
-onDecrease       | When decrease button is clicked get value decreased | Function |
+Handler          | Description |
+------------------|-------------|
+onChange       | Get the number of the Spinner |
+onMax       | When max is reached get max number permitted |
+onMin       | When min is reached get min number permitted |
+onIncrease       | When increase button is clicked get value increased |
+onDecrease       | When decrease button is clicked get value decreased |
 
 ## Props
 
@@ -96,7 +96,7 @@ editable          | Set if input number field is editable or not | Boolean | tru
 
 Property          | Description | Type | Default | Note
 ------------------|-------------|------|---------|-------
-style | Container style | Object |  |
+style | Container style | Object |  | Can overwrite `width` and `showBorder` |
 width             | Custom width of the Spinner | Number | 150 | |
 height            | Custom height of the Spinner | Number | 50 | |
 color             | Custom color of the Spinner | String | ‘#3e525f' | |
@@ -106,8 +106,8 @@ background        | Background color of number button | String | ’transparent'
 rounded        | Use circular button | Boolean | true | |
 showBorder        | Show the border of the Spinner or not | Boolean | false | Use with `rounded={false}` |
 textColor          | Custom number color | String | ‘#000000' | |
-inputStyle | InputStyle | Object |  |
+inputStyle | Input Style (Text number at middle) | Object |  |
 fontSize          | Custom fontSize of the text input in the Spinner | Number | 14 | |
 buttonFontSize        | Custom fontSize of buttons in the Spinner | Number | 14 | |
 buttonTextColor   | Custom color of the button in the Spinner | String | 'white' | |
-buttonStyle | Button Style | Object |  |
+buttonStyle | Button Style (Plus and Minus buttons) | Object |  |

@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Platform, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import PropTypes from 'prop-types';
-import Style from './style';
+import {Style} from './style';
 
 /**
  * Input Spinner
@@ -17,7 +17,7 @@ class InputSpinner extends Component {
         super(props);
 
         let spinnerStep = this.parseNum(this.props.step);
-        if (!this.typeReal() && spinnerStep < 1) {
+        if (!this.typeDecimal() && spinnerStep < 1) {
             spinnerStep = 1;
         }
 
@@ -25,11 +25,11 @@ class InputSpinner extends Component {
         let colorMax = this.props.colorMax;
 
         if(colorMin == null){
-            colorMin = this.props.color;
+            colorMin = this.props.color; // Set default color
         }
 
         if(colorMax == null){
-            colorMax = this.props.color;
+            colorMax = this.props.color; // Set default color
         }
 
         this.state = {
@@ -152,11 +152,20 @@ class InputSpinner extends Component {
     }
 
     /**
+     * Detetct if is numeric
+     * @param val
+     * @returns {boolean}
+     */
+    isNumeric(val) {
+        return !isNaN(parseFloat(val)) && isFinite(val);
+    }
+
+    /**
      * Round number to props precision
      * @param num
      */
     roundNum(num){
-        if (this.typeReal()) {
+        if (this.typeDecimal()) {
             return Number(Math.round(num + "e+" + this.props.precision) + "e-" + this.props.precision);
         }
         return num;
@@ -168,7 +177,7 @@ class InputSpinner extends Component {
      * @returns {*}
      */
     parseNum(num) {
-        if (this.typeReal()) {
+        if (this.typeDecimal()) {
             num = parseFloat(num);
         } else {
             num = parseInt(num);
@@ -186,7 +195,7 @@ class InputSpinner extends Component {
      */
     getValue() {
         let value = this.state.value;
-        if (this.typeReal() && this.decimalInput) {
+        if (this.typeDecimal() && this.decimalInput) {
             this.decimalInput = false;
             return this.parseNum(value).toFixed(1);
         }
@@ -209,7 +218,7 @@ class InputSpinner extends Component {
      * Detect if type is decimal
      * @returns {boolean}
      */
-    typeReal() {
+    typeDecimal() {
         let type = this.getType();
         return (type === 'float' || type === 'double' || type === 'decimal' || type === 'real' );
     }
@@ -277,20 +286,18 @@ class InputSpinner extends Component {
     render() {
 
         let keyboardType = "numeric";
-        if (Platform.OS) {
-            if (this.typeReal()) {
-                keyboardType = "number-pad"
-            } else {
-                keyboardType = "decimal-pad"
-            }
+        if (this.typeDecimal()) {
+            keyboardType = "decimal-pad";
+        } else {
+            keyboardType = "number-pad";
         }
 
         let color = (this.maxReached() ? this.state.colorMax : (this.minReached() ? this.state.colorMin : this.state.color));
 
         return (
-            <View style={[Style.container, this.props.style,
+            <View style={[Style.container,
                 {borderColor: this.props.showBorder ? color : 'transparent'},
-                {width: this.state.width}]}>
+                {width: this.state.width}, this.props.style]}>
 
                 <TouchableOpacity
                     style={[(this.props.rounded ? Style.buttonRounded : Style.button), this.props.buttonStyle,
@@ -351,8 +358,8 @@ InputSpinner.propTypes = {
     buttonTextColor: PropTypes.string,
     disabled: PropTypes.bool,
     editable: PropTypes.bool,
-    width: PropTypes.number,
-    height: PropTypes.number,
+    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     onChange: PropTypes.func,
     onMin: PropTypes.func,
     onMax: PropTypes.func,

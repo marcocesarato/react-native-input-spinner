@@ -5,20 +5,22 @@
 
 import {StyleSheet} from 'react-native';
 
-export default style = StyleSheet.create({
+export const Style = StyleSheet.create({
     container: {
         borderWidth: 0.5,
         borderRadius: 4,
         flexDirection: 'row',
         overflow: 'hidden',
-        width: 200
+        width: 150
     },
     button: {
+        border: 0,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 2,
     },
     buttonRounded: {
+        border: 0,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 50,
