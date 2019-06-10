@@ -198,6 +198,8 @@ class InputSpinner extends Component {
         if (this.typeDecimal() && this.decimalInput) {
             this.decimalInput = false;
             return this.parseNum(value).toFixed(1);
+        } else if (this.typeDecimal()) {
+            return this.parseNum(value).toFixed(this.props.precision);
         }
         return String(this.parseNum(value));
     }
@@ -296,46 +298,46 @@ class InputSpinner extends Component {
 
         return (
             <View style={[Style.container,
-                {borderColor: this.props.showBorder ? color : 'transparent'},
-                {width: this.state.width}, this.props.style]}>
+        {borderColor: this.props.showBorder ? color : 'transparent'},
+        {width: this.state.width}, this.props.style]}>
 
-                <TouchableOpacity
-                    style={[(this.props.rounded ? Style.buttonRounded : Style.button), this.props.buttonStyle,
-                        {backgroundColor: color},
-                        {borderColor: this.props.showBorder ? color : 'transparent'},
-                        {height: this.state.height, width: this.state.height}]}
-                    onPress={() => this.decrease()}>
+    <TouchableOpacity
+        style={[(this.props.rounded ? Style.buttonRounded : Style.button), this.props.buttonStyle,
+            {backgroundColor: color},
+            {borderColor: this.props.showBorder ? color : 'transparent'},
+            {height: this.state.height, width: this.state.height}]}
+        onPress={() => this.decrease()}>
 
-                    <Text style={[Style.buttonText,
-                        {color: this.props.buttonTextColor, fontSize: this.props.buttonFontSize}]}>-</Text>
+    <Text style={[Style.buttonText,
+        {color: this.props.buttonTextColor, fontSize: this.props.buttonFontSize}]}>-</Text>
 
-                </TouchableOpacity>
+        </TouchableOpacity>
 
-                <TextInput
-                    style={[Style.numberText, this.props.inputStyle,
-                        {color: this.state.textColor},
-                        {fontSize: this.props.fontSize},
-                        {borderColor: this.props.showBorder ? color : 'transparent'},
-                        {backgroundColor: this.props.background},
-                        {height: this.props.height}]}
-                    value={this.getValue()}
-                    editable={(!this.state.disabled && this.props.editable)}
-                    keyboardType={keyboardType}
-                    onChangeText={this.onChange.bind(this)}/>
+        <TextInput
+        style={[Style.numberText, this.props.inputStyle,
+            {color: this.state.textColor},
+            {fontSize: this.props.fontSize},
+            {borderColor: this.props.showBorder ? color : 'transparent'},
+            {backgroundColor: this.props.background},
+            {height: this.props.height}]}
+        value={this.getValue()}
+        editable={(!this.state.disabled && this.props.editable)}
+        keyboardType={keyboardType}
+        onChangeText={this.onChange.bind(this)}/>
 
-                <TouchableOpacity
-                    style={[(this.props.rounded ? Style.buttonRounded : Style.button), this.props.buttonStyle,
-                        {backgroundColor: color},
-                        {borderColor: this.props.showBorder ? color : 'transparent'},
-                        {height: this.state.height, width: this.state.height}]}
-                    onPress={() => this.increase()}>
+        <TouchableOpacity
+        style={[(this.props.rounded ? Style.buttonRounded : Style.button), this.props.buttonStyle,
+            {backgroundColor: color},
+            {borderColor: this.props.showBorder ? color : 'transparent'},
+            {height: this.state.height, width: this.state.height}]}
+        onPress={() => this.increase()}>
 
-                    <Text style={[Style.buttonText,
-                        {color: this.props.buttonTextColor, fontSize: this.props.buttonFontSize}]}>+</Text>
+    <Text style={[Style.buttonText,
+        {color: this.props.buttonTextColor, fontSize: this.props.buttonFontSize}]}>+</Text>
 
-                </TouchableOpacity>
-            </View>
-        )
+        </TouchableOpacity>
+        </View>
+    )
     }
 }
 
