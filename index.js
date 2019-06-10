@@ -24,11 +24,11 @@ class InputSpinner extends Component {
         let colorMin = this.props.colorMin;
         let colorMax = this.props.colorMax;
 
-        if(colorMin == null){
+        if (colorMin == null) {
             colorMin = this.props.color; // Set default color
         }
 
-        if(colorMax == null){
+        if (colorMax == null) {
             colorMax = this.props.color; // Set default color
         }
 
@@ -99,11 +99,11 @@ class InputSpinner extends Component {
         if (this.props.color !== prevProps.color) {
             let newState = {color: this.props.color};
 
-            if(prevProps.color === prevProps.colorMin){
+            if (prevProps.color === prevProps.colorMin) {
                 newState.colorMin = this.props.color;
             }
 
-            if(prevProps.color === prevProps.colorMax){
+            if (prevProps.color === prevProps.colorMax) {
                 newState.colorMax = this.props.color;
             }
             this.setState(newState);
@@ -127,7 +127,7 @@ class InputSpinner extends Component {
     onChange(num) {
         if (this.state.disabled) return;
         const current_value = this.state.value;
-        if(String(num).endsWith('.') && !this.getValue().endsWith('.0')){
+        if (String(num).endsWith('.') && !this.getValue().endsWith('.0')) {
             this.decimalInput = true;
         }
         num = this.parseNum(String(num).replace(/^0+/, '')) || 0;
@@ -164,9 +164,15 @@ class InputSpinner extends Component {
      * Round number to props precision
      * @param num
      */
-    roundNum(num){
+    roundNum(num) {
         if (this.typeDecimal()) {
-            return Number(Math.round(num + "e+" + this.props.precision) + "e-" + this.props.precision);
+            let val = num * Math.pow(10, this.props.precision);
+            let fraction = (Math.round((val - parseInt(val)) * 10) / 10);
+            if (fraction === -0.5) {
+                fraction = -0.6;
+            }
+            val = Math.round(parseInt(val) + fraction) / Math.pow(10, this.props.precision);
+            return val;
         }
         return num;
     }
@@ -182,7 +188,7 @@ class InputSpinner extends Component {
         } else {
             num = parseInt(num);
         }
-        if(isNaN(num)){
+        if (isNaN(num)) {
             num = 0;
         }
         this.roundNum(num);
@@ -199,7 +205,7 @@ class InputSpinner extends Component {
             this.decimalInput = false;
             return this.parseNum(value).toFixed(1);
         } else if (this.typeDecimal()) {
-            return this.parseNum(value).toFixed(this.props.precision);
+            value = this.parseNum(value).toFixed(this.props.precision);
         }
         return String(this.parseNum(value));
     }
@@ -208,9 +214,9 @@ class InputSpinner extends Component {
      * Get Type
      * @returns {String}
      */
-    getType(){
+    getType() {
         let type = this.props.type;
-        if(this.state instanceof Object && this.state.type != null){
+        if (this.state instanceof Object && this.state.type != null) {
             type = this.state.type;
         }
         return String(type).toLowerCase();
@@ -222,7 +228,7 @@ class InputSpinner extends Component {
      */
     typeDecimal() {
         let type = this.getType();
-        return (type === 'float' || type === 'double' || type === 'decimal' || type === 'real' );
+        return (type === 'float' || type === 'double' || type === 'decimal' || type === 'real');
     }
 
     /**
@@ -262,8 +268,8 @@ class InputSpinner extends Component {
      * @param num
      * @returns {boolean}
      */
-    maxReached(num = null){
-        if(num == null){
+    maxReached(num = null) {
+        if (num == null) {
             num = this.state.value;
         }
         return (num >= this.state.max);
@@ -274,8 +280,8 @@ class InputSpinner extends Component {
      * @param num
      * @returns {boolean}
      */
-    minReached(num = null){
-        if(num == null){
+    minReached(num = null) {
+        if (num == null) {
             num = this.state.value;
         }
         return (num <= this.state.min);
@@ -298,46 +304,46 @@ class InputSpinner extends Component {
 
         return (
             <View style={[Style.container,
-        {borderColor: this.props.showBorder ? color : 'transparent'},
-        {width: this.state.width}, this.props.style]}>
+                {borderColor: this.props.showBorder ? color : 'transparent'},
+                {width: this.state.width}, this.props.style]}>
 
-    <TouchableOpacity
-        style={[(this.props.rounded ? Style.buttonRounded : Style.button), this.props.buttonStyle,
-            {backgroundColor: color},
-            {borderColor: this.props.showBorder ? color : 'transparent'},
-            {height: this.state.height, width: this.state.height}]}
-        onPress={() => this.decrease()}>
+                <TouchableOpacity
+                    style={[(this.props.rounded ? Style.buttonRounded : Style.button), this.props.buttonStyle,
+                        {backgroundColor: color},
+                        {borderColor: this.props.showBorder ? color : 'transparent'},
+                        {height: this.state.height, width: this.state.height}]}
+                    onPress={() => this.decrease()}>
 
-    <Text style={[Style.buttonText,
-        {color: this.props.buttonTextColor, fontSize: this.props.buttonFontSize}]}>-</Text>
+                    <Text style={[Style.buttonText,
+                        {color: this.props.buttonTextColor, fontSize: this.props.buttonFontSize}]}>-</Text>
 
-        </TouchableOpacity>
+                </TouchableOpacity>
 
-        <TextInput
-        style={[Style.numberText, this.props.inputStyle,
-            {color: this.state.textColor},
-            {fontSize: this.props.fontSize},
-            {borderColor: this.props.showBorder ? color : 'transparent'},
-            {backgroundColor: this.props.background},
-            {height: this.props.height}]}
-        value={this.getValue()}
-        editable={(!this.state.disabled && this.props.editable)}
-        keyboardType={keyboardType}
-        onChangeText={this.onChange.bind(this)}/>
+                <TextInput
+                    style={[Style.numberText, this.props.inputStyle,
+                        {color: this.state.textColor},
+                        {fontSize: this.props.fontSize},
+                        {borderColor: this.props.showBorder ? color : 'transparent'},
+                        {backgroundColor: this.props.background},
+                        {height: this.props.height}]}
+                    value={this.getValue()}
+                    editable={(!this.state.disabled && this.props.editable)}
+                    keyboardType={keyboardType}
+                    onChangeText={this.onChange.bind(this)}/>
 
-        <TouchableOpacity
-        style={[(this.props.rounded ? Style.buttonRounded : Style.button), this.props.buttonStyle,
-            {backgroundColor: color},
-            {borderColor: this.props.showBorder ? color : 'transparent'},
-            {height: this.state.height, width: this.state.height}]}
-        onPress={() => this.increase()}>
+                <TouchableOpacity
+                    style={[(this.props.rounded ? Style.buttonRounded : Style.button), this.props.buttonStyle,
+                        {backgroundColor: color},
+                        {borderColor: this.props.showBorder ? color : 'transparent'},
+                        {height: this.state.height, width: this.state.height}]}
+                    onPress={() => this.increase()}>
 
-    <Text style={[Style.buttonText,
-        {color: this.props.buttonTextColor, fontSize: this.props.buttonFontSize}]}>+</Text>
+                    <Text style={[Style.buttonText,
+                        {color: this.props.buttonTextColor, fontSize: this.props.buttonFontSize}]}>+</Text>
 
-        </TouchableOpacity>
-        </View>
-    )
+                </TouchableOpacity>
+            </View>
+        )
     }
 }
 
