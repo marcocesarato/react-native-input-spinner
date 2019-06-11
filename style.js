@@ -14,13 +14,11 @@ export const Style = StyleSheet.create({
         width: 150
     },
     button: {
-        border: 0,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 2,
     },
     buttonRounded: {
-        border: 0,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 50,
