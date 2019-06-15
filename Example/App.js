@@ -100,7 +100,7 @@ export default class App extends Component {
                     <InputSpinner
                         value={this.state.value}
                         style={styles.spinner}
-                        rounded
+                        rounded={false}
                         showBorder/>
                 </View>
                 <View style={styles.col}>
@@ -111,7 +111,7 @@ export default class App extends Component {
                         textColor={"#FFF"}
                         color={"#25863f"}
                         background={"#82cc62"}
-                        rounded
+                        rounded={false}
                         showBorder/>
                 </View>
             </ScrollView>
