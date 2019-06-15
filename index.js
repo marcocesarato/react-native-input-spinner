@@ -300,7 +300,10 @@ class InputSpinner extends Component {
             keyboardType = "number-pad";
         }
 
-        let color = (this.maxReached() ? this.state.colorMax : (this.minReached() ? this.state.colorMin : this.state.color));
+        const left = (this.props.arrow ? "<" : "-");
+        const right = (this.props.arrow ? ">" : "+");
+
+        const color = (this.maxReached() ? this.state.colorMax : (this.minReached() ? this.state.colorMin : this.state.color));
 
         return (
             <View style={[Style.container,
@@ -315,7 +318,7 @@ class InputSpinner extends Component {
                     onPress={() => this.decrease()}>
 
                     <Text style={[Style.buttonText,
-                        {color: this.props.buttonTextColor, fontSize: this.props.buttonFontSize}]}>-</Text>
+                        {color: this.props.buttonTextColor, fontSize: this.props.buttonFontSize}]}>{left}</Text>
 
                 </TouchableOpacity>
 
@@ -339,7 +342,7 @@ class InputSpinner extends Component {
                     onPress={() => this.increase()}>
 
                     <Text style={[Style.buttonText,
-                        {color: this.props.buttonTextColor, fontSize: this.props.buttonFontSize}]}>+</Text>
+                        {color: this.props.buttonTextColor, fontSize: this.props.buttonFontSize}]}>{right}</Text>
 
                 </TouchableOpacity>
             </View>

@@ -30,18 +30,25 @@ export default class App extends Component {
                         color={"#40c5f4"}/>
                 </View>
                 <View style={styles.col}>
+                    <Text style={styles.text}>Arrows</Text>
+                    <InputSpinner
+                        value={this.state.value}
+                        style={styles.spinner}
+                        arrow/>
+                </View>
+                <View style={styles.col}>
                     <Text style={styles.text}>Disabled</Text>
                     <InputSpinner
                         value={this.state.value}
                         style={styles.spinner}
-                        disabled={true}/>
+                        disabled/>
                 </View>
                 <View style={styles.col}>
                     <Text style={styles.text}>Not editable</Text>
                     <InputSpinner
                         value={this.state.value}
                         style={styles.spinner}
-                        editable={false}/>
+                        editable/>
                 </View>
                 <View style={styles.col}>
                     <Text style={styles.text}>onChange</Text>
@@ -93,8 +100,8 @@ export default class App extends Component {
                     <InputSpinner
                         value={this.state.value}
                         style={styles.spinner}
-                        rounded={false}
-                        showBorder={true}/>
+                        rounded
+                        showBorder/>
                 </View>
                 <View style={styles.col}>
                     <Text style={styles.text}>color, background and textColor</Text>
@@ -104,8 +111,8 @@ export default class App extends Component {
                         textColor={"#FFF"}
                         color={"#25863f"}
                         background={"#82cc62"}
-                        rounded={false}
-                        showBorder={true}/>
+                        rounded
+                        showBorder/>
                 </View>
             </ScrollView>
         );
