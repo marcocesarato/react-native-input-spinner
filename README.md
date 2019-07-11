@@ -37,7 +37,7 @@ yarn add react-native-input-spinner
 
 ```javascript
 // Require
-include InputSpinner from 'react-native-input-spinner';
+import InputSpinner from 'react-native-input-spinner';
 
 // Example
 <InputSpinner
