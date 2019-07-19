@@ -36,7 +36,6 @@ yarn add react-native-input-spinner
 ## Usage
 
 ```javascript
-// Require
 import InputSpinner from 'react-native-input-spinner';
 
 // Example
@@ -100,7 +99,10 @@ style | Container style | Object |  | Can overwrite `width` and `showBorder` |
 arrow | Labels on button will be arrows (< and >) instead of plus and minus | Boolean |  |  |
 width             | Custom width of the Spinner | Number | 150 | |
 height            | Custom height of the Spinner | Number | 50 | |
+activeOpacity     | Opacity on pressed button | Number | 0.85 | |
 color             | Custom color of the Spinner | String | ‘#3e525f' | |
+colorRight             | Custom color of the Spinner right button pressed | String | ‘#3e525f' | |
+colorLeft             | Custom color of the Spinner left button | String | ‘#3e525f' | |
 colorMin             | Custom color of the Spinner when reach min value | String | | |
 colorMax             | Custom color of the Spinner when reach max value | String | | |
 background        | Background color of number button | String | ’transparent' | |

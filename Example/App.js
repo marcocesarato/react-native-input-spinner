@@ -3,13 +3,24 @@ import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import InputSpinner from "react-native-input-spinner";
 
 export default class App extends Component {
-
+    
     constructor(props){
         super(props);
         this.state = {
             value: 1,
-            valueReal: 1.5
+            valueReal: 1.5,
+            colorLeft: this.getRandomColor(),
+            colorRight: this.getRandomColor(),
         }
+    }
+
+    getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
     }
 
     render(){
@@ -113,6 +124,21 @@ export default class App extends Component {
                         background={"#82cc62"}
                         rounded={false}
                         showBorder/>
+                </View>
+                <View style={styles.col}>
+                    <Text style={styles.text}>colorLeft and colorRight</Text>
+                    <InputSpinner
+                        value={this.state.value}
+                        style={styles.spinner}
+                        colorLeft={this.state.colorLeft}
+                        colorRight={this.state.colorRight}
+                        onChange={(num)=>{
+                            // ...
+                            this.setState({
+                                colorLeft: this.getRandomColor(),
+                                colorRight: this.getRandomColor(),
+                            })
+                        }}/>
                 </View>
             </ScrollView>
         );

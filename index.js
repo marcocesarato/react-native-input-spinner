@@ -4,6 +4,12 @@ import PropTypes from 'prop-types';
 import {Style} from './style';
 
 /**
+ * Default Color
+ * @type {string}
+ */
+const defaultColor = '#3e525f';
+
+/**
  * Input Spinner
  * @author Marco Cesarato <cesarato.developer@gmail.com>
  */
@@ -93,6 +99,16 @@ class InputSpinner extends Component {
         // Color Max
         if (this.props.colorMax !== prevProps.colorMax) {
             this.setState({colorMax: this.props.colorMax});
+        }
+
+        // Color Left
+        if (this.props.colorLeft !== prevProps.colorLeft) {
+            this.setState({colorLeft: this.props.colorLeft});
+        }
+
+        // Color Right
+        if (this.props.colorRight !== prevProps.colorRight) {
+            this.setState({colorRight: this.props.colorRight});
         }
 
         // Color
@@ -300,10 +316,13 @@ class InputSpinner extends Component {
             keyboardType = "number-pad";
         }
 
-        const left = (this.props.arrow ? "<" : "-");
-        const right = (this.props.arrow ? ">" : "+");
+        const left = (this.props.arrow != null ? "<" : "-");
+        const right = (this.props.arrow != null ? ">" : "+");
 
         const color = (this.maxReached() ? this.state.colorMax : (this.minReached() ? this.state.colorMin : this.state.color));
+
+        const colorLeft = (this.props.colorLeft !== defaultColor ? this.props.colorLeft : color);
+        const colorRight = (this.props.colorRight !== defaultColor ? this.props.colorRight : color);
 
         return (
             <View style={[Style.container,
@@ -311,9 +330,11 @@ class InputSpinner extends Component {
                 {width: this.state.width}, this.props.style]}>
 
                 <TouchableOpacity
+                    activeOpacity={this.props.activeOpacity}
+                    underlayColor={this.props.colorPressed}
                     style={[(this.props.rounded ? Style.buttonRounded : Style.button), this.props.buttonStyle,
-                        {backgroundColor: color},
-                        {borderColor: this.props.showBorder ? color : 'transparent'},
+                        {backgroundColor: colorLeft},
+                        {borderColor: this.props.showBorder ? colorLeft : 'transparent'},
                         {height: this.state.height, width: this.state.height}]}
                     onPress={() => this.decrease()}>
 
@@ -335,9 +356,11 @@ class InputSpinner extends Component {
                     onChangeText={this.onChange.bind(this)}/>
 
                 <TouchableOpacity
+                    activeOpacity={this.props.activeOpacity}
+                    underlayColor={this.props.colorPressed}
                     style={[(this.props.rounded ? Style.buttonRounded : Style.button), this.props.buttonStyle,
-                        {backgroundColor: color},
-                        {borderColor: this.props.showBorder ? color : 'transparent'},
+                        {backgroundColor: colorRight},
+                        {borderColor: this.props.showBorder ? colorRight : 'transparent'},
                         {height: this.state.height, width: this.state.height}]}
                     onPress={() => this.increase()}>
 
@@ -358,7 +381,10 @@ InputSpinner.propTypes = {
     step: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     precision: PropTypes.number,
     rounded: PropTypes.bool,
+    activeOpacity: PropTypes.number,
     color: PropTypes.string,
+    colorRight: PropTypes.string,
+    colorLeft: PropTypes.string,
     colorMax: PropTypes.string,
     colorMin: PropTypes.string,
     background: PropTypes.string,
@@ -388,8 +414,11 @@ InputSpinner.defaultProps = {
     value: 0,
     step: 1,
     precision: 2,
+    activeOpacity: 0.85,
     rounded: true,
-    color: '#3e525f',
+    color: defaultColor,
+    colorRight: defaultColor,
+    colorLeft: defaultColor,
     background: 'transparent',
     textColor: '#000000',
     showBorder: false,
