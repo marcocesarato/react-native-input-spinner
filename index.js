@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Platform, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {Platform, StyleSheet, Text, TextInput, TouchableHighlight, View} from "react-native";
 import PropTypes from 'prop-types';
 import {Style} from './style';
 
@@ -329,19 +329,20 @@ class InputSpinner extends Component {
                 {borderColor: this.props.showBorder ? color : 'transparent'},
                 {width: this.state.width}, this.props.style]}>
 
-                <TouchableOpacity
+                <TouchableHighlight
                     activeOpacity={this.props.activeOpacity}
-                    underlayColor={this.props.colorPressed}
-                    style={[(this.props.rounded ? Style.buttonRounded : Style.button), this.props.buttonStyle,
+                    underlayColor={this.props.colorPress}
+                    style={[(this.props.rounded ? Style.buttonRounded : Style.button),
                         {backgroundColor: colorLeft},
                         {borderColor: this.props.showBorder ? colorLeft : 'transparent'},
-                        {height: this.state.height, width: this.state.height}]}
+                        {height: this.state.height, width: this.state.height},
+                        this.props.buttonStyle]}
                     onPress={() => this.decrease()}>
 
                     <Text style={[Style.buttonText,
                         {color: this.props.buttonTextColor, fontSize: this.props.buttonFontSize}]}>{left}</Text>
 
-                </TouchableOpacity>
+                </TouchableHighlight>
 
                 <TextInput
                     style={[Style.numberText, this.props.inputStyle,
@@ -355,19 +356,20 @@ class InputSpinner extends Component {
                     keyboardType={keyboardType}
                     onChangeText={this.onChange.bind(this)}/>
 
-                <TouchableOpacity
+                <TouchableHighlight
                     activeOpacity={this.props.activeOpacity}
-                    underlayColor={this.props.colorPressed}
-                    style={[(this.props.rounded ? Style.buttonRounded : Style.button), this.props.buttonStyle,
+                    underlayColor={this.props.colorPress}
+                    style={[(this.props.rounded ? Style.buttonRounded : Style.button),
                         {backgroundColor: colorRight},
                         {borderColor: this.props.showBorder ? colorRight : 'transparent'},
-                        {height: this.state.height, width: this.state.height}]}
+                        {height: this.state.height, width: this.state.height},
+                        this.props.buttonStyle]}
                     onPress={() => this.increase()}>
 
                     <Text style={[Style.buttonText,
                         {color: this.props.buttonTextColor, fontSize: this.props.buttonFontSize}]}>{right}</Text>
 
-                </TouchableOpacity>
+                </TouchableHighlight>
             </View>
         )
     }
@@ -383,6 +385,7 @@ InputSpinner.propTypes = {
     rounded: PropTypes.bool,
     activeOpacity: PropTypes.number,
     color: PropTypes.string,
+    colorPress: PropTypes.string,
     colorRight: PropTypes.string,
     colorLeft: PropTypes.string,
     colorMax: PropTypes.string,
@@ -414,9 +417,10 @@ InputSpinner.defaultProps = {
     value: 0,
     step: 1,
     precision: 2,
-    activeOpacity: 0.85,
     rounded: true,
+    activeOpacity: 0.85,
     color: defaultColor,
+    colorPress: defaultColor,
     colorRight: defaultColor,
     colorLeft: defaultColor,
     background: 'transparent',

@@ -1,6 +1,6 @@
 {
   "name": "react-native-input-spinner",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "description": "React native input with increase and decrease buttons",
   "main": "index.js",
   "scripts": {

@@ -130,6 +130,7 @@ export default class App extends Component {
                     <InputSpinner
                         value={this.state.value}
                         style={styles.spinner}
+                        colorPress={"#F00"}
                         colorLeft={this.state.colorLeft}
                         colorRight={this.state.colorRight}
                         onChange={(num)=>{
