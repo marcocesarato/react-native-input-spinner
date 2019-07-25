@@ -48,6 +48,15 @@ export default class App extends Component {
                         arrows/>
                 </View>
                 <View style={styles.col}>
+                    <Text style={styles.text}>Custom button text and fontSize</Text>
+                    <InputSpinner
+                        value={this.state.value}
+                        style={styles.spinner}
+                        buttonFontSize={10}
+                        buttonLeftText={"▲"}
+                        buttonRightText={"▼"}/>
+                </View>
+                <View style={styles.col}>
                     <Text style={styles.text}>Disabled</Text>
                     <InputSpinner
                         value={this.state.value}

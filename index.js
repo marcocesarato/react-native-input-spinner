@@ -354,8 +354,8 @@ class InputSpinner extends Component {
 
         // Button Text
         // TODO: prop for set an icon
-        const left = (this.props.arrows !== false ? "<" : "-");
-        const right = (this.props.arrows !== false ? ">" : "+");
+        const left = (this.props.arrows !== false ? "<" : (this.props.buttonLeftText ? this.props.buttonLeftText : "-"));
+        const right = (this.props.arrows !== false ? ">" : (this.props.buttonRightText ? this.props.buttonRightText : "+"));
 
         // Colors
         const color = (this.maxReached() ? this.state.colorMax : (this.minReached() ? this.state.colorMin : this.state.color));
@@ -365,7 +365,6 @@ class InputSpinner extends Component {
 
         // Button Styles
         const buttonStyle = {
-            borderColor: this.props.showBorder ? colorLeft : 'transparent',
             height: this.state.height,
             width: this.state.height
         };
@@ -373,21 +372,30 @@ class InputSpinner extends Component {
 
         const buttonLeftStyle = [
             buttonStyle,
-            {backgroundColor: colorLeft},
-            (this.props.rounded ? Style.buttonRounded : Style.button),
+            {
+                borderColor: this.props.showBorder ? colorLeft : 'transparent',
+                backgroundColor: colorLeft
+            },
+            (this.props.rounded ? Style.buttonRounded : Style.buttonLeft),
             (this.state.buttonPress === 'left' ? buttonPressStyle : this.props.buttonStyle)
         ];
         const buttonRightStyle = [
             buttonStyle,
-            {backgroundColor: colorRight},
-            (this.props.rounded ? Style.buttonRounded : Style.button),
+            {
+                borderColor: this.props.showBorder ? colorRight : 'transparent',
+                backgroundColor: colorRight
+            },
+            (this.props.rounded ? Style.buttonRounded : Style.buttonRight),
             (this.state.buttonPress === 'right' ? buttonPressStyle : this.props.buttonStyle)
         ];
 
         // Button Text Style
         const buttonTextStyle = [
             Style.buttonText,
-            {fontSize: this.props.buttonFontSize}
+            {
+                fontSize: this.props.buttonFontSize,
+                fontFamily: this.props.buttonFontFamily
+            }
         ];
 
         const buttonTextLeftStyle = [
@@ -407,6 +415,7 @@ class InputSpinner extends Component {
             {
                 color: this.state.textColor,
                 fontSize: this.props.fontSize,
+                fontFamily: this.props.fontFamily,
                 borderColor: this.props.showBorder ? color : 'transparent',
                 backgroundColor: this.props.background,
                 height: this.props.height
@@ -482,7 +491,9 @@ InputSpinner.propTypes = {
     arrows: PropTypes.bool,
     showBorder: PropTypes.bool,
     fontSize: PropTypes.number,
+    fontFamily: PropTypes.string,
     buttonFontSize: PropTypes.number,
+    buttonfontFamily: PropTypes.string,
     buttonTextColor: PropTypes.string,
     disabled: PropTypes.bool,
     editable: PropTypes.bool,
@@ -493,6 +504,8 @@ InputSpinner.propTypes = {
     onMax: PropTypes.func,
     onIncrease: PropTypes.func,
     onDecrease: PropTypes.func,
+    buttonLeftText: PropTypes.string,
+    buttonRightText: PropTypes.string,
     buttonStyle: PropTypes.object,
     buttonPressStyle: PropTypes.object,
     inputStyle: PropTypes.object,
@@ -517,13 +530,17 @@ InputSpinner.defaultProps = {
     arrows: false,
     showBorder: false,
     fontSize: 14,
+    fontFamily: null,
     buttonFontSize: 25,
+    buttonFontFamily: null,
     buttonTextColor: '#FFFFFF',
     buttonPressTextColor: '#FFFFFF',
     disabled: false,
     editable: true,
     width: 150,
     height: 50,
+    buttonLeftText: null,
+    buttonRightText: null,
     buttonStyle: {},
     buttonPressStyle: {},
     inputStyle: {},

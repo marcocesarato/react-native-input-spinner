@@ -13,15 +13,24 @@ export const Style = StyleSheet.create({
         overflow: 'hidden',
         width: 150
     },
-    button: {
+    buttonLeft: {
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 2,
+        borderBottomRightRadius: 0,
+        borderTopRightRadius: 0,
+    },
+    buttonRight: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 2,
+        borderBottomLeftRadius: 0,
+        borderTopLeftRadius: 0,
     },
     buttonRounded: {
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 50,
+        borderRadius: 999,
     },
     buttonText: {
         color: 'white',

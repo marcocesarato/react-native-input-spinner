@@ -111,9 +111,13 @@ rounded        | Use circular button | Boolean | true |
 showBorder        | Show the border of the Spinner or not | Boolean | false | Use with `rounded={false}` 
 textColor          | Custom number color | String | ‘#000000' | 
 inputStyle | Input Style (Text number at middle) | Object |  |
-fontSize          | Custom fontSize of the text input in the Spinner | Number | 14 | 
-buttonFontSize        | Custom fontSize of buttons in the Spinner | Number | 14 | 
+fontSize          | Custom fontSize of the text input of the Spinner | Number | 14 | 
+fontFamily          | Custom fontFamily of the text input of the Spinner | String | System Default |
+buttonLeftText        | Custom text on the button left of the spinner | String |  | 
+buttonRightText        | Custom text on the button right of the spinner | String |  | 
+buttonFontSize        | Custom fontSize of buttons of the Spinner | Number | 14 | 
+buttonFontFamily        | Custom fontFamily of buttons of the Spinner | String | System Default | 
 buttonStyle | Button Style (Plus and Minus buttons) | Object |  |
-buttonTextColor   | Custom color of the button in the Spinner | String | '#FFFFFF' | 
+buttonTextColor   | Custom color of the button of the Spinner | String | '#FFFFFF' | 
 buttonPressStyle | Button Style on Pressed state (Plus and Minus buttons) | Object |  |
-buttonPressTextColor   | Custom color of the button in the Spinner on Pressed state | String | '#FFFFFF' | 
+buttonPressTextColor   | Custom color of the button of the Spinner on Pressed state | String | '#FFFFFF' | 
