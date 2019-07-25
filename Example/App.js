@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {StyleSheet, Text, View, ScrollView} from 'react-native';
+import {StyleSheet, Text, View, ScrollView} from "react-native";
 import InputSpinner from "react-native-input-spinner";
 
 export default class App extends Component {
@@ -140,6 +140,16 @@ export default class App extends Component {
                                 colorRight: this.getRandomColor(),
                             })
                         }}/>
+                </View>
+                <View style={styles.col}>
+                    <Text style={styles.text}>Colors on press</Text>
+                    <InputSpinner
+                        value={this.state.value}
+                        style={styles.spinner}
+                        color={"#000"}
+                        colorPress={"#FFF"}
+                        buttonTextColor={"#FFF"}
+                        buttonPressTextColor={"#000"}/>
                 </View>
             </ScrollView>
         );

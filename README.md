@@ -16,7 +16,7 @@
 
 ## Description
 
-An extendible input number spinner component for react-native.
+An extendible input number spinner component for react-native highly customizable.
 
 This component enhance a text input for entering numeric values, with increase and decrease buttons.
 
@@ -100,18 +100,20 @@ arrow | Labels on button will be arrows (< and >) instead of plus and minus | Bo
 width             | Custom width of the Spinner | Number | 150 | 
 height            | Custom height of the Spinner | Number | 50 | 
 activeOpacity     | Opacity on pressed button | Number | 0.85 | 
-color             | Custom color of the Spinner | String | ‘#3e525f' | 
-colorPress | Custom color of the Spinner button on touch press | String | ‘#3e525f' | 
-colorRight             | Custom color of the Spinner right button | String | ‘#3e525f' | 
-colorLeft             | Custom color of the Spinner left button | String | ‘#3e525f' | 
+color             | Custom color of the Spinner | String | '#3E525F' | 
+colorPress | Custom color of the Spinner button on touch press | String | '#3E525F' | 
+colorRight             | Custom color of the Spinner right button | String | '#3E525F' | 
+colorLeft             | Custom color of the Spinner left button | String | '#3E525F' | 
 colorMin             | Custom color of the Spinner when reach min value | String | | 
 colorMax             | Custom color of the Spinner when reach max value | String | | 
-background        | Background color of number button | String | ’transparent' | 
+background        | Background color of number button | String | 'transparent' | 
 rounded        | Use circular button | Boolean | true | 
 showBorder        | Show the border of the Spinner or not | Boolean | false | Use with `rounded={false}` 
 textColor          | Custom number color | String | ‘#000000' | 
 inputStyle | Input Style (Text number at middle) | Object |  |
 fontSize          | Custom fontSize of the text input in the Spinner | Number | 14 | 
 buttonFontSize        | Custom fontSize of buttons in the Spinner | Number | 14 | 
-buttonTextColor   | Custom color of the button in the Spinner | String | 'white' | 
 buttonStyle | Button Style (Plus and Minus buttons) | Object |  |
+buttonTextColor   | Custom color of the button in the Spinner | String | '#FFFFFF' | 
+buttonPressStyle | Button Style on Pressed state (Plus and Minus buttons) | Object |  |
+buttonPressTextColor   | Custom color of the button in the Spinner on Pressed state | String | '#FFFFFF' | 

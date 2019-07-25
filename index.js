@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Platform, StyleSheet, Text, TextInput, TouchableHighlight, View} from "react-native";
+import {Text, TextInput, TouchableHighlight, View} from "react-native";
 import PropTypes from 'prop-types';
 import {Style} from './style';
 
@@ -7,7 +7,7 @@ import {Style} from './style';
  * Default Color
  * @type {string}
  */
-const defaultColor = '#3e525f';
+const defaultColor = '#3E525F';
 
 /**
  * Input Spinner
@@ -50,7 +50,12 @@ class InputSpinner extends Component {
             color: this.props.color,
             colorMin: colorMin,
             colorMax: colorMax,
+            colorLeft: this.props.colorLeft,
+            colorRight: this.props.colorRight,
+            buttonTextColor: this.props.buttonTextColor,
+            buttonPressTextColor: this.props.buttonPressTextColor,
             type: this.props.type,
+            buttonPress: null,
         };
     }
 
@@ -111,6 +116,21 @@ class InputSpinner extends Component {
             this.setState({colorRight: this.props.colorRight});
         }
 
+        // Color Press
+        if (this.props.colorPress !== prevProps.colorPress) {
+            this.setState({colorPress: this.props.colorPress});
+        }
+
+        // Color Button Text
+        if (this.props.buttonTextColor !== prevProps.buttonTextColor) {
+            this.setState({buttonTextColor: this.props.buttonTextColor});
+        }
+
+        // Color Button Text Press
+        if (this.props.buttonPressTextColor !== prevProps.buttonPressTextColor) {
+            this.setState({buttonPressTextColor: this.props.buttonPressTextColor});
+        }
+
         // Color
         if (this.props.color !== prevProps.color) {
             let newState = {color: this.props.color};
@@ -168,12 +188,18 @@ class InputSpinner extends Component {
     }
 
     /**
-     * Detetct if is numeric
-     * @param val
-     * @returns {boolean}
+     * On Button Press
+     * @param buttonDirection
      */
-    isNumeric(val) {
-        return !isNaN(parseFloat(val)) && isFinite(val);
+    onShowUnderlay(buttonDirection){
+        this.setState({buttonPress: buttonDirection});
+    }
+
+    /**
+     * On Button Unpress
+     */
+    onHideUnderlay(){
+        this.setState({buttonPress: null});
     }
 
     /**
@@ -304,11 +330,21 @@ class InputSpinner extends Component {
     }
 
     /**
+     * Is object empty
+     * @param obj
+     * @returns {boolean}
+     */
+    isObjectEmpty(obj){
+        return (Object.entries(obj).length === 0 && obj.constructor === Object);
+    }
+
+    /**
      * Render
      * @returns {*}
      */
     render() {
 
+        // Keyboard type
         let keyboardType = "numeric";
         if (this.typeDecimal()) {
             keyboardType = "decimal-pad";
@@ -316,41 +352,95 @@ class InputSpinner extends Component {
             keyboardType = "number-pad";
         }
 
+        // Button Text
+        // TODO: prop for set an icon
         const left = (this.props.arrow != null ? "<" : "-");
         const right = (this.props.arrow != null ? ">" : "+");
 
+        // Colors
         const color = (this.maxReached() ? this.state.colorMax : (this.minReached() ? this.state.colorMin : this.state.color));
+        const colorLeft = (this.state.colorLeft !== defaultColor ? this.state.colorLeft : color);
+        const colorRight = (this.state.colorRight !== defaultColor ? this.state.colorRight : color);
+        const colorTextPress = (this.state.buttonPressTextColor !== this.state.buttonTextColor ? this.state.buttonPressTextColor : this.state.buttonTextColor);
 
-        const colorLeft = (this.props.colorLeft !== defaultColor ? this.props.colorLeft : color);
-        const colorRight = (this.props.colorRight !== defaultColor ? this.props.colorRight : color);
+        // Button Styles
+        const buttonStyle = {
+            borderColor: this.props.showBorder ? colorLeft : 'transparent',
+            height: this.state.height,
+            width: this.state.height
+        };
+        const buttonPressStyle = (this.isObjectEmpty(this.props.buttonPressStyle) ? this.props.buttonStyle : this.props.buttonPressStyle);
+
+        const buttonLeftStyle = [
+            buttonStyle,
+            {backgroundColor: colorLeft},
+            (this.props.rounded ? Style.buttonRounded : Style.button),
+            (this.state.buttonPress === 'left' ? buttonPressStyle : this.props.buttonStyle)
+        ];
+        const buttonRightStyle = [
+            buttonStyle,
+            {backgroundColor: colorRight},
+            (this.props.rounded ? Style.buttonRounded : Style.button),
+            (this.state.buttonPress === 'right' ? buttonPressStyle : this.props.buttonStyle)
+        ];
+
+        // Button Text Style
+        const buttonTextStyle = [
+            Style.buttonText,
+            {fontSize: this.props.buttonFontSize}
+        ];
+
+        const buttonTextLeftStyle = [
+            Style.buttonText,
+            buttonTextStyle,
+            {color: (this.state.buttonPress === 'left' ? colorTextPress : this.state.buttonTextColor)}
+        ];
+        const buttonTextRightStyle = [
+            Style.buttonText,
+            buttonTextStyle,
+            {color: (this.state.buttonPress === 'right' ? colorTextPress : this.state.buttonTextColor)}
+        ];
+
+        // Input Style
+        const inputStyle = [
+            Style.numberText,
+            {
+                color: this.state.textColor,
+                fontSize: this.props.fontSize,
+                borderColor: this.props.showBorder ? color : 'transparent',
+                backgroundColor: this.props.background,
+                height: this.props.height
+            },
+            this.props.inputStyle
+        ];
+
+        // Container Style
+        const containerStyle = [
+            Style.container,
+            {
+                borderColor: this.props.showBorder ? color : 'transparent',
+                width: this.state.width
+            },
+            this.props.style
+        ];
 
         return (
-            <View style={[Style.container,
-                {borderColor: this.props.showBorder ? color : 'transparent'},
-                {width: this.state.width}, this.props.style]}>
+            <View style={containerStyle}>
 
                 <TouchableHighlight
                     activeOpacity={this.props.activeOpacity}
                     underlayColor={this.props.colorPress}
-                    style={[(this.props.rounded ? Style.buttonRounded : Style.button),
-                        {backgroundColor: colorLeft},
-                        {borderColor: this.props.showBorder ? colorLeft : 'transparent'},
-                        {height: this.state.height, width: this.state.height},
-                        this.props.buttonStyle]}
+                    onHideUnderlay={this.onHideUnderlay.bind(this)}
+                    onShowUnderlay={this.onShowUnderlay.bind(this, 'left')}
+                    style={buttonLeftStyle}
                     onPress={() => this.decrease()}>
 
-                    <Text style={[Style.buttonText,
-                        {color: this.props.buttonTextColor, fontSize: this.props.buttonFontSize}]}>{left}</Text>
+                    <Text style={buttonTextLeftStyle}>{left}</Text>
 
                 </TouchableHighlight>
 
                 <TextInput
-                    style={[Style.numberText, this.props.inputStyle,
-                        {color: this.state.textColor},
-                        {fontSize: this.props.fontSize},
-                        {borderColor: this.props.showBorder ? color : 'transparent'},
-                        {backgroundColor: this.props.background},
-                        {height: this.props.height}]}
+                    style={inputStyle}
                     value={this.getValue()}
                     editable={(!this.state.disabled && this.props.editable)}
                     keyboardType={keyboardType}
@@ -359,15 +449,12 @@ class InputSpinner extends Component {
                 <TouchableHighlight
                     activeOpacity={this.props.activeOpacity}
                     underlayColor={this.props.colorPress}
-                    style={[(this.props.rounded ? Style.buttonRounded : Style.button),
-                        {backgroundColor: colorRight},
-                        {borderColor: this.props.showBorder ? colorRight : 'transparent'},
-                        {height: this.state.height, width: this.state.height},
-                        this.props.buttonStyle]}
+                    onHideUnderlay={this.onHideUnderlay.bind(this)}
+                    onShowUnderlay={this.onShowUnderlay.bind(this, 'right')}
+                    style={buttonRightStyle}
                     onPress={() => this.increase()}>
 
-                    <Text style={[Style.buttonText,
-                        {color: this.props.buttonTextColor, fontSize: this.props.buttonFontSize}]}>{right}</Text>
+                    <Text style={buttonTextRightStyle}>{right}</Text>
 
                 </TouchableHighlight>
             </View>
@@ -406,6 +493,7 @@ InputSpinner.propTypes = {
     onIncrease: PropTypes.func,
     onDecrease: PropTypes.func,
     buttonStyle: PropTypes.object,
+    buttonPressStyle: PropTypes.object,
     inputStyle: PropTypes.object,
     style: PropTypes.object,
 };
@@ -428,12 +516,14 @@ InputSpinner.defaultProps = {
     showBorder: false,
     fontSize: 14,
     buttonFontSize: 25,
-    buttonTextColor: 'white',
+    buttonTextColor: '#FFFFFF',
+    buttonPressTextColor: '#FFFFFF',
     disabled: false,
     editable: true,
     width: 150,
     height: 50,
     buttonStyle: {},
+    buttonPressStyle: {},
     inputStyle: {},
     style: {},
 };
