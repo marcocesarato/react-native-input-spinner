@@ -96,7 +96,7 @@ editable          | Set if input number field is editable or not | Boolean | tru
 Property          | Description | Type | Default | Note
 ------------------|-------------|------|---------|-------
 style | Container style | Object |  | Can overwrite `width` and `showBorder` 
-arrow | Labels on button will be arrows (< and >) instead of plus and minus | Boolean |  |  
+arrows | Labels on button will be arrows (< and >) instead of plus and minus | Boolean | false  |  
 width             | Custom width of the Spinner | Number | 150 | 
 height            | Custom height of the Spinner | Number | 50 | 
 activeOpacity     | Opacity on pressed button | Number | 0.85 | 

@@ -45,7 +45,7 @@ export default class App extends Component {
                     <InputSpinner
                         value={this.state.value}
                         style={styles.spinner}
-                        arrow/>
+                        arrows/>
                 </View>
                 <View style={styles.col}>
                     <Text style={styles.text}>Disabled</Text>

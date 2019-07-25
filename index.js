@@ -354,8 +354,8 @@ class InputSpinner extends Component {
 
         // Button Text
         // TODO: prop for set an icon
-        const left = (this.props.arrow != null ? "<" : "-");
-        const right = (this.props.arrow != null ? ">" : "+");
+        const left = (this.props.arrows !== false ? "<" : "-");
+        const right = (this.props.arrows !== false ? ">" : "+");
 
         // Colors
         const color = (this.maxReached() ? this.state.colorMax : (this.minReached() ? this.state.colorMin : this.state.color));
@@ -479,6 +479,7 @@ InputSpinner.propTypes = {
     colorMin: PropTypes.string,
     background: PropTypes.string,
     textColor: PropTypes.string,
+    arrows: PropTypes.bool,
     showBorder: PropTypes.bool,
     fontSize: PropTypes.number,
     buttonFontSize: PropTypes.number,
@@ -513,6 +514,7 @@ InputSpinner.defaultProps = {
     colorLeft: defaultColor,
     background: 'transparent',
     textColor: '#000000',
+    arrows: false,
     showBorder: false,
     fontSize: 14,
     buttonFontSize: 25,
