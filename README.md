@@ -115,6 +115,8 @@ fontSize          | Custom fontSize of the text input of the Spinner | Number | 
 fontFamily          | Custom fontFamily of the text input of the Spinner | String | System Default |
 buttonLeftText        | Custom text on the button left of the spinner | String |  | 
 buttonRightText        | Custom text on the button right of the spinner | String |  | 
+buttonLeftImage        | Custom element on the button left of the spinner | Component |  | 
+buttonRightImage        | Custom element on the button right of the spinner | Component |  | 
 buttonFontSize        | Custom fontSize of buttons of the Spinner | Number | 14 | 
 buttonFontFamily        | Custom fontFamily of buttons of the Spinner | String | System Default | 
 buttonStyle | Button Style (Plus and Minus buttons) | Object |  |

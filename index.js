@@ -39,6 +39,7 @@ class InputSpinner extends Component {
         }
 
         this.state = {
+            type: this.props.type,
             min: this.parseNum(this.props.min),
             max: this.parseNum(this.props.max),
             value: this.parseNum(this.props.value),
@@ -48,14 +49,14 @@ class InputSpinner extends Component {
             height: this.props.height,
             textColor: this.props.textColor,
             color: this.props.color,
+            colorPress: this.props.colorPress,
             colorMin: colorMin,
             colorMax: colorMax,
             colorLeft: this.props.colorLeft,
             colorRight: this.props.colorRight,
+            buttonPress: null,
             buttonTextColor: this.props.buttonTextColor,
             buttonPressTextColor: this.props.buttonPressTextColor,
-            type: this.props.type,
-            buttonPress: null,
         };
     }
 
@@ -339,11 +340,19 @@ class InputSpinner extends Component {
     }
 
     /**
-     * Render
-     * @returns {*}
+     * Is text input editable
+     * @returns {boolean|Boolean}
      */
-    render() {
+    isEditable(){
+        return (!this.state.disabled && this.props.editable);
+    }
 
+    /**
+     * Get keyboard type
+     * @returns {string}
+     * @private
+     */
+    _getKeyboardType(){
         // Keyboard type
         let keyboardType = "numeric";
         if (this.typeDecimal()) {
@@ -351,121 +360,280 @@ class InputSpinner extends Component {
         } else {
             keyboardType = "number-pad";
         }
+        return keyboardType;
+    }
 
-        // Button Text
-        // TODO: prop for set an icon
-        const left = (this.props.arrows !== false ? "<" : (this.props.buttonLeftText ? this.props.buttonLeftText : "-"));
-        const right = (this.props.arrows !== false ? ">" : (this.props.buttonRightText ? this.props.buttonRightText : "+"));
+    /**
+     * Get main color
+     * @returns {String|*}
+     * @private
+     */
+    _getColor(){
+        return (this.maxReached() ? this.state.colorMax : (this.minReached() ? this.state.colorMin : this.state.color));
+    }
 
-        // Colors
-        const color = (this.maxReached() ? this.state.colorMax : (this.minReached() ? this.state.colorMin : this.state.color));
-        const colorLeft = (this.state.colorLeft !== defaultColor ? this.state.colorLeft : color);
-        const colorRight = (this.state.colorRight !== defaultColor ? this.state.colorRight : color);
-        const colorTextPress = (this.state.buttonPressTextColor !== this.state.buttonTextColor ? this.state.buttonPressTextColor : this.state.buttonTextColor);
+    /**
+     * Get color on button press
+     * @returns {String|*}
+     * @private
+     */
+    _getColorPress(){
+        const color = (this.state.colorPress !== defaultColor ? this.state.colorPress : this.state.color);
+        return (this.maxReached() ? this.state.colorMax : (this.minReached() ? this.state.colorMin : color));
+    }
 
-        // Button Styles
-        const buttonStyle = {
+    /**
+     * Get color text on button press
+     * @returns {string}
+     * @private
+     */
+    _getColorPressText(){
+        return (this.state.buttonPressTextColor !== this.state.buttonTextColor ? this.state.buttonPressTextColor : this.state.buttonTextColor);
+    }
+
+    /**
+     * Get left button color
+     * @returns {string}
+     * @private
+     */
+    _getColorLeftButton(){
+        const color = this._getColor();
+        return (this.state.colorLeft !== defaultColor ? this.state.colorLeft : color);
+    }
+
+    /**
+     * Get right button color
+     * @returns {string}
+     * @private
+     */
+    _getColorRightButton(){
+        const color = this._getColor();
+        return (this.state.colorRight !== defaultColor ? this.state.colorRight : color);
+    }
+
+    /**
+     * Get container style
+     * @returns {*[]}
+     * @private
+     */
+    _getContainerStyle(){
+        return [
+            Style.container,
+            {
+                borderColor: this.props.showBorder ? this._getColor() : 'transparent',
+                width: this.state.width
+            },
+            this.props.style
+        ];
+    }
+
+    /**
+     * Get input text style
+     * @returns {*[]}
+     * @private
+     */
+    _getInputTextStyle(){
+        return [
+            Style.numberText,
+            {
+                color: this.state.textColor,
+                fontSize: this.props.fontSize,
+                fontFamily: this.props.fontFamily,
+                borderColor: this.props.showBorder ? this._getColor() : 'transparent',
+                backgroundColor: this.props.background,
+                height: this.props.height
+            },
+            this.props.inputStyle
+        ];
+    }
+
+    /**
+     * Get button style
+     * @returns {*}
+     * @private
+     */
+    _getStyleButton(){
+        return {
             height: this.state.height,
             width: this.state.height
         };
-        const buttonPressStyle = (this.isObjectEmpty(this.props.buttonPressStyle) ? this.props.buttonStyle : this.props.buttonPressStyle);
+    }
 
-        const buttonLeftStyle = [
-            buttonStyle,
-            {
-                borderColor: this.props.showBorder ? colorLeft : 'transparent',
-                backgroundColor: colorLeft
-            },
-            (this.props.rounded ? Style.buttonRounded : Style.buttonLeft),
-            (this.state.buttonPress === 'left' ? buttonPressStyle : this.props.buttonStyle)
-        ];
-        const buttonRightStyle = [
-            buttonStyle,
-            {
-                borderColor: this.props.showBorder ? colorRight : 'transparent',
-                backgroundColor: colorRight
-            },
-            (this.props.rounded ? Style.buttonRounded : Style.buttonRight),
-            (this.state.buttonPress === 'right' ? buttonPressStyle : this.props.buttonStyle)
-        ];
+    /**
+     * Get button pressed style
+     * @returns {Object}
+     * @private
+     */
+    _getStyleButtonPress(){
+        return (this.isObjectEmpty(this.props.buttonPressStyle) ? this.props.buttonStyle : this.props.buttonPressStyle);
+    }
 
-        // Button Text Style
-        const buttonTextStyle = [
+    /**
+     * Get button text style
+     * @returns {*[]}
+     * @private
+     */
+    _getStyleButtonText(){
+        return [
             Style.buttonText,
             {
                 fontSize: this.props.buttonFontSize,
                 fontFamily: this.props.buttonFontFamily
             }
         ];
+    }
 
-        const buttonTextLeftStyle = [
+    /**
+     * Get left button text style
+     * @returns {*[]}
+     * @private
+     */
+    _getStyleLeftButtonText(){
+        return [
             Style.buttonText,
-            buttonTextStyle,
-            {color: (this.state.buttonPress === 'left' ? colorTextPress : this.state.buttonTextColor)}
+            this._getStyleButtonText(),
+            {color: (this.state.buttonPress === 'left' ? this._getColorPressText() : this.state.buttonTextColor)}
         ];
-        const buttonTextRightStyle = [
+    }
+
+    /**
+     * Get right button text style
+     * @returns {*[]}
+     * @private
+     */
+    _getStyleRightButtonText(){
+        return [
             Style.buttonText,
-            buttonTextStyle,
-            {color: (this.state.buttonPress === 'right' ? colorTextPress : this.state.buttonTextColor)}
+            this._getStyleButtonText(),
+            {color: (this.state.buttonPress === 'right' ? this._getColorPressText() : this.state.buttonTextColor)}
         ];
+    }
 
-        // Input Style
-        const inputStyle = [
-            Style.numberText,
-            {
-                color: this.state.textColor,
-                fontSize: this.props.fontSize,
-                fontFamily: this.props.fontFamily,
-                borderColor: this.props.showBorder ? color : 'transparent',
-                backgroundColor: this.props.background,
-                height: this.props.height
-            },
-            this.props.inputStyle
-        ];
+    /**
+     * Render left button element
+     * @returns {*}
+     * @private
+     */
+    _renderLeftButtonElement(){
+        if(this.props.buttonLeftImage) {
+            return this.props.buttonLeftImage;
+        } else {
+            const text = (this.props.arrows !== false ? "<" : (this.props.buttonLeftText ? this.props.buttonLeftText : "-"));
+            return (
+                <Text style={this._getStyleLeftButtonText()}>
+                    {text}
+                </Text>
+            );
+        }
+    }
 
-        // Container Style
-        const containerStyle = [
-            Style.container,
+    /**
+     * Render right button element
+     * @returns {*}
+     * @private
+     */
+    _renderRightButtonElement(){
+        if(this.props.buttonRightImage) {
+            return this.props.buttonRightImage;
+        } else {
+            const text = (this.props.arrows !== false ? ">" : (this.props.buttonRightText ? this.props.buttonRightText : "+"));
+            return (
+                <Text style={this._getStyleRightButtonText()}>
+                    {text}
+                </Text>
+            );
+        }
+    }
+
+    /**
+     * Render left button
+     * @returns {*}
+     * @private
+     */
+    _renderLeftButton(){
+
+        const direction = 'left';
+        const colorLeft = this._getColorLeftButton();
+
+        const buttonStyle = [
+            this._getStyleButton(),
             {
-                borderColor: this.props.showBorder ? color : 'transparent',
-                width: this.state.width
+                borderColor: this.props.showBorder ? colorLeft : 'transparent',
+                backgroundColor: colorLeft
             },
-            this.props.style
+            (this.props.rounded ? Style.buttonRounded : Style.buttonLeft),
+            (this.state.buttonPress === direction ? this._getStyleButtonPress() : this.props.buttonStyle)
         ];
 
         return (
-            <View style={containerStyle}>
+            <TouchableHighlight
+                activeOpacity={this.props.activeOpacity}
+                underlayColor={this._getColorPress()}
+                onHideUnderlay={this.onHideUnderlay.bind(this)}
+                onShowUnderlay={this.onShowUnderlay.bind(this, direction)}
+                style={buttonStyle}
+                onPress={() => this.decrease()}>
 
-                <TouchableHighlight
-                    activeOpacity={this.props.activeOpacity}
-                    underlayColor={this.props.colorPress}
-                    onHideUnderlay={this.onHideUnderlay.bind(this)}
-                    onShowUnderlay={this.onShowUnderlay.bind(this, 'left')}
-                    style={buttonLeftStyle}
-                    onPress={() => this.decrease()}>
+                {this._renderLeftButtonElement()}
 
-                    <Text style={buttonTextLeftStyle}>{left}</Text>
+            </TouchableHighlight>
+        );
+    }
 
-                </TouchableHighlight>
+    /**
+     * Render right button
+     * @returns {*}
+     * @private
+     */
+    _renderRightButton(){
+
+        const direction = 'right';
+        const colorRight = this._getColorRightButton();
+
+        const buttonStyle = [
+            this._getStyleButton(),
+            {
+                borderColor: this.props.showBorder ? colorRight : 'transparent',
+                backgroundColor: colorRight
+            },
+            (this.props.rounded ? Style.buttonRounded : Style.buttonRight),
+            (this.state.buttonPress === direction ? this._getStyleButtonPress() : this.props.buttonStyle)
+        ];
+
+        return (
+            <TouchableHighlight
+                activeOpacity={this.props.activeOpacity}
+                underlayColor={this._getColorPress()}
+                onHideUnderlay={this.onHideUnderlay.bind(this)}
+                onShowUnderlay={this.onShowUnderlay.bind(this, direction)}
+                style={buttonStyle}
+                onPress={() => this.increase()}>
+
+                {this._renderRightButtonElement()}
+
+            </TouchableHighlight>
+        );
+    }
+
+    /**
+     * Render
+     * @returns {*}
+     */
+    render() {
+        return (
+            <View style={this._getContainerStyle()}>
+
+                {this._renderLeftButton()}
 
                 <TextInput
-                    style={inputStyle}
+                    style={this._getInputTextStyle()}
                     value={this.getValue()}
-                    editable={(!this.state.disabled && this.props.editable)}
-                    keyboardType={keyboardType}
+                    editable={this.isEditable()}
+                    keyboardType={this._getKeyboardType()}
                     onChangeText={this.onChange.bind(this)}/>
 
-                <TouchableHighlight
-                    activeOpacity={this.props.activeOpacity}
-                    underlayColor={this.props.colorPress}
-                    onHideUnderlay={this.onHideUnderlay.bind(this)}
-                    onShowUnderlay={this.onShowUnderlay.bind(this, 'right')}
-                    style={buttonRightStyle}
-                    onPress={() => this.increase()}>
+                {this._renderRightButton()}
 
-                    <Text style={buttonTextRightStyle}>{right}</Text>
-
-                </TouchableHighlight>
             </View>
         )
     }
@@ -493,7 +661,7 @@ InputSpinner.propTypes = {
     fontSize: PropTypes.number,
     fontFamily: PropTypes.string,
     buttonFontSize: PropTypes.number,
-    buttonfontFamily: PropTypes.string,
+    buttonFontFamily: PropTypes.string,
     buttonTextColor: PropTypes.string,
     disabled: PropTypes.bool,
     editable: PropTypes.bool,
@@ -506,6 +674,8 @@ InputSpinner.propTypes = {
     onDecrease: PropTypes.func,
     buttonLeftText: PropTypes.string,
     buttonRightText: PropTypes.string,
+    buttonLeftImage: PropTypes.element,
+    buttonRightImage: PropTypes.element,
     buttonStyle: PropTypes.object,
     buttonPressStyle: PropTypes.object,
     inputStyle: PropTypes.object,
