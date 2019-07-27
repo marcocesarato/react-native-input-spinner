@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {StyleSheet, Text, View, ScrollView} from "react-native";
+import {StyleSheet, Text, View, ScrollView, Image} from "react-native";
 import InputSpinner from "react-native-input-spinner";
 
 export default class App extends Component {
@@ -135,6 +135,23 @@ export default class App extends Component {
                         showBorder/>
                 </View>
                 <View style={styles.col}>
+                    <Text style={styles.text}>Button image</Text>
+                    <InputSpinner
+                        value={this.state.value}
+                        style={styles.spinner}
+                        color={"#FFF"}
+                        colorPress={"#0F0"}
+                        height={50}
+                        buttonLeftImage={(<Image
+                            style={{width: 50, height: 50}}
+                            source={{uri: 'https://image.flaticon.com/icons/png/512/54/54194.png'}}
+                        />)}
+                        buttonRightImage={(<Image
+                            style={{width: 50, height: 50}}
+                            source={{uri: 'https://image.flaticon.com/icons/png/512/69/69301.png'}}
+                        />)}/>
+                </View>
+                <View style={styles.col}>
                     <Text style={styles.text}>colorLeft and colorRight</Text>
                     <InputSpinner
                         value={this.state.value}
@@ -155,10 +172,10 @@ export default class App extends Component {
                     <InputSpinner
                         value={this.state.value}
                         style={styles.spinner}
-                        color={"#000"}
-                        colorPress={"#FFF"}
-                        buttonTextColor={"#FFF"}
-                        buttonPressTextColor={"#000"}/>
+                        color={"#C4C4C4"}
+                        colorPress={"#F00"}
+                        buttonTextColor={"#000"}
+                        buttonPressTextColor={"#FFF"}/>
                 </View>
             </ScrollView>
         );

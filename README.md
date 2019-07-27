@@ -1,6 +1,5 @@
 # React Native Input Spinner
 ## `react-native-input-spinner`
-`Compatible with: Android, iOS, Windows, Web and Expo`
 
 [![NPM version][npm-image]][npm-url]
 [![npm download][download-image]][download-url]
@@ -11,28 +10,31 @@
 [download-image]: https://img.shields.io/npm/dm/react-native-input-spinner.svg?style=flat-square
 [download-url]: https://npmjs.org/package/react-native-input-spinner
 
+*Compatible with: Android, iOS, Windows, Web and Expo*
+
 **Github:** https://github.com/marcocesarato/react-native-input-spinner
 
 **Author:** Marco Cesarato
 
 ### If this project has helped you out, please support us with a star 🌟
 
-## Description
+## 📘 Description
 
 An extendible input number spinner component for react-native highly customizable.
 
 This component enhance a text input for entering numeric values, with increase and decrease buttons.
 
-## Screenshots
+## 🎨 Screenshots
 
 Default props + Min & Max colors         | Not rounded, showBorder, Min & Max colors |
 ------------------|-------------|
 <img src="screenshots/example.png" />       | <img src="screenshots/example_2.png" /> |
 
-## 🤔 How to contribute
-Have an idea? Found a bug? Please raise to [ISSUES](https://github.com/marcocesarato/react-native-input-spinner/issues).
-Contributions are welcome and are greatly appreciated! Every little bit helps, and credit will always be given.
+### High customization
+<img src="screenshots/customization.png" />
 
+#### Button press colors
+<img src="screenshots/button_press.gif" /> 
 
 ## 📖 Install
 
@@ -66,7 +68,7 @@ import InputSpinner from 'react-native-input-spinner';
 
 For more examples check the `Example` directory the `App.js` file
 
-## Run example
+## ⚡️ Run example
 Clone or download repo and after:
 ```shell
 cd Example
@@ -164,3 +166,7 @@ Property          | Description | Type | Default | Note
 `background`        | Custom input text background color | String | `transparent` |  
 `fontSize`          | Custom fontSize of the text input of the Spinner | Number | `14` | 
 `fontFamily`          | Custom fontFamily of the text input of the Spinner | String | System Default |
+
+## 🤔 How to contribute
+Have an idea? Found a bug? Please raise to [ISSUES](https://github.com/marcocesarato/react-native-input-spinner/issues).
+Contributions are welcome and are greatly appreciated! Every little bit helps, and credit will always be given.
