@@ -21,7 +21,6 @@
 ## 📘 Description
 
 An extendible input number spinner component for react-native highly customizable.
-
 This component enhance a text input for entering numeric values, with increase and decrease buttons.
 
 ## 🎨 Screenshots
@@ -116,8 +115,8 @@ Property          | Description | Type | Default | Note
 <img src="screenshots/append.png"/> 
 
 ##### Description
-Top spinner with a child
-Bottom spinner with `prepend` and `append`
+- Top spinner with a child
+- Bottom spinner with `prepend` and `append`
 
 ### Props style
 
