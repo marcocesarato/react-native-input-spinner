@@ -83,7 +83,7 @@ Open Expo Client on your device. Use it to scan the QR code printed by `expo sta
 
 ## 💡 Props
 
-Check the `PROPS.md` file to have the complete list of component props ordered by name.
+Check the "[Props List](PROPS.md)" file to have the complete list of component props ordered by name.
 
 ### Handlers
 
@@ -109,6 +109,15 @@ Property          | Description | Type | Default | Note
 `editable`          | Set if input number field is editable or not | Boolean | `true` | |
 `prepend`        | Custom element after left button | Component |  |
 `append`        | Custom element before right button | Component |  |
+
+
+#### Screenshot
+
+<img src="screenshots/append.png"/> 
+
+##### Description
+Top spinner with a child
+Bottom spinner with `prepend` and `append`
 
 ### Props style
 
