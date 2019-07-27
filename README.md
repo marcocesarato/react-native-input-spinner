@@ -107,6 +107,8 @@ Property          | Description | Type | Default | Note
 `precision`            | Max numbers permitted after comma | Integer  | `2` |
 `disabled`          | Disable the Spinner or not | Boolean | `false` | |
 `editable`          | Set if input number field is editable or not | Boolean | `true` | |
+`prepend`        | Custom element after left button | Component |  |
+`append`        | Custom element before right button | Component |  |
 
 ### Props style
 
@@ -149,8 +151,10 @@ Property          | Description | Type | Default | Note
 `activeOpacity`     | Opacity of underlay on pressed button | Number | `0.85` | 
 `buttonLeftText`        | Custom text on the button left of the spinner | String |  | 
 `buttonRightText`        | Custom text on the button right of the spinner | String |  | 
-`buttonLeftImage`        | Custom element on the button left of the spinner instead of labels | Component |  |  Could overwrite other props
-`buttonRightImage`        | Custom element on the button right of the spinner instead of labels | Component |  |  Could overwrite other props
+`buttonLeftImage`        | Custom element on the button left of the spinner | Component |  |  Could overwrite other props
+`buttonRightImage`        | Custom element on the button right of the spinner | Component |  |  Could overwrite other props
+`buttonPressLeftImage`        | Custom element on the button left of the spinner on pressed state | Component |  |  Could overwrite other props
+`buttonPressRightImage`        | Custom element on the button right of the spinner on pressed state | Component |  |  Could overwrite other props
 `buttonFontSize`        | Custom fontSize of buttons of the Spinner | Number | `14` | 
 `buttonFontFamily`        | Custom fontFamily of buttons of the Spinner | String | System Default | 
 `buttonTextColor`   | Custom color of the labels's button of the Spinner | String | `#FFFFFF` | 

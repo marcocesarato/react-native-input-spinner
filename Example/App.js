@@ -177,6 +177,24 @@ export default class App extends Component {
                         buttonTextColor={"#000"}
                         buttonPressTextColor={"#FFF"}/>
                 </View>
+                <View style={styles.col}>
+                    <Text style={styles.text}>Children</Text>
+                    <InputSpinner
+                        value={this.state.value}
+                        style={styles.spinner}>
+                        <Text style={styles.simbol}>$</Text>
+                    </InputSpinner>
+                </View>
+                <View style={styles.col}>
+                    <Text style={styles.text}>Prepend and append</Text>
+                    <InputSpinner
+                        value={this.state.value}
+                        style={styles.spinner}
+                        append={(<Text style={styles.simbol}>Append</Text>)}
+                        prepend={(<Text style={styles.simbol}>Prepend</Text>)}>
+                    <Text style={styles.simbol}>$</Text>
+                </InputSpinner>
+                </View>
             </ScrollView>
         );
     }
@@ -205,6 +223,16 @@ const styles = StyleSheet.create({
     spinner: {
         flex: 1,
         width: "auto",
-        minWidth: 150,
+        minWidth: 300
+    },
+    simbol: {
+        marginLeft: 10,
+        marginRight: 10,
+        height: "100%",
+        justifyContent: 'center',
+        alignItems: 'center',
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        lineHeight: 50
     }
 });

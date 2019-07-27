@@ -348,6 +348,24 @@ class InputSpinner extends Component {
     }
 
     /**
+     * Is right button pressed
+     * @returns {boolean}
+     * @private
+     */
+    _isRightButtonPressed(){
+        return (this.state.buttonPress === 'right');
+    }
+
+    /**
+     * Is left button pressed
+     * @returns {boolean}
+     * @private
+     */
+    _isLeftButtonPressed(){
+        return (this.state.buttonPress === 'left');
+    }
+
+    /**
      * Get keyboard type
      * @returns {string}
      * @private
@@ -492,7 +510,7 @@ class InputSpinner extends Component {
         return [
             Style.buttonText,
             this._getStyleButtonText(),
-            {color: (this.state.buttonPress === 'left' ? this._getColorPressText() : this.state.buttonTextColor)}
+            {color: (this._isLeftButtonPressed() ? this._getColorPressText() : this.state.buttonTextColor)}
         ];
     }
 
@@ -505,7 +523,7 @@ class InputSpinner extends Component {
         return [
             Style.buttonText,
             this._getStyleButtonText(),
-            {color: (this.state.buttonPress === 'right' ? this._getColorPressText() : this.state.buttonTextColor)}
+            {color: (this._isRightButtonPressed() ? this._getColorPressText() : this.state.buttonTextColor)}
         ];
     }
 
@@ -517,6 +535,8 @@ class InputSpinner extends Component {
     _renderLeftButtonElement(){
         if(this.props.buttonLeftImage) {
             return this.props.buttonLeftImage;
+        } else if(this._isLeftButtonPressed() && this.props.buttonPressLeftImage) {
+            return this.props.buttonPressLeftImage;
         } else {
             const text = (this.props.arrows !== false ? "<" : (this.props.buttonLeftText ? this.props.buttonLeftText : "-"));
             return (
@@ -535,6 +555,8 @@ class InputSpinner extends Component {
     _renderRightButtonElement(){
         if(this.props.buttonRightImage) {
             return this.props.buttonRightImage;
+        } else if(this._isRightButtonPressed() && this.props.buttonPressRightImage) {
+            return this.props.buttonPressRightImage;
         } else {
             const text = (this.props.arrows !== false ? ">" : (this.props.buttonRightText ? this.props.buttonRightText : "+"));
             return (
@@ -552,7 +574,6 @@ class InputSpinner extends Component {
      */
     _renderLeftButton(){
 
-        const direction = 'left';
         const colorLeft = this._getColorLeftButton();
 
         const buttonStyle = [
@@ -562,7 +583,7 @@ class InputSpinner extends Component {
                 backgroundColor: colorLeft
             },
             (this.props.rounded ? Style.buttonRounded : Style.buttonLeft),
-            (this.state.buttonPress === direction ? this._getStyleButtonPress() : this.props.buttonStyle)
+            (this._isLeftButtonPressed() ? this._getStyleButtonPress() : this.props.buttonStyle)
         ];
 
         return (
@@ -570,7 +591,7 @@ class InputSpinner extends Component {
                 activeOpacity={this.props.activeOpacity}
                 underlayColor={this._getColorPress()}
                 onHideUnderlay={this.onHideUnderlay.bind(this)}
-                onShowUnderlay={this.onShowUnderlay.bind(this, direction)}
+                onShowUnderlay={this.onShowUnderlay.bind(this, 'left')}
                 style={buttonStyle}
                 onPress={() => this.decrease()}>
 
@@ -587,7 +608,6 @@ class InputSpinner extends Component {
      */
     _renderRightButton(){
 
-        const direction = 'right';
         const colorRight = this._getColorRightButton();
 
         const buttonStyle = [
@@ -597,7 +617,7 @@ class InputSpinner extends Component {
                 backgroundColor: colorRight
             },
             (this.props.rounded ? Style.buttonRounded : Style.buttonRight),
-            (this.state.buttonPress === direction ? this._getStyleButtonPress() : this.props.buttonStyle)
+            (this._isRightButtonPressed() ? this._getStyleButtonPress() : this.props.buttonStyle)
         ];
 
         return (
@@ -605,7 +625,7 @@ class InputSpinner extends Component {
                 activeOpacity={this.props.activeOpacity}
                 underlayColor={this._getColorPress()}
                 onHideUnderlay={this.onHideUnderlay.bind(this)}
-                onShowUnderlay={this.onShowUnderlay.bind(this, direction)}
+                onShowUnderlay={this.onShowUnderlay.bind(this, 'right')}
                 style={buttonStyle}
                 onPress={() => this.increase()}>
 
@@ -625,12 +645,17 @@ class InputSpinner extends Component {
 
                 {this._renderLeftButton()}
 
+                {this.props.prepend}
+
                 <TextInput
                     style={this._getInputTextStyle()}
                     value={this.getValue()}
                     editable={this.isEditable()}
                     keyboardType={this._getKeyboardType()}
                     onChangeText={this.onChange.bind(this)}/>
+
+                {this.props.children}
+                {this.props.append}
 
                 {this._renderRightButton()}
 
@@ -676,10 +701,14 @@ InputSpinner.propTypes = {
     buttonRightText: PropTypes.string,
     buttonLeftImage: PropTypes.element,
     buttonRightImage: PropTypes.element,
+    buttonPressLeftImage: PropTypes.element,
+    buttonPressRightImage: PropTypes.element,
     buttonStyle: PropTypes.object,
     buttonPressStyle: PropTypes.object,
     inputStyle: PropTypes.object,
     style: PropTypes.object,
+    append: PropTypes.element,
+    prepend: PropTypes.element,
 };
 
 InputSpinner.defaultProps = {
