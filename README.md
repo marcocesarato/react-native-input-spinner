@@ -32,9 +32,6 @@ Default props + Min & Max colors         | Not rounded, showBorder, Min & Max co
 ### High customization
 <img src="screenshots/customization.png" />
 
-#### Button press colors
-<img src="screenshots/button_press.gif" /> 
-
 ## 📖 Install
 
 Just run the following command line:
@@ -84,6 +81,9 @@ Open Expo Client on your device. Use it to scan the QR code printed by `expo sta
 
 Check the "[Props List](PROPS.md)" file to have the complete list of component props ordered by name.
 
+### Structure
+<img src="screenshots/structure.png" /> 
+
 ### Handlers
 
 Handler          | Description | Func |
@@ -109,8 +109,7 @@ Property          | Description | Type | Default | Note
 `prepend`        | Custom element after left button | Component |  |
 `append`        | Custom element before right button | Component |  |
 
-
-#### Screenshot
+#### Screenshots
 
 <img src="screenshots/append.png"/> 
 
@@ -118,7 +117,7 @@ Property          | Description | Type | Default | Note
 - Top spinner with a child
 - Bottom spinner with `prepend` and `append`
 
-### Props style
+### Props Styles
 
 Property          | Description | Type | Default | Note
 ------------------|-------------|------|---------|-------
@@ -127,7 +126,7 @@ Property          | Description | Type | Default | Note
 `buttonStyle` | Button style | Object |  | Could overwrite other props
 `buttonPressStyle` | Button style on Pressed state | Object |  | Could overwrite other props
 
-### Props colors
+### Props Colors
 
 Property          | Description | Type | Default | Note
 ------------------|-------------|------|---------|-------
@@ -139,8 +138,16 @@ Property          | Description | Type | Default | Note
 `colorLeft`             | Custom color of the Spinner left button | String | `#3E525F` | 
 `colorMin`             | Custom color of the Spinner when reach min value | String | | 
 `colorMax`             | Custom color of the Spinner when reach max value | String | | 
+`buttonTextColor`   | Custom color of the labels's button of the Spinner | String | `#FFFFFF` | 
+`buttonPressTextColor`   | Custom color of the button of the Spinner on Pressed state | String | `#FFFFFF` | 
 
-### Props container style
+#### Screenshots
+<img src="screenshots/button_press.gif" /> 
+
+##### Description
+- Spinner with `color`, `buttonTextColor`, `colorPress` and `buttonPressTextColor` custom colors
+
+### Props Container Style
 
 Property          | Description | Type | Default | Note
 ------------------|-------------|------|---------|-------
@@ -149,7 +156,7 @@ Property          | Description | Type | Default | Note
 `height`            | Custom height of the Spinner | Number | `50` | 
 `showBorder`        | Show the border of the Spinner or not | Boolean | `false` | Use with `rounded={false}`
 
-### Props buttons style
+### Props Buttons Style
 
 Property          | Description | Type | Default | Note
 ------------------|-------------|------|---------|-------
@@ -169,7 +176,7 @@ Property          | Description | Type | Default | Note
 `buttonPressStyle` | Button Style on Pressed state (Plus and Minus buttons) | Object |  |
 `buttonPressTextColor`   | Custom color of the button of the Spinner on Pressed state | String | `#FFFFFF` | 
 
-### Props text input style
+### Props Text Input Style
 
 Property          | Description | Type | Default | Note
 ------------------|-------------|------|---------|-------
