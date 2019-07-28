@@ -26,6 +26,10 @@
     "integer",
     "decimal"
   ],
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
