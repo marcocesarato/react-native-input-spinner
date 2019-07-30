@@ -1,6 +1,6 @@
 {
   "name": "react-native-input-spinner",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "React native input with increase and decrease buttons",
   "main": "index.js",
   "scripts": {
@@ -26,6 +26,18 @@
     "integer",
     "decimal"
   ],
+  "prettier": {
+    "tabWidth": 4,
+    "useTabs": true,
+    "semi": true,
+    "singleQuote": false,
+    "trailingComma": "es5",
+    "bracketSpacing": false,
+    "jsxBracketSameLine": true,
+    "arrowParens": "always",
+    "requirePragma": false,
+    "insertPragma": true
+  },
   "peerDependencies": {
     "react": "*",
     "react-native": "*"
