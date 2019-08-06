@@ -3,7 +3,8 @@
 
 [![NPM version][npm-image]][npm-url]
 [![npm download][download-image]][download-url]
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+[![Package Quality](https://npm.packagequality.com/shield/react-native-input-spinner.svg)](https://packagequality.com/#?package=react-native-input-spinner)
+[![js-prittier-style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://prettier.io/)
 
 [npm-image]: http://img.shields.io/npm/v/react-native-input-spinner.svg?style=flat-square
 [npm-url]: http://npmjs.org/package/react-native-input-spinner
