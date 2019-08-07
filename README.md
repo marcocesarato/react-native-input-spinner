@@ -6,6 +6,7 @@
 ![npm](https://img.shields.io/npm/dy/react-native-input-spinner?style=flat-square)
 [![Package Quality](https://npm.packagequality.com/shield/react-native-input-spinner.svg?style=flat-square)](https://packagequality.com/#?package=react-native-input-spinner)
 [![js-prittier-style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://prettier.io/)
+
 [![NPM](https://nodei.co/npm/react-native-input-spinner.png?downloads=true&downloadRank=true)](https://nodei.co/npm/react-native-input=spinner/)
 
 [npm-image]: http://img.shields.io/npm/v/react-native-input-spinner.svg?style=flat-square
