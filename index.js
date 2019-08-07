@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { Text, TextInput, TouchableHighlight, View } from "react-native";
+import React, {Component} from "react";
+import {Text, TextInput, TouchableHighlight, View} from "react-native";
 import PropTypes from "prop-types";
-import { Style } from "./style";
+import {Style} from "./style";
 
 /**
  * Default Color
@@ -31,7 +31,7 @@ class InputSpinner extends Component {
 			max: this.parseNum(this.props.max),
 			value: this.parseNum(this.props.value),
 			step: spinnerStep,
-			buttonPress: null
+			buttonPress: null,
 		};
 	}
 
@@ -43,15 +43,15 @@ class InputSpinner extends Component {
 	componentDidUpdate(prevProps) {
 		// Parse Value
 		if (this.props.value !== prevProps.value) {
-			this.setState({ value: this.parseNum(this.props.value) });
+			this.setState({value: this.parseNum(this.props.value)});
 		}
 		// Parse Min
 		if (this.props.min !== prevProps.min) {
-			this.setState({ min: this.parseNum(this.props.min) });
+			this.setState({min: this.parseNum(this.props.min)});
 		}
 		// Parse Max
 		if (this.props.max !== prevProps.max) {
-			this.setState({ max: this.parseNum(this.props.max) });
+			this.setState({max: this.parseNum(this.props.max)});
 		}
 		// Parse Step
 		if (this.props.step !== prevProps.step) {
@@ -59,7 +59,7 @@ class InputSpinner extends Component {
 			if (!this.typeDecimal() && spinnerStep < 1) {
 				spinnerStep = 1;
 			}
-			this.setState({ step: spinnerStep });
+			this.setState({step: spinnerStep});
 		}
 	}
 
@@ -81,13 +81,13 @@ class InputSpinner extends Component {
 					this.props.onMax(this.state.max);
 				}
 			}
-			this.setState({ value: num });
+			this.setState({value: num});
 		} else {
 			if (this.props.onMin) {
 				this.props.onMin(this.state.min);
 			}
 			num = this.state.min;
-			this.setState({ value: num });
+			this.setState({value: num});
 		}
 		if (current_value !== num && this.props.onChange) {
 			this.props.onChange(num);
@@ -99,14 +99,14 @@ class InputSpinner extends Component {
 	 * @param buttonDirection
 	 */
 	onShowUnderlay(buttonDirection) {
-		this.setState({ buttonPress: buttonDirection });
+		this.setState({buttonPress: buttonDirection});
 	}
 
 	/**
 	 * On Button Unpress
 	 */
 	onHideUnderlay() {
-		this.setState({ buttonPress: null });
+		this.setState({buttonPress: null});
 	}
 
 	/**
@@ -192,7 +192,8 @@ class InputSpinner extends Component {
 	 */
 	increase() {
 		if (this.props.disabled) return;
-		let num = this.parseNum(this.state.value) + this.parseNum(this.state.step);
+		let num =
+			this.parseNum(this.state.value) + this.parseNum(this.state.step);
 		if (this.props.onIncrease) {
 			let increased_num = num;
 			if (this.maxReached(num)) {
@@ -208,7 +209,8 @@ class InputSpinner extends Component {
 	 */
 	decrease() {
 		if (this.props.disabled) return;
-		let num = this.parseNum(this.state.value) - this.parseNum(this.state.step);
+		let num =
+			this.parseNum(this.state.value) - this.parseNum(this.state.step);
 		if (this.props.onDecrease) {
 			let decreased_num = num;
 			if (this.minReached(num)) {
@@ -303,8 +305,8 @@ class InputSpinner extends Component {
 		return this.maxReached()
 			? this._getColorMax()
 			: this.minReached()
-				? this._getColorMin()
-				: this.props.color;
+			? this._getColorMin()
+			: this.props.color;
 	}
 
 	/**
@@ -313,7 +315,7 @@ class InputSpinner extends Component {
 	 * @private
 	 */
 	_getColorMin() {
-		if(!this.props.colorMin){
+		if (!this.props.colorMin) {
 			return this.props.color;
 		}
 		return this.props.colorMin;
@@ -325,7 +327,7 @@ class InputSpinner extends Component {
 	 * @private
 	 */
 	_getColorMax() {
-		if(!this.props.colorMax){
+		if (!this.props.colorMax) {
 			return this.props.color;
 		}
 		return this.props.colorMax;
@@ -344,8 +346,8 @@ class InputSpinner extends Component {
 		return this.maxReached()
 			? this._getColorMax()
 			: this.minReached()
-				? this._getColorMin()
-				: color;
+			? this._getColorMin()
+			: color;
 	}
 
 	/**
@@ -366,7 +368,9 @@ class InputSpinner extends Component {
 	 */
 	_getColorLeftButton() {
 		const color = this._getColor();
-		return this.props.colorLeft !== defaultColor ? this.props.colorLeft : color;
+		return this.props.colorLeft !== defaultColor
+			? this.props.colorLeft
+			: color;
 	}
 
 	/**
@@ -390,10 +394,12 @@ class InputSpinner extends Component {
 		return [
 			Style.container,
 			{
-				borderColor: this.props.showBorder ? this._getColor() : "transparent",
-				width: this.props.width
+				borderColor: this.props.showBorder
+					? this._getColor()
+					: "transparent",
+				width: this.props.width,
 			},
-			this.props.style
+			this.props.style,
 		];
 	}
 
@@ -409,11 +415,13 @@ class InputSpinner extends Component {
 				color: this.props.textColor,
 				fontSize: this.props.fontSize,
 				fontFamily: this.props.fontFamily,
-				borderColor: this.props.showBorder ? this._getColor() : "transparent",
+				borderColor: this.props.showBorder
+					? this._getColor()
+					: "transparent",
 				backgroundColor: this.props.background,
-				height: this.props.height
+				height: this.props.height,
 			},
-			this.props.inputStyle
+			this.props.inputStyle,
 		];
 	}
 
@@ -426,7 +434,7 @@ class InputSpinner extends Component {
 		const size = this.props.height;
 		return {
 			height: size,
-			width: size
+			width: size,
 		};
 	}
 
@@ -451,8 +459,8 @@ class InputSpinner extends Component {
 			Style.buttonText,
 			{
 				fontSize: this.props.buttonFontSize,
-				fontFamily: this.props.buttonFontFamily
-			}
+				fontFamily: this.props.buttonFontFamily,
+			},
 		];
 	}
 
@@ -468,8 +476,8 @@ class InputSpinner extends Component {
 			{
 				color: this._isLeftButtonPressed()
 					? this._getColorPressText()
-					: this.props.buttonTextColor
-			}
+					: this.props.buttonTextColor,
+			},
 		];
 	}
 
@@ -485,8 +493,8 @@ class InputSpinner extends Component {
 			{
 				color: this._isRightButtonPressed()
 					? this._getColorPressText()
-					: this.props.buttonTextColor
-			}
+					: this.props.buttonTextColor,
+			},
 		];
 	}
 
@@ -498,7 +506,10 @@ class InputSpinner extends Component {
 	_renderLeftButtonElement() {
 		if (this.props.buttonLeftImage) {
 			return this.props.buttonLeftImage;
-		} else if (this._isLeftButtonPressed() && this.props.buttonPressLeftImage) {
+		} else if (
+			this._isLeftButtonPressed() &&
+			this.props.buttonPressLeftImage
+		) {
 			return this.props.buttonPressLeftImage;
 		} else {
 			const text =
@@ -547,12 +558,12 @@ class InputSpinner extends Component {
 			this._getStyleButton(),
 			{
 				borderColor: this.props.showBorder ? colorLeft : "transparent",
-				backgroundColor: colorLeft
+				backgroundColor: colorLeft,
 			},
 			this.props.rounded ? Style.buttonRounded : Style.buttonLeft,
 			this._isLeftButtonPressed()
 				? this._getStyleButtonPress()
-				: this.props.buttonStyle
+				: this.props.buttonStyle,
 		];
 
 		return (
@@ -562,8 +573,7 @@ class InputSpinner extends Component {
 				onHideUnderlay={this.onHideUnderlay.bind(this)}
 				onShowUnderlay={this.onShowUnderlay.bind(this, "left")}
 				style={buttonStyle}
-				onPress={() => this.decrease()}
-			>
+				onPress={() => this.decrease()}>
 				{this._renderLeftButtonElement()}
 			</TouchableHighlight>
 		);
@@ -581,12 +591,12 @@ class InputSpinner extends Component {
 			this._getStyleButton(),
 			{
 				borderColor: this.props.showBorder ? colorRight : "transparent",
-				backgroundColor: colorRight
+				backgroundColor: colorRight,
 			},
 			this.props.rounded ? Style.buttonRounded : Style.buttonRight,
 			this._isRightButtonPressed()
 				? this._getStyleButtonPress()
-				: this.props.buttonStyle
+				: this.props.buttonStyle,
 		];
 
 		return (
@@ -596,8 +606,7 @@ class InputSpinner extends Component {
 				onHideUnderlay={this.onHideUnderlay.bind(this)}
 				onShowUnderlay={this.onShowUnderlay.bind(this, "right")}
 				style={buttonStyle}
-				onPress={() => this.increase()}
-			>
+				onPress={() => this.increase()}>
 				{this._renderRightButtonElement()}
 			</TouchableHighlight>
 		);
@@ -675,7 +684,7 @@ InputSpinner.propTypes = {
 	inputStyle: PropTypes.object,
 	style: PropTypes.object,
 	append: PropTypes.element,
-	prepend: PropTypes.element
+	prepend: PropTypes.element,
 };
 
 InputSpinner.defaultProps = {
@@ -710,7 +719,7 @@ InputSpinner.defaultProps = {
 	buttonStyle: {},
 	buttonPressStyle: {},
 	inputStyle: {},
-	style: {}
+	style: {},
 };
 
 export default InputSpinner;
