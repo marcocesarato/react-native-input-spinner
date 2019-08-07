@@ -1,4 +1,4 @@
-<img src="images/logo.png" width="100%"/>
+<img src="images/logo_full.png" width="100%"/>
 
 [![NPM version][npm-image]][npm-url]
 ![npm](https://img.shields.io/npm/dy/react-native-input-spinner?style=flat-square)

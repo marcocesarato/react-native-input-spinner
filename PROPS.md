@@ -1,4 +1,4 @@
-# React Native Input Spinner
+<img src="images/logo.png" width="100%"/>
 
 ## 💡 Props List
 
