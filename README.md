@@ -1,53 +1,33 @@
 <img src="images/logo_full.png" width="100%"/>
 
-[![NPM version][npm-image]][npm-url]
-![npm](https://img.shields.io/npm/dy/react-native-input-spinner?style=flat-square)
+[![NPM version](http://img.shields.io/npm/v/react-native-input-spinner.svg?style=flat-square)](http://npmjs.org/package/react-native-input-spinner)
+[![npm](https://img.shields.io/npm/dy/react-native-input-spinner?style=flat-square)](http://npmjs.org/package/react-native-input-spinner)
 [![Package Quality](https://npm.packagequality.com/shield/react-native-input-spinner.svg?style=flat-square)](https://packagequality.com/#?package=react-native-input-spinner)
 [![js-prittier-style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://prettier.io/)
+[![Compatibility](https://img.shields.io/badge/platform-android%20%7C%20ios%20%7C%20expo-blue.svg?style=flat-square)](http://npmjs.org/package/react-native-input-spinner)
 
 [![NPM](https://nodei.co/npm/react-native-input-spinner.png?mini=true)](https://nodei.co/npm/react-native-input-spinner/)
 
-[npm-image]: http://img.shields.io/npm/v/react-native-input-spinner.svg?style=flat-square
-[npm-url]: http://npmjs.org/package/react-native-input-spinner
-
 ### If this project has helped you out, please support us with a star 🌟
 
-**Github:** https://github.com/marcocesarato/react-native-input-spinner
+## 📘 Description
 
 **Author:** Marco Cesarato
 
-## 📘 Description
+**Github:** https://github.com/marcocesarato/react-native-input-spinner
 
 An extendible input number spinner component for react-native highly customizable.
 This component enhance a text input for entering numeric values, with increase and decrease buttons.
 
 _Compatible with: Android, iOS, Windows, Web and Expo._
 
-## 🎨 Screenshots
-
-| Default props + Min & Max colors | Not rounded, showBorder, Min & Max colors |
-| -------------------------------- | ----------------------------------------- |
-| <img src="images/example.png" /> | <img src="images/example_2.png" />        |
-
-### High customization
-
-<img src="images/customization.png" />
-
 ## 📖 Install
 
-Just run the following command line:
+Install the library from npm or yarn just running one of the following command lines:
 
-### npm
-
-```shell
-npm install react-native-input-spinner --save
-```
-
-### Yarn
-
-```shell
-yarn add react-native-input-spinner
-```
+| npm                                             | yarn                                  |
+| ----------------------------------------------- | ------------------------------------- |
+| `npm install react-native-input-spinner --save` | `yarn add react-native-input-spinner` |
 
 ## 💻 Usage
 
@@ -69,6 +49,16 @@ import InputSpinner from "react-native-input-spinner";
 ```
 
 For more examples check the `Example` directory the `App.js` file
+
+## 🎨 Screenshots
+
+| Default props + Min & Max colors | Not rounded, showBorder, Min & Max colors |
+| -------------------------------- | ----------------------------------------- |
+| <img src="images/example.png" /> | <img src="images/example_2.png" />        |
+
+### High customization
+
+<img src="images/customization.png" />
 
 ## ⚡️ Run example
 
@@ -205,9 +195,8 @@ Have an idea? Found a bug? Please raise to [ISSUES](https://github.com/marcocesa
 Contributions are welcome and are greatly appreciated! Every little bit helps, and credit will always be given.
 
 <p align="center">
-
-<a href="https://nodei.co/npm/react-native-input=spinner/" rel="nofollow">
-    <img align="center" src="https://nodei.co/npm/react-native-input-spinner.png?downloads=true&downloadRank=true" width="384">
-</a>
-
+    <br>
+    <a href="https://nodei.co/npm/react-native-input=spinner/" rel="nofollow">
+        <img align="center" src="https://nodei.co/npm/react-native-input-spinner.png?downloads=true&downloadRank=true" width="384">
+    </a>
 </p>
