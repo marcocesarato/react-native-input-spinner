@@ -1,17 +1,17 @@
-# React Native Input Spinner
-## `react-native-input-spinner`
+<img src="images/logo.png" width="100%"/>
+
+<center>
 
 [![NPM version][npm-image]][npm-url]
-[![npm download][download-image]][download-url]
-[![Package Quality](https://npm.packagequality.com/shield/react-native-input-spinner.svg)](https://packagequality.com/#?package=react-native-input-spinner)
+![npm](https://img.shields.io/npm/dy/react-native-input-spinner?style=flat-square)
+[![Package Quality](https://npm.packagequality.com/shield/react-native-input-spinner.svg?style=flat-square)](https://packagequality.com/#?package=react-native-input-spinner)
 [![js-prittier-style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://prettier.io/)
+[![NPM](https://nodei.co/npm/react-native-input-spinner.png?downloads=true&downloadRank=true)](https://nodei.co/npm/react-native-input=spinner/)
 
 [npm-image]: http://img.shields.io/npm/v/react-native-input-spinner.svg?style=flat-square
 [npm-url]: http://npmjs.org/package/react-native-input-spinner
-[download-image]: https://img.shields.io/npm/dm/react-native-input-spinner.svg?style=flat-square
-[download-url]: https://npmjs.org/package/react-native-input-spinner
 
-*Compatible with: Android, iOS, Windows, Web and Expo*
+</center>
 
 **Github:** https://github.com/marcocesarato/react-native-input-spinner
 
@@ -24,14 +24,16 @@
 An extendible input number spinner component for react-native highly customizable.
 This component enhance a text input for entering numeric values, with increase and decrease buttons.
 
+*Compatible with: Android, iOS, Windows, Web and Expo.*
+
 ## 🎨 Screenshots
 
 Default props + Min & Max colors         | Not rounded, showBorder, Min & Max colors |
 ------------------|-------------|
-<img src="screenshots/example.png" />       | <img src="screenshots/example_2.png" /> |
+<img src="images/example.png" />       | <img src="images/example_2.png" /> |
 
 ### High customization
-<img src="screenshots/customization.png" />
+<img src="images/customization.png" />
 
 ## 📖 Install
 
@@ -76,14 +78,14 @@ expo start
 Open Expo Client on your device. Use it to scan the QR code printed by `expo start`. You may have to wait a minute while your project bundles and loads for the first time.
 
 ### Example app
-<img src="screenshots/example_app.png" />
+<img src="images/example_app.png" />
 
 ## 💡 Props
 
 Check the "[Props List](PROPS.md)" file to have the complete list of component props ordered by name.
 
 ### Structure
-<img src="screenshots/structure.png" /> 
+<img src="images/structure.png" /> 
 
 ### Handlers
 
@@ -112,7 +114,7 @@ Property          | Description | Type | Default | Note
 
 #### Screenshots
 
-<img src="screenshots/append.png"/> 
+<img src="images/append.png"/> 
 
 ##### Description
 - Top spinner with a child
@@ -143,7 +145,7 @@ Property          | Description | Type | Default | Note
 `buttonPressTextColor`   | Custom color of the button of the Spinner on Pressed state | String | `#FFFFFF` | 
 
 #### Screenshots
-<img src="screenshots/button_press.gif" /> 
+<img src="images/button_press.gif" /> 
 
 ##### Description
 - Spinner with `color`, `buttonTextColor`, `colorPress` and `buttonPressTextColor` custom colors
