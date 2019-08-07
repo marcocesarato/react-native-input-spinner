@@ -1,6 +1,4 @@
-<img src="images/logo.png" width="100%"/>
-
-<center>
+<img src="images/logo.png"/>
 
 [![NPM version][npm-image]][npm-url]
 ![npm](https://img.shields.io/npm/dy/react-native-input-spinner?style=flat-square)
@@ -12,7 +10,6 @@
 [npm-image]: http://img.shields.io/npm/v/react-native-input-spinner.svg?style=flat-square
 [npm-url]: http://npmjs.org/package/react-native-input-spinner
 
-</center>
 
 **Github:** https://github.com/marcocesarato/react-native-input-spinner
 
