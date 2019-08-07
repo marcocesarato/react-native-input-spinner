@@ -1,21 +1,20 @@
-<img src="images/logo.png"/>
+<img src="images/logo.png" width="100%"/>
 
 [![NPM version][npm-image]][npm-url]
 ![npm](https://img.shields.io/npm/dy/react-native-input-spinner?style=flat-square)
 [![Package Quality](https://npm.packagequality.com/shield/react-native-input-spinner.svg?style=flat-square)](https://packagequality.com/#?package=react-native-input-spinner)
 [![js-prittier-style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://prettier.io/)
 
-[![NPM](https://nodei.co/npm/react-native-input-spinner.png?downloads=true&downloadRank=true)](https://nodei.co/npm/react-native-input=spinner/)
+[![NPM](https://nodei.co/npm/react-native-input-spinner.png?mini=true)](https://nodei.co/npm/react-native-input-spinner/)
 
 [npm-image]: http://img.shields.io/npm/v/react-native-input-spinner.svg?style=flat-square
 [npm-url]: http://npmjs.org/package/react-native-input-spinner
 
+### If this project has helped you out, please support us with a star 🌟
 
 **Github:** https://github.com/marcocesarato/react-native-input-spinner
 
 **Author:** Marco Cesarato
-
-### If this project has helped you out, please support us with a star 🌟
 
 ## 📘 Description
 
@@ -190,3 +189,11 @@ Property          | Description | Type | Default | Note
 ## 🤔 How to contribute
 Have an idea? Found a bug? Please raise to [ISSUES](https://github.com/marcocesarato/react-native-input-spinner/issues).
 Contributions are welcome and are greatly appreciated! Every little bit helps, and credit will always be given.
+
+<p align="center">
+
+<a href="https://nodei.co/npm/react-native-input=spinner/" rel="nofollow">
+    <img align="center" src="https://nodei.co/npm/react-native-input-spinner.png?downloads=true&downloadRank=true" width="384">
+</a>
+
+</p>
