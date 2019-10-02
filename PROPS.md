@@ -10,12 +10,14 @@
 | `background`            | Background color of number button                                   | String           | `transparent`    |                                   |
 | `buttonFontFamily`      | Custom fontFamily of buttons of the Spinner                         | String           | `System Default` |                                   |
 | `buttonFontSize`        | Custom fontSize of buttons of the Spinner                           | Number           | `14`             |                                   |
+| `buttonLeftDisabled`    | Disable left button                                                 |  Boolean         | `false`          |                                   |
 | `buttonLeftImage`       | Custom element on the button left of the spinner                    | Component        |                  |                                   |
 | `buttonLeftText`        | Custom text on the button left of the spinner                       | String           |                  |                                   |
 | `buttonPressLeftImage`  | Custom element on the button left of the spinner on pressed state   | Component        |                  |                                   |
 | `buttonPressRightImage` | Custom element on the button right of the spinner on pressed state  | Component        |                  |                                   |
 | `buttonPressStyle`      | Button Style on Pressed state (Plus and Minus buttons)              | Object           |                  | Could overwrite other props       |
 | `buttonPressTextColor`  | Custom color of the button of the Spinner on Pressed state          | String           | `#FFFFFF`        |                                   |
+| `buttonRightDisabled`   | Disable right button                                                |  Boolean         | `false`          |                                   |
 | `buttonRightImage`      | Custom element on the button right of the spinner                   | Component        |                  |                                   |
 | `buttonRightText`       | Custom text on the button right of the spinner                      | String           |                  |                                   |
 | `buttonStyle`           | Button Style (Plus and Minus buttons)                               | Object           |                  | Could overwrite other props       |

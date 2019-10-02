@@ -191,7 +191,7 @@ class InputSpinner extends Component {
 	 * Increase
 	 */
 	increase() {
-		if (this.props.disabled) return;
+		if (this._isDisabledButtonRight()) return;
 		let num =
 			this.parseNum(this.state.value) + this.parseNum(this.state.step);
 		if (this.props.onIncrease) {
@@ -208,7 +208,7 @@ class InputSpinner extends Component {
 	 * Decrease
 	 */
 	decrease() {
-		if (this.props.disabled) return;
+		if (this._isDisabledButtonLeft()) return;
 		let num =
 			this.parseNum(this.state.value) - this.parseNum(this.state.step);
 		if (this.props.onDecrease) {
@@ -260,6 +260,24 @@ class InputSpinner extends Component {
 	 */
 	isEditable() {
 		return !this.props.disabled && this.props.editable;
+	}
+
+	/**
+	 * Is left button disabled
+	 * @returns {Boolean}
+	 * @private
+	 */
+	_isDisabledButtonLeft(){
+		return (this.props.disabled || this.props.buttonRightDisabled);
+	}
+
+	/**
+	 * Is right button disabled
+	 * @returns {Boolean}
+	 * @private
+	 */
+	_isDisabledButtonRight(){
+		return (this.props.disabled || this.props.buttonRightDisabled);
 	}
 
 	/**
@@ -572,6 +590,7 @@ class InputSpinner extends Component {
 				underlayColor={this._getColorPress()}
 				onHideUnderlay={this.onHideUnderlay.bind(this)}
 				onShowUnderlay={this.onShowUnderlay.bind(this, "left")}
+				disabled={this._isDisabledButtonLeft()}
 				style={buttonStyle}
 				onPress={() => this.decrease()}>
 				{this._renderLeftButtonElement()}
@@ -605,6 +624,7 @@ class InputSpinner extends Component {
 				underlayColor={this._getColorPress()}
 				onHideUnderlay={this.onHideUnderlay.bind(this)}
 				onShowUnderlay={this.onShowUnderlay.bind(this, "right")}
+				disabled={this._isDisabledButtonLeft()}
 				style={buttonStyle}
 				onPress={() => this.increase()}>
 				{this._renderRightButtonElement()}
@@ -673,6 +693,8 @@ InputSpinner.propTypes = {
 	onMax: PropTypes.func,
 	onIncrease: PropTypes.func,
 	onDecrease: PropTypes.func,
+	buttonLeftDisabled: PropTypes.bool,
+	buttonRightDisabled: PropTypes.bool,
 	buttonLeftText: PropTypes.string,
 	buttonRightText: PropTypes.string,
 	buttonLeftImage: PropTypes.element,
@@ -714,6 +736,8 @@ InputSpinner.defaultProps = {
 	editable: true,
 	width: 150,
 	height: 50,
+	buttonLeftDisabled: false,
+	buttonRightDisabled: false,
 	buttonLeftText: null,
 	buttonRightText: null,
 	buttonStyle: {},

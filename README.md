@@ -167,6 +167,8 @@ Check the "[Props List](PROPS.md)" file to have the complete list of component p
 | `arrows`                | Labels on button will be (< and >) instead of (+ and -)            | Boolean   | `false`        |
 | `rounded`               | Use circular button                                                | Boolean   | `true`         |
 | `activeOpacity`         | Opacity of underlay on pressed button                              | Number    | `0.85`         |
+| `buttonLeftDisabled`    | Disable left button                                                |  Boolean  | `false`        |                             |
+| `buttonRightDisabled`   | Disable right button                                               |  Boolean  | `false`        |                             |
 | `buttonLeftText`        | Custom text on the button left of the spinner                      | String    |                |
 | `buttonRightText`       | Custom text on the button right of the spinner                     | String    |                |
 | `buttonLeftImage`       | Custom element on the button left of the spinner                   | Component |                | Could overwrite other props |
