@@ -624,7 +624,7 @@ class InputSpinner extends Component {
 				underlayColor={this._getColorPress()}
 				onHideUnderlay={this.onHideUnderlay.bind(this)}
 				onShowUnderlay={this.onShowUnderlay.bind(this, "right")}
-				disabled={this._isDisabledButtonLeft()}
+				disabled={this._isDisabledButtonRight()}
 				style={buttonStyle}
 				onPress={() => this.increase()}>
 				{this._renderRightButtonElement()}
