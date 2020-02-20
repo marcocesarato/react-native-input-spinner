@@ -268,7 +268,7 @@ class InputSpinner extends Component {
 	 * @private
 	 */
 	_isDisabledButtonLeft(){
-		return (this.props.disabled || this.props.buttonRightDisabled);
+		return (this.props.disabled || this.props.buttonLeftDisabled);
 	}
 
 	/**
