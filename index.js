@@ -223,12 +223,13 @@ class InputSpinner extends Component {
 
 	/**
 	 * On Submit keyboard
-	 * @param NativeEvent
-	 * @returns {*} 
+	 * @returns {*}
+	 * @param e
 	 */
-
 	 onSubmit(e){
-		 this.props.onSubmit(this.parseNum(e.nativeEvent.text))
+		if (this.props.onSubmit) {
+			this.props.onSubmit(this.parseNum(e.nativeEvent.text));
+		}
 	 }
 
 
