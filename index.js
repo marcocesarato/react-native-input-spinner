@@ -222,6 +222,17 @@ class InputSpinner extends Component {
 	}
 
 	/**
+	 * On Submit keyboard
+	 * @param NativeEvent
+	 * @returns {*} 
+	 */
+
+	 onSubmit(e){
+		 this.props.onSubmit(this.parseNum(e.nativeEvent.text))
+	 }
+
+
+	/**
 	 * Max is reached
 	 * @param num
 	 * @returns {boolean}
@@ -649,6 +660,7 @@ class InputSpinner extends Component {
 					editable={this.isEditable()}
 					keyboardType={this._getKeyboardType()}
 					onChangeText={this.onChange.bind(this)}
+					onSubmitEditing={this.onSubmit.bind(this)}
 				/>
 
 				{this.props.children}
@@ -693,6 +705,7 @@ InputSpinner.propTypes = {
 	onMax: PropTypes.func,
 	onIncrease: PropTypes.func,
 	onDecrease: PropTypes.func,
+	onSubmit : PropTypes.func,
 	buttonLeftDisabled: PropTypes.bool,
 	buttonRightDisabled: PropTypes.bool,
 	buttonLeftText: PropTypes.string,
