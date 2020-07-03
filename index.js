@@ -70,7 +70,8 @@ class InputSpinner extends Component {
 	onChange(num) {
 		if (this.props.disabled) return;
 		const current_value = this.state.value;
-		if (String(num).endsWith(".") && !this.getValue().endsWith(".0")) {
+		const separator = !this.isStringEmpty(this.props.decimalSeparator) ? this.props.decimalSeparator : ".";
+		if (String(num).endsWith(separator) && !this.getValue().endsWith(separator + "0")) {
 			this.decimalInput = true;
 		}
 		num = this.parseNum(String(num).replace(/^0+/, "")) || 0;
@@ -134,6 +135,7 @@ class InputSpinner extends Component {
 	 * @returns {*}
 	 */
 	parseNum(num) {
+		num = String(num).replace(!this.isStringEmpty(this.props.decimalSeparator) ? this.props.decimalSeparator : ".", ".");
 		if (this.typeDecimal()) {
 			num = parseFloat(num);
 		} else {
@@ -154,11 +156,16 @@ class InputSpinner extends Component {
 		let value = this.state.value;
 		if (this.typeDecimal() && this.decimalInput) {
 			this.decimalInput = false;
-			return this.parseNum(value).toFixed(1);
+			value = this.parseNum(value).toFixed(1)
+				.replace(/0+$/, "");
 		} else if (this.typeDecimal()) {
-			value = this.parseNum(value).toFixed(this.props.precision);
+			value = String(this.parseNum(
+				this.parseNum(value).toFixed(this.props.precision)
+			));
+		} else {
+			value = String(this.parseNum(value));
 		}
-		return String(this.parseNum(value));
+		return value.replace(".", !this.isStringEmpty(this.props.decimalSeparator) ? this.props.decimalSeparator : ".");
 	}
 
 	/**
@@ -226,11 +233,11 @@ class InputSpinner extends Component {
 	 * @returns {*}
 	 * @param e
 	 */
-	 onSubmit(e){
+	onSubmit(e){
 		if (this.props.onSubmit) {
 			this.props.onSubmit(this.parseNum(e.nativeEvent.text));
 		}
-	 }
+	}
 
 
 	/**
@@ -264,6 +271,15 @@ class InputSpinner extends Component {
 	 */
 	isObjectEmpty(obj) {
 		return Object.entries(obj).length === 0 && obj.constructor === Object;
+	}
+
+	/**
+	 * Is string empty
+	 * @param str
+	 * @returns {boolean|boolean}
+	 */
+	isStringEmpty(str) {
+		return !str || String(str) === "";
 	}
 
 	/**
@@ -335,8 +351,8 @@ class InputSpinner extends Component {
 		return this.maxReached()
 			? this._getColorMax()
 			: this.minReached()
-			? this._getColorMin()
-			: this.props.color;
+				? this._getColorMin()
+				: this.props.color;
 	}
 
 	/**
@@ -376,8 +392,8 @@ class InputSpinner extends Component {
 		return this.maxReached()
 			? this._getColorMax()
 			: this.minReached()
-			? this._getColorMin()
-			: color;
+				? this._getColorMin()
+				: color;
 	}
 
 	/**
@@ -721,6 +737,7 @@ InputSpinner.propTypes = {
 	style: PropTypes.object,
 	append: PropTypes.element,
 	prepend: PropTypes.element,
+	decimalSeparator: PropTypes.string,
 };
 
 InputSpinner.defaultProps = {
@@ -758,6 +775,7 @@ InputSpinner.defaultProps = {
 	buttonPressStyle: {},
 	inputStyle: {},
 	style: {},
+	decimalSeparator: ".",
 };
 
 export default InputSpinner;
