@@ -51,5 +51,12 @@
 		"url": "https://github.com/marcocesarato/react-native-input-spinner/issues"
 	},
 	"homepage": "https://github.com/marcocesarato/react-native-input-spinner#readme",
-	"license": "GPL-3.0-or-later"
+	"license": "GPL-3.0-or-later",
+	"dependencies": {
+		"prop-types": "^15.7.2"
+	},
+	"bit": {
+		"env": {},
+		"packageManager": "npm"
+	}
 }
