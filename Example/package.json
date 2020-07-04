@@ -8,12 +8,12 @@
 		"eject": "expo eject"
 	},
 	"dependencies": {
-		"expo": "^33.0.7",
-		"react": "16.8.3",
-		"react-dom": "^16.8.6",
-		"react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
+		"expo": "^38.0.8",
+		"react": "16.13.1",
+		"react-dom": "^16.13.1",
+		"react-native": "https://github.com/expo/react-native/archive/sdk-38.0.0.tar.gz",
 		"react-native-input-spinner": "^1.2.13",
-		"react-native-web": "^0.11.5"
+		"react-native-web": "^0.13.1"
 	},
 	"prettier": {
 		"tabWidth": 4,
@@ -28,7 +28,7 @@
 		"insertPragma": false
 	},
 	"devDependencies": {
-		"babel-preset-expo": "^5.1.1"
+		"babel-preset-expo": "^8.2.3"
 	},
 	"private": true
 }
