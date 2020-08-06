@@ -31,6 +31,7 @@ class InputSpinner extends Component {
 			max: this.parseNum(this.props.max),
 			value: this.parseNum(this.props.value),
 			step: spinnerStep,
+			focused: false,
 			buttonPress: null,
 		};
 	}
@@ -239,6 +240,40 @@ class InputSpinner extends Component {
 		}
 	}
 
+	/**
+	 * On Focus
+	 * @returns {*}
+	 * @param e
+	 */
+	onFocus(e){
+		if (this.props.onFocus) {
+			this.props.onFocus(e);
+		}
+		this.setState({focused: true});
+	}
+
+	/**
+	 * On Blur
+	 * @returns {*}
+	 * @param e
+	 */
+	onBlur(e){
+		if (this.props.onBlur) {
+			this.props.onBlur(e);
+		}
+		this.setState({focused: false});
+	}
+
+	/**
+	 * On Key Press
+	 * @returns {*}
+	 * @param e
+	 */
+	onKeyPress(e){
+		if (this.props.onKeyPress) {
+			this.props.onKeyPress(e);
+		}
+	}
 
 	/**
 	 * Max is reached
@@ -265,6 +300,27 @@ class InputSpinner extends Component {
 	}
 
 	/**
+	 * Blur
+	 */
+	blur() {
+		this.textInput.blur();
+	}
+
+	/**
+	 * Focus
+	 */
+	focus() {
+		this.textInput.focus();
+	}
+
+	/**
+	 * Clear
+	 */
+	clear() {
+		this.textInput.clear();
+	}
+
+	/**
 	 * Is object empty
 	 * @param obj
 	 * @returns {boolean}
@@ -288,6 +344,14 @@ class InputSpinner extends Component {
 	 */
 	isEditable() {
 		return !this.props.disabled && this.props.editable;
+	}
+
+	/**
+	 * Is text input focused
+	 * @returns {boolean|Boolean}
+	 */
+	isFocused() {
+		return this.state.focus;
 	}
 
 	/**
@@ -672,9 +736,15 @@ class InputSpinner extends Component {
 				{this.props.prepend}
 
 				<TextInput
+					ref={input => this.textInput = input}
 					style={this._getInputTextStyle()}
 					value={this.getValue()}
+					autofocus={this.props.autofocus}
 					editable={this.isEditable()}
+					maxLength={this.props.maxLength}
+					onKeyPress={this.onKeyPress.bind(this)}
+					onFocus={this.onFocus.bind(this)}
+					onBlur={this.onBlur.bind(this)}
 					keyboardType={this._getKeyboardType()}
 					onChangeText={this.onChange.bind(this)}
 					onSubmitEditing={this.onSubmit.bind(this)}
@@ -713,11 +783,16 @@ InputSpinner.propTypes = {
 	buttonFontSize: PropTypes.number,
 	buttonFontFamily: PropTypes.string,
 	buttonTextColor: PropTypes.string,
+	maxLength: PropTypes.number,
 	disabled: PropTypes.bool,
 	editable: PropTypes.bool,
+	autofocus: PropTypes.bool,
 	width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	onChange: PropTypes.func,
+	onFocus: PropTypes.func,
+	onBlur: PropTypes.func,
+	onKeyPress: PropTypes.func,
 	onMin: PropTypes.func,
 	onMax: PropTypes.func,
 	onIncrease: PropTypes.func,
@@ -763,8 +838,10 @@ InputSpinner.defaultProps = {
 	buttonFontFamily: null,
 	buttonTextColor: "#FFFFFF",
 	buttonPressTextColor: "#FFFFFF",
+	maxLength: null,
 	disabled: false,
 	editable: true,
+	autofocus: false,
 	width: 150,
 	height: 50,
 	buttonLeftDisabled: false,
