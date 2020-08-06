@@ -89,25 +89,38 @@ Check the "[Props List](PROPS.md)" file to have the complete list of component p
 | Handler      | Description                                         | Func                   |
 | ------------ | --------------------------------------------------- | ---------------------- |
 | `onChange`   | Get the number of the Spinner                       | (num) => { ... }       |
+| `onDecrease` | When decrease button is clicked get value decreased | (decreased) => { ... } |
+| `onIncrease` | When increase button is clicked get value increased | (increased) => { ... } |
 | `onMax`      | When max is reached get max number permitted        | (max) => { ... }       |
 | `onMin`      | When min is reached get min number permitted        | (min) => { ... }       |
-| `onIncrease` | When increase button is clicked get value increased | (increased) => { ... } |
-| `onDecrease` | When decrease button is clicked get value decreased | (decreased) => { ... } |
+
+### Text Input Handlers
+
+| Handler           | Description                                                            | Func           |
+| ----------------- | ---------------------------------------------------------------------- | -------------- |
+| `onBlur`          | Callback that is called when the text input is blurred.                | (e) => { ... } |
+| `onFocus`         | Callback that is called when the text input is focused.                | (e) => { ... } |
+| `onKeyPress`      | Callback that is called when a key is pressed.                         | (e) => { ... } |
+| `onSubmitEditing` | Callback that is called when the text input's submit button is pressed | (e) => { ... } |
 
 ### Props
 
-| Property    | Description                                               | Type             | Default | Note                              |
-| ----------- | --------------------------------------------------------- | ---------------- | ------- | --------------------------------- |
-| `value`     | Controlled value of the Spinner                           | String<br>Number | `0`     |                                   |
-| `type`      | Type of spinner                                           | String           | `int`   | Can be `int` or `real`/`float`... |
-| `step`      | Value to increment or decrement the current spinner value | String<br>Number | `1`     |
-| `max`       | Max number permitted                                      | String<br>Number | `0`     |
-| `min`       | Min value permitted                                       | String<br>Number | `99`    |
-| `precision` | Max numbers permitted after comma                         | Integer          | `2`     |
-| `disabled`  | Disable the Spinner or not                                | Boolean          | `false` |                                   |
-| `editable`  | Set if input number field is editable or not              | Boolean          | `true`  |                                   |
-| `prepend`   | Custom element after left button                          | Component        |         |
-| `append`    | Custom element before right button                        | Component        |         |
+| Property            | Description                                                  | Type             | Default | Note                              |
+| ------------------- | ------------------------------------------------------------ | ---------------- | ------- | --------------------------------- |
+| `append`            | Custom element before right button                           | Component        |         |                                   |
+| `autofocus`         | If `true`, focuses the input on zcomponentDidMountz.         |                  | `false` |                                   |
+| `disabled`          | Disable the Spinner or not                                   | Boolean          | `false` |                                   |
+| `editable`          | Set if input number field is editable or not                 | Boolean          | `true`  |                                   |
+| `maxLength`         | Limits the maximum number of characters that can be entered. | Number           |         |                                   |
+| `max`               | Max number permitted                                         | String<br>Number | `0`     |
+| `min`               | Min value permitted                                          | String<br>Number | `99`    |
+| `precision`         | Max numbers permitted after comma                            | Integer          | `2`     |
+| `prepend`           | Custom element after left button                             | Component        |         |
+| `selectTextOnFocus` | If `true`, all text will automatically be selected on focus. | Bool             | `false` |                                   |
+| `selectionColor`    | The highlight and cursor color of the text input.            | String           | `null`  |                                   |
+| `step`              | Value to increment or decrement the current spinner value    | String<br>Number | `1`     |
+| `type`              | Type of spinner                                              | String           | `int`   | Can be `int` or `real`/`float`... |
+| `value`             | Controlled value of the Spinner                              | String<br>Number | `0`     |                                   |
 
 #### Screenshots
 
@@ -122,25 +135,25 @@ Check the "[Props List](PROPS.md)" file to have the complete list of component p
 
 | Property           | Description                   | Type   | Default | Note                        |
 | ------------------ | ----------------------------- | ------ | ------- | --------------------------- |
-| `style`            | Container style               | Object |         | Could overwrite other props |
-| `inputStyle`       | Text Input style              | Object |         | Could overwrite other props |
-| `buttonStyle`      | Button style                  | Object |         | Could overwrite other props |
 | `buttonPressStyle` | Button style on Pressed state | Object |         | Could overwrite other props |
+| `buttonStyle`      | Button style                  | Object |         | Could overwrite other props |
+| `inputStyle`       | Text Input style              | Object |         | Could overwrite other props |
+| `style`            | Container style               | Object |         | Could overwrite other props |
 
 ### Props Colors
 
 | Property               | Description                                                | Type   | Default       | Note |
 | ---------------------- | ---------------------------------------------------------- | ------ | ------------- | ---- |
 | `background`           | Custom input text background color                         | String | `transparent` |
-| `textColor`            | Custom input text number color                             | String | `#000000`     |
-| `color`                | Custom color of the Spinner                                | String | `#3E525F`     |
+| `buttonPressTextColor` | Custom color of the button of the Spinner on Pressed state | String | `#FFFFFF`     |
+| `buttonTextColor`      | Custom color of the labels's button of the Spinner         | String | `#FFFFFF`     |
+| `colorLeft`            | Custom color of the Spinner left button                    | String | `#3E525F`     |
+| `colorMax`             | Custom color of the Spinner when reach max value           | String |               |
+| `colorMin`             | Custom color of the Spinner when reach min value           | String |               |
 | `colorPress`           | Custom color of the Spinner button on touch press          | String | `#3E525F`     |
 | `colorRight`           | Custom color of the Spinner right button                   | String | `#3E525F`     |
-| `colorLeft`            | Custom color of the Spinner left button                    | String | `#3E525F`     |
-| `colorMin`             | Custom color of the Spinner when reach min value           | String |               |
-| `colorMax`             | Custom color of the Spinner when reach max value           | String |               |
-| `buttonTextColor`      | Custom color of the labels's button of the Spinner         | String | `#FFFFFF`     |
-| `buttonPressTextColor` | Custom color of the button of the Spinner on Pressed state | String | `#FFFFFF`     |
+| `color`                | Custom color of the Spinner                                | String | `#3E525F`     |
+| `textColor`            | Custom input text number color                             | String | `#000000`     |
 
 #### Screenshots
 
@@ -154,42 +167,42 @@ Check the "[Props List](PROPS.md)" file to have the complete list of component p
 
 | Property     | Description                           | Type    | Default | Note                        |
 | ------------ | ------------------------------------- | ------- | ------- | --------------------------- |
-| `style`      | Container style                       | Object  |         | Could overwrite other props |
-| `width`      | Custom width of the Spinner           | Number  | `150`   |
 | `height`     | Custom height of the Spinner          | Number  | `50`    |
 | `showBorder` | Show the border of the Spinner or not | Boolean | `false` | Use with `rounded={false}`  |
+| `style`      | Container style                       | Object  |         | Could overwrite other props |
+| `width`      | Custom width of the Spinner           | Number  | `150`   |
 
 ### Props Buttons Style
 
 | Property                | Description                                                        | Type      | Default        | Note                        |
 | ----------------------- | ------------------------------------------------------------------ | --------- | -------------- | --------------------------- |
-| `buttonStyle`           | Button Style (Plus and Minus buttons)                              | Object    |                |
-| `arrows`                | Labels on button will be (< and >) instead of (+ and -)            | Boolean   | `false`        |
-| `rounded`               | Use circular button                                                | Boolean   | `true`         |
 | `activeOpacity`         | Opacity of underlay on pressed button                              | Number    | `0.85`         |
-| `buttonLeftDisabled`    | Disable left button                                                |  Boolean  | `false`        |                             |
-| `buttonRightDisabled`   | Disable right button                                               |  Boolean  | `false`        |                             |
-| `buttonLeftText`        | Custom text on the button left of the spinner                      | String    |                |
-| `buttonRightText`       | Custom text on the button right of the spinner                     | String    |                |
+| `arrows`                | Labels on button will be (< and >) instead of (+ and -)            | Boolean   | `false`        |
+| `buttonFontFamily`      | Custom fontFamily of buttons of the Spinner                        | String    | System Default |
+| `buttonFontSize`        | Custom fontSize of buttons of the Spinner                          | Number    | `14`           |
+| `buttonLeftDisabled`    | Disable left button                                                | Boolean   | `false`        |                             |
 | `buttonLeftImage`       | Custom element on the button left of the spinner                   | Component |                | Could overwrite other props |
-| `buttonRightImage`      | Custom element on the button right of the spinner                  | Component |                | Could overwrite other props |
+| `buttonLeftText`        | Custom text on the button left of the spinner                      | String    |                |
 | `buttonPressLeftImage`  | Custom element on the button left of the spinner on pressed state  | Component |                | Could overwrite other props |
 | `buttonPressRightImage` | Custom element on the button right of the spinner on pressed state | Component |                | Could overwrite other props |
-| `buttonFontSize`        | Custom fontSize of buttons of the Spinner                          | Number    | `14`           |
-| `buttonFontFamily`      | Custom fontFamily of buttons of the Spinner                        | String    | System Default |
-| `buttonTextColor`       | Custom color of the labels's button of the Spinner                 | String    | `#FFFFFF`      |
 | `buttonPressStyle`      | Button Style on Pressed state (Plus and Minus buttons)             | Object    |                |
 | `buttonPressTextColor`  | Custom color of the button of the Spinner on Pressed state         | String    | `#FFFFFF`      |
+| `buttonRightDisabled`   | Disable right button                                               | Boolean   | `false`        |                             |
+| `buttonRightImage`      | Custom element on the button right of the spinner                  | Component |                | Could overwrite other props |
+| `buttonRightText`       | Custom text on the button right of the spinner                     | String    |                |
+| `buttonStyle`           | Button Style (Plus and Minus buttons)                              | Object    |                |
+| `buttonTextColor`       | Custom color of the labels's button of the Spinner                 | String    | `#FFFFFF`      |
+| `rounded`               | Use circular button                                                | Boolean   | `true`         |
 
 ### Props Text Input Style
 
 | Property     | Description                                        | Type   | Default        | Note                      |
 | ------------ | -------------------------------------------------- | ------ | -------------- | ------------------------- |
+| `background` | Custom input text background color                 | String | `transparent`  |
+| `fontFamily` | Custom fontFamily of the text input of the Spinner | String | System Default |
+| `fontSize`   | Custom fontSize of the text input of the Spinner   | Number | `14`           |
 | `inputStyle` | Text Input style                                   | Object |                | Can overwrite other props |
 | `textColor`  | Custom input text number color                     | String | `#000000`      |
-| `background` | Custom input text background color                 | String | `transparent`  |
-| `fontSize`   | Custom fontSize of the text input of the Spinner   | Number | `14`           |
-| `fontFamily` | Custom fontFamily of the text input of the Spinner | String | System Default |
 
 ## 🤔 How to contribute
 
