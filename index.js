@@ -739,6 +739,8 @@ class InputSpinner extends Component {
 					ref={input => this.textInput = input}
 					style={this._getInputTextStyle()}
 					value={this.getValue()}
+					selectionColor={this.props.selectionColor}
+					selectTextOnFocus{this.props.selectTextOnFocus}
 					autofocus={this.props.autofocus}
 					editable={this.isEditable()}
 					maxLength={this.props.maxLength}
@@ -787,6 +789,8 @@ InputSpinner.propTypes = {
 	disabled: PropTypes.bool,
 	editable: PropTypes.bool,
 	autofocus: PropTypes.bool,
+	selectTextOnFocus: PropTypes.bool,
+	selectionColor: PropTypes.string,
 	width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	onChange: PropTypes.func,
@@ -842,6 +846,8 @@ InputSpinner.defaultProps = {
 	disabled: false,
 	editable: true,
 	autofocus: false,
+	selectTextOnFocus: false,
+	selectionColor: null,
 	width: 150,
 	height: 50,
 	buttonLeftDisabled: false,
