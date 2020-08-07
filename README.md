@@ -86,41 +86,38 @@ Check the "[Props List](PROPS.md)" file to have the complete list of component p
 
 ### Handlers
 
-| Handler      | Description                                         | Func                   |
-| ------------ | --------------------------------------------------- | ---------------------- |
-| `onChange`   | Get the number of the Spinner                       | (num) => { ... }       |
-| `onDecrease` | When decrease button is clicked get value decreased | (decreased) => { ... } |
-| `onIncrease` | When increase button is clicked get value increased | (increased) => { ... } |
-| `onMax`      | When max is reached get max number permitted        | (max) => { ... }       |
-| `onMin`      | When min is reached get min number permitted        | (min) => { ... }       |
-
-### Text Input Handlers
-
-| Handler           | Description                                                            | Func           |
-| ----------------- | ---------------------------------------------------------------------- | -------------- |
-| `onBlur`          | Callback that is called when the text input is blurred.                | (e) => { ... } |
-| `onFocus`         | Callback that is called when the text input is focused.                | (e) => { ... } |
-| `onKeyPress`      | Callback that is called when a key is pressed.                         | (e) => { ... } |
-| `onSubmitEditing` | Callback that is called when the text input's submit button is pressed | (e) => { ... } |
+| Handler           | Description                                                                   | Func                   |
+| ----------------- | ----------------------------------------------------------------------------- | ---------------------- |
+| `onBlur`          | Callback that is called when the text input is blurred.                       | (e) => { ... }         |
+| `onChange`        | Callback that is called when the number of the Spinner change.                | (num) => { ... }       |
+| `onDecrease`      | Callback that is called when decrease button is clicked get value decreased.  | (decreased) => { ... } |
+| `onFocus`         | Callback that is called when the text input is focused.                       | (e) => { ... }         |
+| `onIncrease`      | Callback that is called when increase button is clicked get value increased . | (increased) => { ... } |
+| `onKeyPress`      | Callback that is called when a key is pressed.                                | (e) => { ... }         |
+| `onMax`           | Callback that is called when max is reached get max number permitted.         | (max) => { ... }       |
+| `onMin`           | Callback that is called when min is reached get min number permitted.         | (min) => { ... }       |
+| `onSubmitEditing` | Callback that is called when the text input's submit button is pressed        | (e) => { ... }         |
 
 ### Props
 
-| Property            | Description                                                  | Type             | Default | Note                              |
-| ------------------- | ------------------------------------------------------------ | ---------------- | ------- | --------------------------------- |
-| `append`            | Custom element before right button                           | Component        |         |                                   |
-| `autofocus`         | If `true`, focuses the input on zcomponentDidMountz.         |                  | `false` |                                   |
-| `disabled`          | Disable the Spinner or not                                   | Boolean          | `false` |                                   |
-| `editable`          | Set if input number field is editable or not                 | Boolean          | `true`  |                                   |
-| `maxLength`         | Limits the maximum number of characters that can be entered. | Number           |         |                                   |
-| `max`               | Max number permitted                                         | String<br>Number | `0`     |
-| `min`               | Min value permitted                                          | String<br>Number | `99`    |
-| `precision`         | Max numbers permitted after comma                            | Integer          | `2`     |
-| `prepend`           | Custom element after left button                             | Component        |         |
-| `selectTextOnFocus` | If `true`, all text will automatically be selected on focus. | Bool             | `false` |                                   |
-| `selectionColor`    | The highlight and cursor color of the text input.            | String           | `null`  |                                   |
-| `step`              | Value to increment or decrement the current spinner value    | String<br>Number | `1`     |
-| `type`              | Type of spinner                                              | String           | `int`   | Can be `int` or `real`/`float`... |
-| `value`             | Controlled value of the Spinner                              | String<br>Number | `0`     |                                   |
+| Property            | Description                                                                             | Type             | Default | Note                              |
+| ------------------- | --------------------------------------------------------------------------------------- | ---------------- | ------- | --------------------------------- |
+| `append`            | Custom element before right button                                                      | Component        |         |                                   |
+| `autofocus`         | If `true`, focuses the input on zcomponentDidMountz.                                    |                  | `false` |                                   |
+| `disabled`          | Disable the Spinner or not                                                              | Boolean          | `false` |                                   |
+| `editable`          | Set if input number field is editable or not                                            | Boolean          | `true`  |                                   |
+| `maxLength`         | Limits the maximum number of characters that can be entered.                            | Number           |         |                                   |
+| `max`               | Max number permitted                                                                    | String<br>Number | `0`     |
+| `min`               | Min value permitted                                                                     | String<br>Number | `99`    |
+| `precision`         | Max numbers permitted after comma                                                       | Integer          | `2`     |
+| `prepend`           | Custom element after left button                                                        | Component        |         |
+| `returnKeyLabel`    | Sets the return key to the label. Use it instead of `returnKeyType`.                    | String           |         |                                   |
+| `returnKeyType`     | Determines how the return key should look. On Android you can also use `returnKeyLabel` | String           |         |
+| `selectTextOnFocus` | If `true`, all text will automatically be selected on focus.                            | Bool             | `false` |                                   |
+| `selectionColor`    | The highlight and cursor color of the text input.                                       | String           | `null`  |                                   |
+| `step`              | Value to increment or decrement the current spinner value                               | String<br>Number | `1`     |
+| `type`              | Type of spinner                                                                         | String           | `int`   | Can be `int` or `real`/`float`... |
+| `value`             | Controlled value of the Spinner                                                         | String<br>Number | `0`     |                                   |
 
 #### Screenshots
 
