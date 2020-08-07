@@ -103,7 +103,7 @@ Check the "[Props List](PROPS.md)" file to have the complete list of component p
 | Property            | Description                                                                             | Type             | Default | Note                              |
 | ------------------- | --------------------------------------------------------------------------------------- | ---------------- | ------- | --------------------------------- |
 | `append`            | Custom element before right button                                                      | Component        |         |                                   |
-| `autofocus`         | If `true`, focuses the input on zcomponentDidMountz.                                    |                  | `false` |                                   |
+| `autofocus`         | If `true`, focuses the input on `componentDidMount`.                                    |                  | `false` |                                   |
 | `disabled`          | Disable the Spinner or not                                                              | Boolean          | `false` |                                   |
 | `editable`          | Set if input number field is editable or not                                            | Boolean          | `true`  |                                   |
 | `maxLength`         | Limits the maximum number of characters that can be entered.                            | Number           |         |                                   |

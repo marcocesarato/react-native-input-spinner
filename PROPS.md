@@ -7,7 +7,7 @@
 | `activeOpacity`         | Opacity on pressed button                                                               | Number           | `0.85`           |
 | `append`                | Custom element before right button                                                      | Component        |                  |
 | `arrows`                | Labels on button will be arrows (< and >) instead of plus and minus                     | Boolean          | `false`          |
-| `autofocus`             | If `true`, focuses the input on zcomponentDidMountz.                                    |                  | `false`          |                                   |
+| `autofocus`             | If `true`, focuses the input on `componentDidMount`.                                    |                  | `false`          |                                   |
 | `background`            | Background color of number button                                                       | String           | `transparent`    |                                   |
 | `buttonFontFamily`      | Custom fontFamily of buttons of the Spinner                                             | String           | `System Default` |                                   |
 | `buttonFontSize`        | Custom fontSize of buttons of the Spinner                                               | Number           | `14`             |                                   |
