@@ -34,6 +34,7 @@
 | `fontFamily`            | Custom fontFamily of the text input of the Spinner                                      | String           | System Default   |                                   |
 | `fontSize`              | Custom fontSize of the text input of the Spinner                                        | Number           | `14`             |                                   |
 | `height`                | Custom height of the Spinner                                                            | Number           | `50`             |                                   |
+| `initialValue`          | Initial value of the Spinner                                                            | String<br>Number | `0`              |                                   |
 | `inputStyle`            | Input Style (Text number at middle)                                                     | Object           |                  | Could overwrite other props       |
 | `maxLength`             | Limits the maximum number of characters that can be entered.                            | Number           |                  |                                   |
 | `max`                   | Max number permitted                                                                    | String<br>Number | `0`              |                                   |

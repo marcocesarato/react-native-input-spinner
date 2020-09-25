@@ -105,7 +105,8 @@ Check the "[Props List](PROPS.md)" file to have the complete list of component p
 | `append`            | Custom element before right button                                                      | Component        |         |                                   |
 | `autofocus`         | If `true`, focuses the input on `componentDidMount`.                                    |                  | `false` |                                   |
 | `disabled`          | Disable the Spinner or not                                                              | Boolean          | `false` |                                   |
-| `editable`          | Set if input number field is editable or not                                            | Boolean          | `true`  |                                   |
+| `editable`          | Set if input number field is editable or not                                             | Boolean          | `true`  |                                   |
+| `initialValue`      | Initial value of the Spinner                                                        | String<br>Number | `0`         |                                   |
 | `maxLength`         | Limits the maximum number of characters that can be entered.                            | Number           |         |                                   |
 | `max`               | Max number permitted                                                                    | String<br>Number | `0`     |
 | `min`               | Min value permitted                                                                     | String<br>Number | `99`    |

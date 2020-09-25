@@ -29,7 +29,7 @@ class InputSpinner extends Component {
 		this.state = {
 			min: this.parseNum(this.props.min),
 			max: this.parseNum(this.props.max),
-			value: this.parseNum(this.props.value),
+			value: this.parseNum(!isNaN(this.props.initialValue) ? this.props.initialValue : this.props.value),
 			step: spinnerStep,
 			focused: false,
 			buttonPress: null,
@@ -828,6 +828,7 @@ InputSpinner.defaultProps = {
 	min: 0,
 	max: 999,
 	value: 0,
+	initialValue: null,
 	step: 1,
 	precision: 2,
 	rounded: true,
