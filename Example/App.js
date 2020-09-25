@@ -76,7 +76,7 @@ export default class App extends Component {
 					<InputSpinner
 						value={this.state.value}
 						style={styles.spinner}
-						editable
+						editable={false}
 					/>
 				</View>
 				<View style={styles.col}>
