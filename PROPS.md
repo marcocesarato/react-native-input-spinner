@@ -37,8 +37,8 @@
 | `initialValue`          | Initial value of the Spinner                                                            | String<br>Number | `0`              |                                   |
 | `inputStyle`            | Input Style (Text number at middle)                                                     | Object           |                  | Could overwrite other props       |
 | `maxLength`             | Limits the maximum number of characters that can be entered.                            | Number           |                  |                                   |
-| `max`                   | Max number permitted                                                                    | String<br>Number | `0`              |                                   |
-| `min`                   | Min value permitted                                                                     | String<br>Number | `99`             |                                   |
+| `max`                   | Max number permitted                                                                    | String<br>Number | `null`           |                                   |
+| `min`                   | Min value permitted                                                                     | String<br>Number | `0`              |                                   |
 | `onBlur`                | Callback that is called when the text input is blurred.                                 | (e) => { ... }   |
 | `onChange`              | Get the number of the Spinner                                                           | Function         |                  | `(num) => { ... }`                |
 | `onDecrease`            | When decrease button is clicked get value decreased                                     | Function         |                  | `(decreased) => { ... }`          |

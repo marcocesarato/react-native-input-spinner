@@ -108,8 +108,8 @@ Check the "[Props List](PROPS.md)" file to have the complete list of component p
 | `editable`          | Set if input number field is editable or not                                             | Boolean          | `true`  |                                   |
 | `initialValue`      | Initial value of the Spinner                                                        | String<br>Number | `0`         |                                   |
 | `maxLength`         | Limits the maximum number of characters that can be entered.                            | Number           |         |                                   |
-| `max`               | Max number permitted                                                                    | String<br>Number | `0`     |
-| `min`               | Min value permitted                                                                     | String<br>Number | `99`    |
+| `max`               | Max number permitted                                                                    | String<br>Number | `null`  |
+| `min`               | Min value permitted                                                                     | String<br>Number | `0`     |
 | `precision`         | Max numbers permitted after comma                                                       | Integer          | `2`     |
 | `prepend`           | Custom element after left button                                                        | Component        |         |
 | `returnKeyLabel`    | Sets the return key to the label. Use it instead of `returnKeyType`.                    | String           |         |                                   |
