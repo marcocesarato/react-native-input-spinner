@@ -26,10 +26,22 @@ class InputSpinner extends Component {
 			spinnerStep = 1;
 		}
 
+		const min =
+			this.props.min != null ? this.parseNum(this.props.min) : null;
+		const max =
+			this.props.max != null ? this.parseNum(this.props.max) : null;
+
+		let initialValue =
+			this.props.initialValue != null && !isNaN(12)
+				? this.props.initialValue
+				: this.props.value;
+		initialValue = this.parseNum(initialValue);
+		initialValue = this.adjustValueLimits(initialValue, min, max);
+
 		this.state = {
-			min: this.parseNum(this.props.min),
-			max: this.parseNum(this.props.max),
-			value: this.parseNum(!isNaN(this.props.initialValue) ? this.props.initialValue : this.props.value),
+			min: min,
+			max: max,
+			value: initialValue,
 			step: spinnerStep,
 			focused: false,
 			buttonPress: null,
@@ -44,15 +56,27 @@ class InputSpinner extends Component {
 	componentDidUpdate(prevProps) {
 		// Parse Value
 		if (this.props.value !== prevProps.value) {
-			this.setState({value: this.parseNum(this.props.value)});
+			let newValue = this.parseNum(this.props.value);
+			newValue = this.adjustValueLimits(newValue);
+			this.setState({value: newValue});
 		}
 		// Parse Min
 		if (this.props.min !== prevProps.min) {
-			this.setState({min: this.parseNum(this.props.min)});
+			this.setState({
+				min:
+					this.props.min != null
+						? this.parseNum(this.props.min)
+						: null,
+			});
 		}
 		// Parse Max
 		if (this.props.max !== prevProps.max) {
-			this.setState({max: this.parseNum(this.props.max)});
+			this.setState({
+				max:
+					this.props.max != null
+						? this.parseNum(this.props.max)
+						: null,
+			});
 		}
 		// Parse Step
 		if (this.props.step !== prevProps.step) {
@@ -71,8 +95,13 @@ class InputSpinner extends Component {
 	onChange(num) {
 		if (this.props.disabled) return;
 		const current_value = this.state.value;
-		const separator = !this.isStringEmpty(this.props.decimalSeparator) ? this.props.decimalSeparator : ".";
-		if (String(num).endsWith(separator) && !this.getValue().endsWith(separator + "0")) {
+		const separator = !this.isStringEmpty(this.props.decimalSeparator)
+			? this.props.decimalSeparator
+			: ".";
+		if (
+			String(num).endsWith(separator) &&
+			!this.getValue().endsWith(separator + "0")
+		) {
 			this.decimalInput = true;
 		}
 		num = this.parseNum(String(num).replace(/^0+/, "")) || 0;
@@ -130,13 +159,34 @@ class InputSpinner extends Component {
 		return num;
 	}
 
+	adjustValueLimits(value, min = null, max = null) {
+		if (min == null && this.state && this.state.min != null) {
+			min = this.state.min;
+		}
+		if (max == null && this.state && this.state.max != null) {
+			min = this.state.max;
+		}
+		if (min != null && value < min) {
+			value = Math.min(min, Math.max(value, min));
+		}
+		if (max != null && value > max) {
+			value = Math.max(max, Math.min(value, max));
+		}
+		return value;
+	}
+
 	/**
 	 * Parse number type
 	 * @param num
 	 * @returns {*}
 	 */
 	parseNum(num) {
-		num = String(num).replace(!this.isStringEmpty(this.props.decimalSeparator) ? this.props.decimalSeparator : ".", ".");
+		num = String(num).replace(
+			!this.isStringEmpty(this.props.decimalSeparator)
+				? this.props.decimalSeparator
+				: ".",
+			"."
+		);
 		if (this.typeDecimal()) {
 			num = parseFloat(num);
 		} else {
@@ -157,16 +207,22 @@ class InputSpinner extends Component {
 		let value = this.state.value;
 		if (this.typeDecimal() && this.decimalInput) {
 			this.decimalInput = false;
-			value = this.parseNum(value).toFixed(1)
-				.replace(/0+$/, "");
+			value = this.parseNum(value).toFixed(1).replace(/0+$/, "");
 		} else if (this.typeDecimal()) {
-			value = String(this.parseNum(
-				this.parseNum(value).toFixed(this.props.precision)
-			));
+			value = String(
+				this.parseNum(
+					this.parseNum(value).toFixed(this.props.precision)
+				)
+			);
 		} else {
 			value = String(this.parseNum(value));
 		}
-		return value.replace(".", !this.isStringEmpty(this.props.decimalSeparator) ? this.props.decimalSeparator : ".");
+		return value.replace(
+			".",
+			!this.isStringEmpty(this.props.decimalSeparator)
+				? this.props.decimalSeparator
+				: "."
+		);
 	}
 
 	/**
@@ -234,7 +290,7 @@ class InputSpinner extends Component {
 	 * @returns {*}
 	 * @param e
 	 */
-	onSubmit(e){
+	onSubmit(e) {
 		if (this.props.onSubmit) {
 			this.props.onSubmit(this.parseNum(e.nativeEvent.text));
 		}
@@ -245,7 +301,7 @@ class InputSpinner extends Component {
 	 * @returns {*}
 	 * @param e
 	 */
-	onFocus(e){
+	onFocus(e) {
 		if (this.props.onFocus) {
 			this.props.onFocus(e);
 		}
@@ -257,7 +313,7 @@ class InputSpinner extends Component {
 	 * @returns {*}
 	 * @param e
 	 */
-	onBlur(e){
+	onBlur(e) {
 		if (this.props.onBlur) {
 			this.props.onBlur(e);
 		}
@@ -269,7 +325,7 @@ class InputSpinner extends Component {
 	 * @returns {*}
 	 * @param e
 	 */
-	onKeyPress(e){
+	onKeyPress(e) {
 		if (this.props.onKeyPress) {
 			this.props.onKeyPress(e);
 		}
@@ -281,10 +337,13 @@ class InputSpinner extends Component {
 	 * @returns {boolean}
 	 */
 	maxReached(num = null) {
-		if (num == null) {
-			num = this.state.value;
+		if (this.state.max != null) {
+			if (num == null) {
+				num = this.state.value;
+			}
+			return num >= this.state.max;
 		}
-		return num >= this.state.max;
+		return false;
 	}
 
 	/**
@@ -293,10 +352,13 @@ class InputSpinner extends Component {
 	 * @returns {boolean}
 	 */
 	minReached(num = null) {
-		if (num == null) {
-			num = this.state.value;
+		if (this.state.min != null) {
+			if (num == null) {
+				num = this.state.value;
+			}
+			return num <= this.state.min;
 		}
-		return num <= this.state.min;
+		return false;
 	}
 
 	/**
@@ -359,8 +421,8 @@ class InputSpinner extends Component {
 	 * @returns {Boolean}
 	 * @private
 	 */
-	_isDisabledButtonLeft(){
-		return (this.props.disabled || this.props.buttonLeftDisabled);
+	_isDisabledButtonLeft() {
+		return this.props.disabled || this.props.buttonLeftDisabled;
 	}
 
 	/**
@@ -368,8 +430,8 @@ class InputSpinner extends Component {
 	 * @returns {Boolean}
 	 * @private
 	 */
-	_isDisabledButtonRight(){
-		return (this.props.disabled || this.props.buttonRightDisabled);
+	_isDisabledButtonRight() {
+		return this.props.disabled || this.props.buttonRightDisabled;
 	}
 
 	/**
@@ -415,8 +477,8 @@ class InputSpinner extends Component {
 		return this.maxReached()
 			? this._getColorMax()
 			: this.minReached()
-				? this._getColorMin()
-				: this.props.color;
+			? this._getColorMin()
+			: this.props.color;
 	}
 
 	/**
@@ -456,8 +518,8 @@ class InputSpinner extends Component {
 		return this.maxReached()
 			? this._getColorMax()
 			: this.minReached()
-				? this._getColorMin()
-				: color;
+			? this._getColorMin()
+			: color;
 	}
 
 	/**
@@ -736,7 +798,7 @@ class InputSpinner extends Component {
 				{this.props.prepend}
 
 				<TextInput
-					ref={input => this.textInput = input}
+					ref={(input) => (this.textInput = input)}
 					style={this._getInputTextStyle()}
 					value={this.getValue()}
 					selectionColor={this.props.selectionColor}
@@ -805,7 +867,7 @@ InputSpinner.propTypes = {
 	onMax: PropTypes.func,
 	onIncrease: PropTypes.func,
 	onDecrease: PropTypes.func,
-	onSubmit : PropTypes.func,
+	onSubmit: PropTypes.func,
 	buttonLeftDisabled: PropTypes.bool,
 	buttonRightDisabled: PropTypes.bool,
 	buttonLeftText: PropTypes.string,
@@ -826,7 +888,7 @@ InputSpinner.propTypes = {
 InputSpinner.defaultProps = {
 	type: "int",
 	min: 0,
-	max: 999,
+	max: null,
 	value: 0,
 	initialValue: null,
 	step: 1,
