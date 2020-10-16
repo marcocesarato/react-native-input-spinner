@@ -242,6 +242,23 @@ export default class App extends Component {
 						<Text style={styles.simbol}>$</Text>
 					</InputSpinner>
 				</View>
+				<View style={styles.col}>
+					<Text style={styles.text}>Mixed</Text>
+					<InputSpinner
+						style={styles.spinner}
+						value={80}
+						min={18}
+						max={48}
+						step={2}
+						rounded={false}
+						showBorder={true}
+						height={35}
+						editable={false}
+						onChange={(value) => {
+							this.setState({value: value});
+						}}
+					/>
+				</View>
 			</ScrollView>
 		);
 	}
