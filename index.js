@@ -36,7 +36,7 @@ class InputSpinner extends Component {
 				? this.props.initialValue
 				: this.props.value;
 		initialValue = this.parseNum(initialValue);
-		initialValue = this.adjustValueLimits(initialValue, min, max);
+		initialValue = this.withinRange(initialValue, min, max);
 
 		this.state = {
 			min: min,
@@ -57,7 +57,7 @@ class InputSpinner extends Component {
 		// Parse Value
 		if (this.props.value !== prevProps.value) {
 			let newValue = this.parseNum(this.props.value);
-			newValue = this.adjustValueLimits(newValue);
+			newValue = this.withinRange(newValue);
 			this.setState({value: newValue});
 		}
 		// Parse Min
@@ -159,18 +159,26 @@ class InputSpinner extends Component {
 		return num;
 	}
 
-	adjustValueLimits(value, min = null, max = null) {
+
+	/**
+	 * Limit value to be within max and min range
+	 * @param value
+	 * @param min
+	 * @param max
+	 * @returns {*}
+	 */
+	withinRange(value, min = null, max = null) {
 		if (min == null && this.state && this.state.min != null) {
 			min = this.state.min;
 		}
 		if (max == null && this.state && this.state.max != null) {
-			min = this.state.max;
+			max = this.state.max;
 		}
 		if (min != null && value < min) {
-			value = Math.min(min, Math.max(value, min));
+			value = min;
 		}
 		if (max != null && value > max) {
-			value = Math.max(max, Math.min(value, max));
+			value = max;
 		}
 		return value;
 	}
