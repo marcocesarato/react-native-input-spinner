@@ -754,7 +754,8 @@ class InputSpinner extends Component {
 				onShowUnderlay={this.onShowUnderlay.bind(this, "left")}
 				disabled={this._isDisabledButtonLeft()}
 				style={buttonStyle}
-				onPress={() => this.decrease()}>
+				onPress={() => this.decrease()}
+				{...this.props.leftElementProps}>
 				{this._renderLeftButtonElement()}
 			</TouchableHighlight>
 		);
@@ -788,7 +789,8 @@ class InputSpinner extends Component {
 				onShowUnderlay={this.onShowUnderlay.bind(this, "right")}
 				disabled={this._isDisabledButtonRight()}
 				style={buttonStyle}
-				onPress={() => this.increase()}>
+				onPress={() => this.increase()}
+				{...this.props.rightElementProps}>
 				{this._renderRightButtonElement()}
 			</TouchableHighlight>
 		);
@@ -800,7 +802,7 @@ class InputSpinner extends Component {
 	 */
 	render() {
 		return (
-			<View style={this._getContainerStyle()}>
+			<View style={this._getContainerStyle()} {...this.props.containerProps}>
 				{this._renderLeftButton()}
 
 				{this.props.prepend}
@@ -822,6 +824,7 @@ class InputSpinner extends Component {
 					keyboardType={this._getKeyboardType()}
 					onChangeText={this.onChange.bind(this)}
 					onSubmitEditing={this.onSubmit.bind(this)}
+					{...this.props.inputProps}
 				/>
 
 				{this.props.children}
@@ -891,6 +894,10 @@ InputSpinner.propTypes = {
 	append: PropTypes.element,
 	prepend: PropTypes.element,
 	decimalSeparator: PropTypes.string,
+	containerProps: PropTypes.object,
+	leftElementProps: PropTypes.object,
+	inputProps: PropTypes.object,
+	rightElementProps: PropTypes.object,
 };
 
 InputSpinner.defaultProps = {
@@ -936,6 +943,10 @@ InputSpinner.defaultProps = {
 	inputStyle: {},
 	style: {},
 	decimalSeparator: ".",
+	containerProps: {},
+	leftElementProps: {},
+	inputProps: {},
+	rightElementProps: {},
 };
 
 export default InputSpinner;
