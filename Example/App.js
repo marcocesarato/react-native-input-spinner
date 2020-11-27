@@ -243,6 +243,13 @@ export default class App extends Component {
 					</InputSpinner>
 				</View>
 				<View style={styles.col}>
+					<Text style={styles.text}>Placeholder</Text>
+					<InputSpinner
+						style={styles.spinner}
+						placeholder={"Placeholder"}
+					/>
+				</View>
+				<View style={styles.col}>
 					<Text style={styles.text}>Mixed</Text>
 					<InputSpinner
 						style={styles.spinner}
@@ -252,7 +259,6 @@ export default class App extends Component {
 						step={2}
 						rounded={false}
 						showBorder={true}
-						height={35}
 						editable={false}
 						onChange={(value) => {
 							this.setState({value: value});
