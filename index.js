@@ -755,7 +755,7 @@ class InputSpinner extends Component {
 				disabled={this._isDisabledButtonLeft()}
 				style={buttonStyle}
 				onPress={() => this.decrease()}
-				{...this.props.leftElementProps}>
+				{...this.props.leftButtonProps}>
 				{this._renderLeftButtonElement()}
 			</TouchableHighlight>
 		);
@@ -790,7 +790,7 @@ class InputSpinner extends Component {
 				disabled={this._isDisabledButtonRight()}
 				style={buttonStyle}
 				onPress={() => this.increase()}
-				{...this.props.rightElementProps}>
+				{...this.props.rightButtonProps}>
 				{this._renderRightButtonElement()}
 			</TouchableHighlight>
 		);
@@ -895,9 +895,9 @@ InputSpinner.propTypes = {
 	prepend: PropTypes.element,
 	decimalSeparator: PropTypes.string,
 	containerProps: PropTypes.object,
-	leftElementProps: PropTypes.object,
 	inputProps: PropTypes.object,
-	rightElementProps: PropTypes.object,
+	leftButtonProps: PropTypes.object,
+	rightButtonProps: PropTypes.object,
 };
 
 InputSpinner.defaultProps = {
@@ -944,9 +944,9 @@ InputSpinner.defaultProps = {
 	style: {},
 	decimalSeparator: ".",
 	containerProps: {},
-	leftElementProps: {},
 	inputProps: {},
-	rightElementProps: {},
+	leftButtonProps: {},
+	rightButtonProps: {},
 };
 
 export default InputSpinner;
