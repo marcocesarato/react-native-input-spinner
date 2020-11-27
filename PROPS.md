@@ -30,12 +30,14 @@
 | `colorRight`            | Custom color of the Spinner right button                                                | String           | `#3E525F`        |                                   |
 | `color`                 | Custom color of the Spinner                                                             | String           | `#3E525F`        |                                   |
 | `disabled`              | Disable the Spinner or not                                                              | Boolean          | `false`          |                                   |
-| `editable`              | Set if input number field is editable or not                                            | Boolean          | `true`           |                                   |
+| `editable`              | Set if input number field is editable or not                                             | Boolean          | `true`           |                                   |
 | `fontFamily`            | Custom fontFamily of the text input of the Spinner                                      | String           | System Default   |                                   |
 | `fontSize`              | Custom fontSize of the text input of the Spinner                                        | Number           | `14`             |                                   |
 | `height`                | Custom height of the Spinner                                                            | Number           | `50`             |                                   |
 | `initialValue`          | Initial value of the Spinner                                                            | String<br>Number | `0`              |                                   |
 | `inputStyle`            | Input Style (Text number at middle)                                                     | Object           |                  | Could overwrite other props       |
+| `inputProps`            | Customized TextInput Component props                                                    | Object           | `null`           |                                   |
+| `leftButtonProps`       | Customized left button (Touchable Component) props                                      | Object           | `null`           |                                   |
 | `maxLength`             | Limits the maximum number of characters that can be entered.                            | Number           |                  |                                   |
 | `max`                   | Max number permitted                                                                    | String<br>Number | `null`           |                                   |
 | `min`                   | Min value permitted                                                                     | String<br>Number | `0`              |                                   |
@@ -48,10 +50,13 @@
 | `onMax`                 | When max is reached get max number permitted                                            | Function         |                  | `(max) => { ... }`                |
 | `onMin`                 | When min is reached get min number permitted                                            | Function         |                  | `(min) => { ... }`                |
 | `onSubmitEditing`       | Callback that is called when the text input's submit button is pressed                  | (e) => { ... }   |
+| `placeholder`           | The string that will be rendered when text input value is equal to zero                 | String           | `null`           |                                   |
+| `placeholderTextColor`  | The text color of the placeholder string.                                               | String           | `null`           |                                   |
 | `precision`             | Max numbers permitted after comma                                                       | Integer          | `2`              |                                   |
 | `prepend`               | Custom element after left button                                                        | Component        |                  |
 | `returnKeyLabel`        | Sets the return key to the label. Use it instead of `returnKeyType`.                    | String           |                  |                                   |
 | `returnKeyType`         | Determines how the return key should look. On Android you can also use `returnKeyLabel` | String           |                  |
+| `rightButtonProps`      | Customized right button (Touchable Component) props                                     | Object           | `null`           |                                   |
 | `rounded`               | Use circular button                                                                     | Boolean          | `true`           |                                   |
 | `selectTextOnFocus`     | If `true`, all text will automatically be selected on focus.                            | Bool             | `false`          |                                   |
 | `selectionColor`        | The highlight and cursor color of the text input.                                       | String           | `null`           |                                   |
