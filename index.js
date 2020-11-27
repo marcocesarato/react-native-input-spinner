@@ -225,7 +225,8 @@ class InputSpinner extends Component {
 		} else {
 			value = String(this.parseNum(value));
 		}
-		return value.replace(
+		let hasPlaceholder = value === "0" && !this.isStringEmpty(this.props.placeholder);
+		return hasPlaceholder ? "" : value.replace(
 			".",
 			!this.isStringEmpty(this.props.decimalSeparator)
 				? this.props.decimalSeparator
@@ -811,6 +812,8 @@ class InputSpinner extends Component {
 					ref={(input) => (this.textInput = input)}
 					style={this._getInputTextStyle()}
 					value={this.getValue()}
+					placeholder={this.props.placeholder}
+					placeholderTextColor={this.props.placeholderTextColor}
 					selectionColor={this.props.selectionColor}
 					selectTextOnFocus={this.props.selectTextOnFocus}
 					returnKeyType={this.props.returnKeyType}
@@ -865,6 +868,8 @@ InputSpinner.propTypes = {
 	editable: PropTypes.bool,
 	autofocus: PropTypes.bool,
 	selectTextOnFocus: PropTypes.bool,
+	placeholder: PropTypes.string,
+	placeholderTextColor: PropTypes.string,
 	selectionColor: PropTypes.string,
 	returnKeyLabel: PropTypes.string,
 	returnKeyType: PropTypes.string,
