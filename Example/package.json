@@ -8,12 +8,12 @@
 		"eject": "expo eject"
 	},
 	"dependencies": {
-		"expo": "^39.0.3",
+		"expo": "^39.0.5",
 		"react": "16.14.0",
 		"react-dom": "^16.14.0",
-		"react-native": "https://github.com/expo/react-native/archive/sdk-38.0.0.tar.gz",
+		"react-native": "https://github.com/expo/react-native/archive/sdk-39.0.0.tar.gz",
 		"react-native-input-spinner": "^1.3.1",
-		"react-native-web": "^0.14.1"
+		"react-native-web": "^0.14.8"
 	},
 	"prettier": {
 		"tabWidth": 4,
