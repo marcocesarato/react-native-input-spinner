@@ -107,8 +107,8 @@ Check the "[Props List](PROPS.md)" file to have the complete list of component p
 | `disabled`             | Disable the Spinner or not                                                              | Boolean          | `false` |                                   |
 | `editable`             | Set if input number field is editable or not                                             | Boolean          | `true`  |                                   |
 | `initialValue`         | Initial value of the Spinner                                                            | String<br>Number | `0`     |                                   |
-| `inputProps`           | Customized TextInput Component props                                                    | Object           | `null`  |                                   |
-| `leftButtonProps`      | Customized left button (Touchable Component) props                                      | Object           | `null`  |                                   |
+| `inputProps`           | Customized TextInput Component props                                                    | Object           | `null`  | Could overwrite other props       |
+| `leftButtonProps`      | Customized left button (Touchable Component) props                                      | Object           | `null`  | Could overwrite other props       |
 | `maxLength`            | Limits the maximum number of characters that can be entered.                            | Number           |         |                                   |
 | `max`                  | Max number permitted                                                                    | String<br>Number | `null`  |
 | `min`                  | Min value permitted                                                                     | String<br>Number | `0`     |
@@ -118,7 +118,7 @@ Check the "[Props List](PROPS.md)" file to have the complete list of component p
 | `prepend`              | Custom element after left button                                                        | Component        |         |
 | `returnKeyLabel`       | Sets the return key to the label. Use it instead of `returnKeyType`.                    | String           |         |                                   |
 | `returnKeyType`        | Determines how the return key should look. On Android you can also use `returnKeyLabel` | String           |         |
-| `rightButtonProps`     | Customized right button (Touchable Component) props                                     | Object           | `null`  |                                   |
+| `rightButtonProps`     | Customized right button (Touchable Component) props                                     | Object           | `null`  | Could overwrite other props       |
 | `selectTextOnFocus`    | If `true`, all text will automatically be selected on focus.                            | Bool             | `false` |                                   |
 | `selectionColor`       | The highlight and cursor color of the text input.                                       | String           | `null`  |                                   |
 | `step`                 | Value to increment or decrement the current spinner value                               | String<br>Number | `1`     |
