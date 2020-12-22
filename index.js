@@ -159,7 +159,6 @@ class InputSpinner extends Component {
 		return num;
 	}
 
-
 	/**
 	 * Limit value to be within max and min range
 	 * @param value
@@ -225,13 +224,16 @@ class InputSpinner extends Component {
 		} else {
 			value = String(this.parseNum(value));
 		}
-		let hasPlaceholder = value === "0" && !this.isStringEmpty(this.props.placeholder);
-		return hasPlaceholder ? "" : value.replace(
-			".",
-			!this.isStringEmpty(this.props.decimalSeparator)
-				? this.props.decimalSeparator
-				: "."
-		);
+		let hasPlaceholder =
+			value === "0" && !this.isStringEmpty(this.props.placeholder);
+		return hasPlaceholder
+			? ""
+			: value.replace(
+					".",
+					!this.isStringEmpty(this.props.decimalSeparator)
+						? this.props.decimalSeparator
+						: "."
+			  );
 	}
 
 	/**
@@ -803,7 +805,9 @@ class InputSpinner extends Component {
 	 */
 	render() {
 		return (
-			<View style={this._getContainerStyle()} {...this.props.containerProps}>
+			<View
+				style={this._getContainerStyle()}
+				{...this.props.containerProps}>
 				{this._renderLeftButton()}
 
 				{this.props.prepend}
