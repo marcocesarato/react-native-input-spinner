@@ -55,13 +55,13 @@ class InputSpinner extends Component {
 	 */
 	componentDidUpdate(prevProps) {
 		// Parse Value
-		if (this.props.value !== this.state.value) {
+		if (this.props.value !== prevProps.value) {
 			let newValue = this.parseNum(this.props.value);
 			newValue = this.withinRange(newValue);
 			this.setState({value: newValue});
 		}
 		// Parse Min
-		if (this.props.min !== this.state.min) {
+		if (this.props.min !== prevProps.min) {
 			this.setState({
 				min:
 					this.props.min != null
@@ -70,7 +70,7 @@ class InputSpinner extends Component {
 			});
 		}
 		// Parse Max
-		if (this.props.max !== this.state.max) {
+		if (this.props.max !== prevProps.max) {
 			this.setState({
 				max:
 					this.props.max != null
@@ -79,7 +79,7 @@ class InputSpinner extends Component {
 			});
 		}
 		// Parse Step
-		if (this.props.step !== this.state.step) {
+		if (this.props.step !== prevProps.step) {
 			let spinnerStep = this.parseNum(this.props.step);
 			if (!this.typeDecimal() && spinnerStep < 1) {
 				spinnerStep = 1;
@@ -112,17 +112,21 @@ class InputSpinner extends Component {
 					this.props.onMax(this.state.max);
 				}
 			}
-			this.setState({value: num});
 		} else {
 			if (this.props.onMin) {
 				this.props.onMin(this.state.min);
 			}
 			num = this.state.min;
-			this.setState({value: num});
 		}
 		if (current_value !== num && this.props.onChange) {
-			this.props.onChange(num);
+			const res = this.props.onChange(num);
+			if (res === false) {
+				return;
+			} else if (this.isNumeric(res)) {
+				num = this.parseNum(res);
+			}
 		}
+		this.setState({value: num});
 	}
 
 	/**
@@ -274,7 +278,12 @@ class InputSpinner extends Component {
 			if (this.maxReached(num)) {
 				increased_num = this.state.max;
 			}
-			this.props.onIncrease(increased_num);
+			const res = this.props.onIncrease(increased_num);
+			if (res === false) {
+				return;
+			} else if (this.isNumeric(res)) {
+				num = this.parseNum(res);
+			}
 		}
 		this.onChange(num);
 	}
@@ -291,9 +300,28 @@ class InputSpinner extends Component {
 			if (this.minReached(num)) {
 				decreased_num = this.state.min;
 			}
-			this.props.onDecrease(decreased_num);
+			const res = this.props.onDecrease(decreased_num);
+			if (res === false) {
+				return;
+			} else if (this.isNumeric(res)) {
+				num = this.parseNum(res);
+			}
 		}
 		this.onChange(num);
+	}
+
+	/**
+	 * Detect if is a numeric value
+	 * @param num
+	 * @returns {boolean}
+	 */
+	isNumeric(num) {
+		return (
+			num !== null &&
+			num !== false &&
+			!isNaN(parseFloat(num)) &&
+			!isNaN(num - 0)
+		);
 	}
 
 	/**
