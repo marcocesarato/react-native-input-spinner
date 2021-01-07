@@ -92,7 +92,7 @@ class InputSpinner extends Component {
 	 * On value change
 	 * @param num
 	 */
-	onChange(num) {
+	async onChange(num) {
 		if (this.props.disabled) return;
 		const current_value = this.state.value;
 		const separator = !this.isStringEmpty(this.props.decimalSeparator)
@@ -119,7 +119,7 @@ class InputSpinner extends Component {
 			num = this.state.min;
 		}
 		if (current_value !== num && this.props.onChange) {
-			const res = this.props.onChange(num);
+			const res = await this.props.onChange(num);
 			if (res === false) {
 				return;
 			} else if (this.isNumeric(res)) {
@@ -269,7 +269,7 @@ class InputSpinner extends Component {
 	/**
 	 * Increase
 	 */
-	increase() {
+	async increase() {
 		if (this._isDisabledButtonRight()) return;
 		let num =
 			this.parseNum(this.state.value) + this.parseNum(this.state.step);
@@ -278,7 +278,7 @@ class InputSpinner extends Component {
 			if (this.maxReached(num)) {
 				increased_num = this.state.max;
 			}
-			const res = this.props.onIncrease(increased_num);
+			const res = await this.props.onIncrease(increased_num);
 			if (res === false) {
 				return;
 			} else if (this.isNumeric(res)) {
@@ -291,7 +291,7 @@ class InputSpinner extends Component {
 	/**
 	 * Decrease
 	 */
-	decrease() {
+	async decrease() {
 		if (this._isDisabledButtonLeft()) return;
 		let num =
 			this.parseNum(this.state.value) - this.parseNum(this.state.step);
@@ -300,7 +300,7 @@ class InputSpinner extends Component {
 			if (this.minReached(num)) {
 				decreased_num = this.state.min;
 			}
-			const res = this.props.onDecrease(decreased_num);
+			const res = await this.props.onDecrease(decreased_num);
 			if (res === false) {
 				return;
 			} else if (this.isNumeric(res)) {
