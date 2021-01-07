@@ -605,6 +605,7 @@ class InputSpinner extends Component {
 		return [
 			Style.container,
 			{
+				flex: 1,
 				borderColor: this.props.showBorder
 					? this._getColor()
 					: "transparent",
@@ -631,6 +632,7 @@ class InputSpinner extends Component {
 					: "transparent",
 				backgroundColor: this.props.background,
 				height: this.props.height,
+				flex: 1,
 			},
 			this.props.inputStyle,
 		];
