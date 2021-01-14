@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {Text, TextInput, TouchableHighlight, View} from "react-native";
 import PropTypes from "prop-types";
 import {Style} from "./style";
+import {isEmpty, isStringEmpty, debounce} from "./utils";
 
 /**
  * Default Color
@@ -95,7 +96,7 @@ class InputSpinner extends Component {
 	onChange(num) {
 		if (this.props.disabled) return;
 		const current_value = this.state.value;
-		const separator = !this.isStringEmpty(this.props.decimalSeparator)
+		const separator = !isEmpty(this.props.decimalSeparator)
 			? this.props.decimalSeparator
 			: ".";
 		if (
@@ -159,7 +160,6 @@ class InputSpinner extends Component {
 		return num;
 	}
 
-
 	/**
 	 * Limit value to be within max and min range
 	 * @param value
@@ -190,7 +190,7 @@ class InputSpinner extends Component {
 	 */
 	parseNum(num) {
 		num = String(num).replace(
-			!this.isStringEmpty(this.props.decimalSeparator)
+			!isEmpty(this.props.decimalSeparator)
 				? this.props.decimalSeparator
 				: ".",
 			"."
@@ -225,13 +225,15 @@ class InputSpinner extends Component {
 		} else {
 			value = String(this.parseNum(value));
 		}
-		let hasPlaceholder = value === "0" && !this.isStringEmpty(this.props.placeholder);
-		return hasPlaceholder ? "" : value.replace(
-			".",
-			!this.isStringEmpty(this.props.decimalSeparator)
-				? this.props.decimalSeparator
-				: "."
-		);
+		let hasPlaceholder = value === "0" && !isEmpty(this.props.placeholder);
+		return hasPlaceholder
+			? ""
+			: value.replace(
+					".",
+					!isEmpty(this.props.decimalSeparator)
+						? this.props.decimalSeparator
+						: "."
+			  );
 	}
 
 	/**
@@ -389,24 +391,6 @@ class InputSpinner extends Component {
 	 */
 	clear() {
 		this.textInput.clear();
-	}
-
-	/**
-	 * Is object empty
-	 * @param obj
-	 * @returns {boolean}
-	 */
-	isObjectEmpty(obj) {
-		return Object.entries(obj).length === 0 && obj.constructor === Object;
-	}
-
-	/**
-	 * Is string empty
-	 * @param str
-	 * @returns {boolean|boolean}
-	 */
-	isStringEmpty(str) {
-		return !str || String(str) === "";
 	}
 
 	/**
@@ -625,7 +609,7 @@ class InputSpinner extends Component {
 	 * @private
 	 */
 	_getStyleButtonPress() {
-		return this.isObjectEmpty(this.props.buttonPressStyle)
+		return isEmpty(this.props.buttonPressStyle)
 			? this.props.buttonStyle
 			: this.props.buttonPressStyle;
 	}
@@ -803,7 +787,9 @@ class InputSpinner extends Component {
 	 */
 	render() {
 		return (
-			<View style={this._getContainerStyle()} {...this.props.containerProps}>
+			<View
+				style={this._getContainerStyle()}
+				{...this.props.containerProps}>
 				{this._renderLeftButton()}
 
 				{this.props.prepend}
