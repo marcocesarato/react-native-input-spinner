@@ -5,10 +5,11 @@ import {Style} from "./style";
 import {debounce, isNumeric, isEmpty, isStringEmpty} from "./utils";
 
 /**
- * Default Color
- * @type {string}
+ * Default constants
  */
 const defaultColor = "#3E525F";
+const defaultLongPressStartTimeout = 1000;
+const defaultLongPressTimeout = 200;
 
 /**
  * Input Spinner
@@ -18,10 +19,6 @@ class InputSpinner extends Component {
 	// Timers
 	increaseTimer = null;
 	decreaseTimer = null;
-
-	// Press trigger timeouts
-	pressStartTriggerTimeout = 1000;
-	pressTriggerTimeout = 200;
 
 	/**
 	 * Constructor
@@ -290,9 +287,9 @@ class InputSpinner extends Component {
 			}
 		}
 
-		let wait = this.pressTriggerTimeout;
+		let wait = this.props.onLongPressTimeout;
 		if (this.increaseTimer === null) {
-			wait = this.pressStartTriggerTimeout;
+			wait = this.props.onLongPressStartTimeout;
 		}
 
 		this.increaseTimer = setTimeout(this.increase, wait);
@@ -318,9 +315,9 @@ class InputSpinner extends Component {
 			}
 		}
 
-		let wait = this.pressTriggerTimeout;
+		let wait = this.props.onLongPressTimeout;
 		if (this.increaseTimer === null) {
-			wait = this.pressStartTriggerTimeout;
+			wait = this.props.onLongPressStartTimeout;
 		}
 
 		this.decreaseTimer = setTimeout(this.decrease, wait);
@@ -894,6 +891,8 @@ InputSpinner.propTypes = {
 	onIncrease: PropTypes.func,
 	onDecrease: PropTypes.func,
 	onSubmit: PropTypes.func,
+	onLongPressStartTimeout: PropTypes.number,
+	onLongPressTimeout: PropTypes.number,
 	buttonLeftDisabled: PropTypes.bool,
 	buttonRightDisabled: PropTypes.bool,
 	buttonLeftText: PropTypes.string,
@@ -949,6 +948,8 @@ InputSpinner.defaultProps = {
 	returnKeyType: null,
 	width: 150,
 	height: 50,
+	onLongPressStartTimeout: defaultLongPressStartTimeout,
+	onLongPressTimeout: defaultLongPressTimeout,
 	buttonLeftDisabled: false,
 	buttonRightDisabled: false,
 	buttonLeftText: null,
