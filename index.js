@@ -2,14 +2,15 @@ import React, {Component} from "react";
 import {Text, TextInput, TouchableHighlight, View} from "react-native";
 import PropTypes from "prop-types";
 import {Style} from "./style";
-import {debounce, isNumeric, isEmpty, isStringEmpty} from "./utils";
+import {debounce, isNumeric, isEmpty} from "./utils";
 
 /**
  * Default constants
  */
 const defaultColor = "#3E525F";
-const defaultLongPressStartTimeout = 1000;
-const defaultLongPressTimeout = 200;
+const defaultLongPressDelay = 750;
+const defaultLongPressSpeed = 7;
+const defaultDebounceTime = 500;
 
 /**
  * Input Spinner
@@ -41,6 +42,10 @@ class InputSpinner extends Component {
 				: this.props.value;
 		initialValue = this.parseNum(initialValue);
 		initialValue = this.withinRange(initialValue, min, max);
+
+		// Set debounce
+		this._debounceSetMax = debounce(this._setStateMax.bind(this), this.props.debounceTime);
+		this._debounceSetMin = debounce(this._setStateMin.bind(this), this.props.debounceTime);
 
 		this.state = {
 			min: min,
@@ -87,10 +92,33 @@ class InputSpinner extends Component {
 	}
 
 	/**
-	 * On value change
-	 * @param num
+	 * Set state to min
+	 * @param callback
+	 * @private
 	 */
-	async onChange(num) {
+	_setStateMin(callback = null) {
+		return this.setState({value: this.state.max}, callback);
+	}
+
+	/**
+	 * Set state to max
+	 * @param callback
+	 * @private
+	 */
+	_setStateMax(callback = null) {
+		return this.setState({value: this.state.max}, callback);
+	}
+
+	/**
+	 * On value change
+	 * @param value
+	 */
+	async onChange(value) {
+		let num = value;
+		let parsedNum = value;
+		if (isEmpty(value)) {
+			num = this.state.min;
+		}
 		if (this.props.disabled) return;
 		const current_value = this.state.value;
 		const separator = !isEmpty(this.props.decimalSeparator)
@@ -102,29 +130,41 @@ class InputSpinner extends Component {
 		) {
 			this.decimalInput = true;
 		}
-		num = this.parseNum(String(num).replace(/^0+/, "")) || 0;
+		num = parsedNum = this.parseNum(String(num).replace(/^0+/, "")) || 0;
 		if (!this.minReached(num)) {
 			if (this.maxReached(num)) {
-				num = this.state.max;
+				parsedNum = this.state.max;
+				this.maxTimer = this._debounceSetMax();
 				if (this.props.onMax) {
 					this.props.onMax(this.state.max);
 				}
 			}
 		} else {
+			parsedNum = this.state.min;
+			this.minTimer = this._debounceSetMin();
 			if (this.props.onMin) {
 				this.props.onMin(this.state.min);
 			}
-			num = this.state.min;
 		}
 		if (current_value !== num && this.props.onChange) {
-			const res = await this.props.onChange(num);
-			if (res === false) {
-				return;
-			} else if (isNumeric(res)) {
-				num = this.parseNum(res);
+			const res = await this.props.onChange(parsedNum);
+			if (!isEmpty(value)) {
+				if (res === false) {
+					return;
+				} else if (isNumeric(res)) {
+					num = this.parseNum(res);
+				}
 			}
 		}
-		this.setState({value: num});
+		if (!isEmpty(value)) {
+			if(parsedNum === num) {
+				clearTimeout(this.minTimer);
+				clearTimeout(this.maxTimer);
+			}
+			this.setState({value: num});
+		} else {
+			this.setState({value: value});
+		}
 	}
 
 	/**
@@ -212,6 +252,9 @@ class InputSpinner extends Component {
 	 */
 	getValue() {
 		let value = this.state.value;
+		if (isEmpty(value)) {
+			return "";
+		}
 		if (this.typeDecimal() && this.decimalInput) {
 			this.decimalInput = false;
 			value = this.parseNum(value).toFixed(1).replace(/0+$/, "");
@@ -226,11 +269,23 @@ class InputSpinner extends Component {
 		return hasPlaceholder
 			? ""
 			: value.replace(
-					".",
-					!isEmpty(this.props.decimalSeparator)
-						? this.props.decimalSeparator
-						: ".",
-			  );
+				".",
+				!isEmpty(this.props.decimalSeparator)
+					? this.props.decimalSeparator
+					: ".",
+			);
+	}
+
+	/**
+	 * Get Placeholder
+	 * @returns {*}
+	 */
+	getPlaceholder() {
+		if(isEmpty(this.props.placeholder)) {
+			return this.state.min;
+		} else {
+			return this.state.placeholder;
+		}
 	}
 
 	/**
@@ -262,10 +317,20 @@ class InputSpinner extends Component {
 	clearTimers() {
 		if (this.increaseTimer) {
 			clearTimeout(this.increaseTimer);
+			this.increaseTimer = null;
 		}
 		if (this.decreaseTimer) {
 			clearTimeout(this.decreaseTimer);
+			this.decreaseTimer = null;
 		}
+	}
+
+	/**
+	 * Get time to wait before increase/decrease on long press
+	 * @returns {number}
+	 */
+	getLongPressWaitingTime() {
+		return 1000 / this.withinRange(this.props.onLongPressSpeed, 1, 10);
 	}
 
 	/**
@@ -274,11 +339,11 @@ class InputSpinner extends Component {
 	async increase() {
 		if (this._isDisabledButtonRight()) return;
 		let num = this.parseNum(this.state.value) + this.parseNum(this.state.step);
+		if (this.maxReached(num)) {
+			return;
+		}
 		if (this.props.onIncrease) {
 			let increased_num = num;
-			if (this.maxReached(num)) {
-				increased_num = this.state.max;
-			}
 			const res = await this.props.onIncrease(increased_num);
 			if (res === false) {
 				return;
@@ -287,12 +352,12 @@ class InputSpinner extends Component {
 			}
 		}
 
-		let wait = this.props.onLongPressTimeout;
+		let wait = this.getLongPressWaitingTime();
 		if (this.increaseTimer === null) {
-			wait = this.props.onLongPressStartTimeout;
+			wait = this.props.onLongPressDelay;
 		}
 
-		this.increaseTimer = setTimeout(this.increase, wait);
+		this.increaseTimer = setTimeout(this.increase.bind(this), wait);
 		this.onChange(num);
 	}
 
@@ -302,11 +367,11 @@ class InputSpinner extends Component {
 	async decrease() {
 		if (this._isDisabledButtonLeft()) return;
 		let num = this.parseNum(this.state.value) - this.parseNum(this.state.step);
+		if (this.minReached(num)) {
+			return;
+		}
 		if (this.props.onDecrease) {
 			let decreased_num = num;
-			if (this.minReached(num)) {
-				decreased_num = this.state.min;
-			}
 			const res = await this.props.onDecrease(decreased_num);
 			if (res === false) {
 				return;
@@ -315,12 +380,12 @@ class InputSpinner extends Component {
 			}
 		}
 
-		let wait = this.props.onLongPressTimeout;
-		if (this.increaseTimer === null) {
-			wait = this.props.onLongPressStartTimeout;
+		let wait = this.getLongPressWaitingTime();
+		if (this.decreaseTimer === null) {
+			wait = this.props.onLongPressDelay;
 		}
 
-		this.decreaseTimer = setTimeout(this.decrease, wait);
+		this.decreaseTimer = setTimeout(this.decrease.bind(this), wait);
 		this.onChange(num);
 	}
 
@@ -498,8 +563,8 @@ class InputSpinner extends Component {
 		return this.maxReached()
 			? this._getColorMax()
 			: this.minReached()
-			? this._getColorMin()
-			: this.props.color;
+				? this._getColorMin()
+				: this.props.color;
 	}
 
 	/**
@@ -539,8 +604,8 @@ class InputSpinner extends Component {
 		return this.maxReached()
 			? this._getColorMax()
 			: this.minReached()
-			? this._getColorMin()
-			: color;
+				? this._getColorMin()
+				: color;
 	}
 
 	/**
@@ -760,8 +825,8 @@ class InputSpinner extends Component {
 				onShowUnderlay={this.onShowUnderlay.bind(this, "left")}
 				disabled={this._isDisabledButtonLeft()}
 				style={buttonStyle}
-				onPressIn={this.decrease}
-				onPressOut={this.clearTimers}
+				onPressIn={this.decrease.bind(this)}
+				onPressOut={this.clearTimers.bind(this)}
 				{...this.props.leftButtonProps}>
 				{this._renderLeftButtonElement()}
 			</TouchableHighlight>
@@ -796,8 +861,8 @@ class InputSpinner extends Component {
 				onShowUnderlay={this.onShowUnderlay.bind(this, "right")}
 				disabled={this._isDisabledButtonRight()}
 				style={buttonStyle}
-				onPressIn={this.increase}
-				onPressOut={this.clearTimers}
+				onPressIn={this.increase.bind(this)}
+				onPressOut={this.clearTimers.bind(this)}
 				{...this.props.rightButtonProps}>
 				{this._renderRightButtonElement()}
 			</TouchableHighlight>
@@ -819,7 +884,7 @@ class InputSpinner extends Component {
 					ref={(input) => (this.textInput = input)}
 					style={this._getInputTextStyle()}
 					value={this.getValue()}
-					placeholder={this.props.placeholder}
+					placeholder={this.getPlaceholder()}
 					placeholderTextColor={this.props.placeholderTextColor}
 					selectionColor={this.props.selectionColor}
 					selectTextOnFocus={this.props.selectTextOnFocus}
@@ -891,8 +956,9 @@ InputSpinner.propTypes = {
 	onIncrease: PropTypes.func,
 	onDecrease: PropTypes.func,
 	onSubmit: PropTypes.func,
-	onLongPressStartTimeout: PropTypes.number,
-	onLongPressTimeout: PropTypes.number,
+	onLongPressDelay: PropTypes.number,
+	onLongPressSpeed: PropTypes.number,
+	debounceTime: PropTypes.number,
 	buttonLeftDisabled: PropTypes.bool,
 	buttonRightDisabled: PropTypes.bool,
 	buttonLeftText: PropTypes.string,
@@ -948,8 +1014,9 @@ InputSpinner.defaultProps = {
 	returnKeyType: null,
 	width: 150,
 	height: 50,
-	onLongPressStartTimeout: defaultLongPressStartTimeout,
-	onLongPressTimeout: defaultLongPressTimeout,
+	onLongPressDelay: defaultLongPressDelay,
+	onLongPressSpeed: defaultLongPressSpeed,
+	debounceTime: defaultDebounceTime,
 	buttonLeftDisabled: false,
 	buttonRightDisabled: false,
 	buttonLeftText: null,

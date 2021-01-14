@@ -1,13 +1,4 @@
 /**
- * Is string empty
- * @param str
- * @returns {boolean|boolean}
- */
-export const isStringEmpty = (str) => {
-	return String(str) === "";
-};
-
-/**
  * Is empty
  * @param x
  * @returns {boolean}
