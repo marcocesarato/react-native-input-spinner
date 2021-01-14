@@ -35,10 +35,8 @@ class InputSpinner extends Component {
 			spinnerStep = 1;
 		}
 
-		const min =
-			this.props.min != null ? this.parseNum(this.props.min) : null;
-		const max =
-			this.props.max != null ? this.parseNum(this.props.max) : null;
+		const min = this.props.min != null ? this.parseNum(this.props.min) : null;
+		const max = this.props.max != null ? this.parseNum(this.props.max) : null;
 
 		let initialValue =
 			this.props.initialValue != null && !isNaN(12)
@@ -72,19 +70,13 @@ class InputSpinner extends Component {
 		// Parse Min
 		if (this.props.min !== prevProps.min) {
 			this.setState({
-				min:
-					this.props.min != null
-						? this.parseNum(this.props.min)
-						: null,
+				min: this.props.min != null ? this.parseNum(this.props.min) : null,
 			});
 		}
 		// Parse Max
 		if (this.props.max !== prevProps.max) {
 			this.setState({
-				max:
-					this.props.max != null
-						? this.parseNum(this.props.max)
-						: null,
+				max: this.props.max != null ? this.parseNum(this.props.max) : null,
 			});
 		}
 		// Parse Step
@@ -198,10 +190,8 @@ class InputSpinner extends Component {
 	 */
 	parseNum(num) {
 		num = String(num).replace(
-			!isEmpty(this.props.decimalSeparator)
-				? this.props.decimalSeparator
-				: ".",
-			"."
+			!isEmpty(this.props.decimalSeparator) ? this.props.decimalSeparator : ".",
+			".",
 		);
 		if (this.typeDecimal()) {
 			num = parseFloat(num);
@@ -226,9 +216,7 @@ class InputSpinner extends Component {
 			value = this.parseNum(value).toFixed(1).replace(/0+$/, "");
 		} else if (this.typeDecimal()) {
 			value = String(
-				this.parseNum(
-					this.parseNum(value).toFixed(this.props.precision)
-				)
+				this.parseNum(this.parseNum(value).toFixed(this.props.precision)),
 			);
 		} else {
 			value = String(this.parseNum(value));
@@ -240,7 +228,7 @@ class InputSpinner extends Component {
 					".",
 					!isEmpty(this.props.decimalSeparator)
 						? this.props.decimalSeparator
-						: "."
+						: ".",
 			  );
 	}
 
@@ -284,8 +272,7 @@ class InputSpinner extends Component {
 	 */
 	increase() {
 		if (this._isDisabledButtonRight()) return;
-		let num =
-			this.parseNum(this.state.value) + this.parseNum(this.state.step);
+		let num = this.parseNum(this.state.value) + this.parseNum(this.state.step);
 		if (this.props.onIncrease) {
 			let increased_num = num;
 			if (this.maxReached(num)) {
@@ -308,8 +295,7 @@ class InputSpinner extends Component {
 	 */
 	decrease() {
 		if (this._isDisabledButtonLeft()) return;
-		let num =
-			this.parseNum(this.state.value) - this.parseNum(this.state.step);
+		let num = this.parseNum(this.state.value) - this.parseNum(this.state.step);
 		if (this.props.onDecrease) {
 			let decreased_num = num;
 			if (this.minReached(num)) {
@@ -564,9 +550,7 @@ class InputSpinner extends Component {
 	 */
 	_getColorLeftButton() {
 		const color = this._getColor();
-		return this.props.colorLeft !== defaultColor
-			? this.props.colorLeft
-			: color;
+		return this.props.colorLeft !== defaultColor ? this.props.colorLeft : color;
 	}
 
 	/**
@@ -590,9 +574,7 @@ class InputSpinner extends Component {
 		return [
 			Style.container,
 			{
-				borderColor: this.props.showBorder
-					? this._getColor()
-					: "transparent",
+				borderColor: this.props.showBorder ? this._getColor() : "transparent",
 				width: this.props.width,
 			},
 			this.props.style,
@@ -611,9 +593,7 @@ class InputSpinner extends Component {
 				color: this.props.textColor,
 				fontSize: this.props.fontSize,
 				fontFamily: this.props.fontFamily,
-				borderColor: this.props.showBorder
-					? this._getColor()
-					: "transparent",
+				borderColor: this.props.showBorder ? this._getColor() : "transparent",
 				backgroundColor: this.props.background,
 				height: this.props.height,
 			},
@@ -702,10 +682,7 @@ class InputSpinner extends Component {
 	_renderLeftButtonElement() {
 		if (this.props.buttonLeftImage) {
 			return this.props.buttonLeftImage;
-		} else if (
-			this._isLeftButtonPressed() &&
-			this.props.buttonPressLeftImage
-		) {
+		} else if (this._isLeftButtonPressed() && this.props.buttonPressLeftImage) {
 			return this.props.buttonPressLeftImage;
 		} else {
 			const text =
@@ -820,9 +797,7 @@ class InputSpinner extends Component {
 	 */
 	render() {
 		return (
-			<View
-				style={this._getContainerStyle()}
-				{...this.props.containerProps}>
+			<View style={this._getContainerStyle()} {...this.props.containerProps}>
 				{this._renderLeftButton()}
 
 				{this.props.prepend}

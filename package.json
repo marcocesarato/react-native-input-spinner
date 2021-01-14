@@ -4,6 +4,7 @@
 	"description": "React native input with increase and decrease buttons",
 	"main": "index.js",
 	"scripts": {
+		"prettify": "prettier --write './*.{ts,json,md,yml,js}'",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
@@ -26,18 +27,6 @@
 		"integer",
 		"decimal"
 	],
-	"prettier": {
-		"tabWidth": 4,
-		"useTabs": true,
-		"semi": true,
-		"singleQuote": false,
-		"trailingComma": "es5",
-		"bracketSpacing": false,
-		"jsxBracketSameLine": true,
-		"arrowParens": "always",
-		"requirePragma": false,
-		"insertPragma": false
-	},
 	"peerDependencies": {
 		"react": "*",
 		"react-native": "*"

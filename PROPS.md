@@ -30,7 +30,7 @@
 | `colorRight`            | Custom color of the Spinner right button                                                | String           | `#3E525F`        |                                   |
 | `color`                 | Custom color of the Spinner                                                             | String           | `#3E525F`        |                                   |
 | `disabled`              | Disable the Spinner or not                                                              | Boolean          | `false`          |                                   |
-| `editable`              | Set if input number field is editable or not                                             | Boolean          | `true`           |                                   |
+| `editable`              | Set if input number field is editable or not                                            | Boolean          | `true`           |                                   |
 | `fontFamily`            | Custom fontFamily of the text input of the Spinner                                      | String           | System Default   |                                   |
 | `fontSize`              | Custom fontSize of the text input of the Spinner                                        | Number           | `14`             |                                   |
 | `height`                | Custom height of the Spinner                                                            | Number           | `50`             |                                   |
