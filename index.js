@@ -15,6 +15,14 @@ const defaultColor = "#3E525F";
  * @author Marco Cesarato <cesarato.developer@gmail.com>
  */
 class InputSpinner extends Component {
+	// Timers
+	increaseTimer = null;
+	decreaseTimer = null;
+
+	// Press trigger timeouts
+	pressStartTriggerTimeout = 1000;
+	pressTriggerTimeout = 200;
+
 	/**
 	 * Constructor
 	 * @param props
@@ -262,6 +270,15 @@ class InputSpinner extends Component {
 		);
 	}
 
+	clearTimers() {
+		if (this.increaseTimer) {
+			clearTimeout(this.increaseTimer);
+		}
+		if (this.decreaseTimer) {
+			clearTimeout(this.decreaseTimer);
+		}
+	}
+
 	/**
 	 * Increase
 	 */
@@ -276,6 +293,13 @@ class InputSpinner extends Component {
 			}
 			this.props.onIncrease(increased_num);
 		}
+
+		let wait = this.pressTriggerTimeout;
+		if (this.increaseTimer === null) {
+			wait = this.pressStartTriggerTimeout;
+		}
+
+		this.increaseTimer = setTimeout(this.increase, wait);
 		this.onChange(num);
 	}
 
@@ -293,6 +317,13 @@ class InputSpinner extends Component {
 			}
 			this.props.onDecrease(decreased_num);
 		}
+
+		let wait = this.pressTriggerTimeout;
+		if (this.increaseTimer === null) {
+			wait = this.pressStartTriggerTimeout;
+		}
+
+		this.decreaseTimer = setTimeout(this.decrease, wait);
 		this.onChange(num);
 	}
 
@@ -739,7 +770,8 @@ class InputSpinner extends Component {
 				onShowUnderlay={this.onShowUnderlay.bind(this, "left")}
 				disabled={this._isDisabledButtonLeft()}
 				style={buttonStyle}
-				onPress={() => this.decrease()}
+				onPressIn={this.decrease}
+				onPressOut={this.clearTimers}
 				{...this.props.leftButtonProps}>
 				{this._renderLeftButtonElement()}
 			</TouchableHighlight>
@@ -774,7 +806,8 @@ class InputSpinner extends Component {
 				onShowUnderlay={this.onShowUnderlay.bind(this, "right")}
 				disabled={this._isDisabledButtonRight()}
 				style={buttonStyle}
-				onPress={() => this.increase()}
+				onPressIn={this.increase}
+				onPressOut={this.clearTimers}
 				{...this.props.rightButtonProps}>
 				{this._renderRightButtonElement()}
 			</TouchableHighlight>
