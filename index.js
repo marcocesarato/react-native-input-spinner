@@ -93,7 +93,7 @@ class InputSpinner extends Component {
 	 * On value change
 	 * @param num
 	 */
-	onChange(num) {
+	async onChange(num) {
 		if (this.props.disabled) return;
 		const current_value = this.state.value;
 		const separator = !isEmpty(this.props.decimalSeparator)
@@ -113,17 +113,21 @@ class InputSpinner extends Component {
 					this.props.onMax(this.state.max);
 				}
 			}
-			this.setState({value: num});
 		} else {
 			if (this.props.onMin) {
 				this.props.onMin(this.state.min);
 			}
 			num = this.state.min;
-			this.setState({value: num});
 		}
 		if (current_value !== num && this.props.onChange) {
-			this.props.onChange(num);
+			const res = await this.props.onChange(num);
+			if (res === false) {
+				return;
+			} else if (this.isNumeric(res)) {
+				num = this.parseNum(res);
+			}
 		}
+		this.setState({value: num});
 	}
 
 	/**
@@ -270,7 +274,7 @@ class InputSpinner extends Component {
 	/**
 	 * Increase
 	 */
-	increase() {
+	async increase() {
 		if (this._isDisabledButtonRight()) return;
 		let num = this.parseNum(this.state.value) + this.parseNum(this.state.step);
 		if (this.props.onIncrease) {
@@ -278,7 +282,12 @@ class InputSpinner extends Component {
 			if (this.maxReached(num)) {
 				increased_num = this.state.max;
 			}
-			this.props.onIncrease(increased_num);
+			const res = await this.props.onIncrease(increased_num);
+			if (res === false) {
+				return;
+			} else if (this.isNumeric(res)) {
+				num = this.parseNum(res);
+			}
 		}
 
 		let wait = this.pressTriggerTimeout;
@@ -293,7 +302,7 @@ class InputSpinner extends Component {
 	/**
 	 * Decrease
 	 */
-	decrease() {
+	async decrease() {
 		if (this._isDisabledButtonLeft()) return;
 		let num = this.parseNum(this.state.value) - this.parseNum(this.state.step);
 		if (this.props.onDecrease) {
@@ -301,7 +310,12 @@ class InputSpinner extends Component {
 			if (this.minReached(num)) {
 				decreased_num = this.state.min;
 			}
-			this.props.onDecrease(decreased_num);
+			const res = await this.props.onDecrease(decreased_num);
+			if (res === false) {
+				return;
+			} else if (this.isNumeric(res)) {
+				num = this.parseNum(res);
+			}
 		}
 
 		let wait = this.pressTriggerTimeout;
@@ -311,6 +325,20 @@ class InputSpinner extends Component {
 
 		this.decreaseTimer = setTimeout(this.decrease, wait);
 		this.onChange(num);
+	}
+
+	/**
+	 * Detect if is a numeric value
+	 * @param num
+	 * @returns {boolean}
+	 */
+	isNumeric(num) {
+		return (
+			num !== null &&
+			num !== false &&
+			!isNaN(parseFloat(num)) &&
+			!isNaN(num - 0)
+		);
 	}
 
 	/**
@@ -574,6 +602,7 @@ class InputSpinner extends Component {
 		return [
 			Style.container,
 			{
+				flex: 1,
 				borderColor: this.props.showBorder ? this._getColor() : "transparent",
 				width: this.props.width,
 			},
@@ -596,6 +625,7 @@ class InputSpinner extends Component {
 				borderColor: this.props.showBorder ? this._getColor() : "transparent",
 				backgroundColor: this.props.background,
 				height: this.props.height,
+				flex: 1,
 			},
 			this.props.inputStyle,
 		];

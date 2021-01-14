@@ -214,7 +214,7 @@ Contributions are welcome and are greatly appreciated! Every little bit helps, a
 
 <p align="center">
     <br>
-    <a href="https://nodei.co/npm/react-native-input=spinner/" rel="nofollow">
+    <a href="https://nodei.co/npm/react-native-input-spinner/" rel="nofollow">
         <img align="center" src="https://nodei.co/npm/react-native-input-spinner.png?downloads=true&downloadRank=true" width="384">
     </a>
 </p>
