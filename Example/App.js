@@ -17,7 +17,7 @@ export default class App extends Component {
 		super(props);
 		let data = [];
 		for (var i = 0; i < 10; i++) {
-			data.push({key: i, value: Math.floor(Math.random() * 100) + 1});
+			data.push({key: String(i), value: Math.floor(Math.random() * 100) + 1});
 		}
 		this.state = {
 			value: 1,
