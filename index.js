@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Text, TextInput, TouchableHighlight, View} from "react-native";
 import PropTypes from "prop-types";
 import {Style} from "./style";
-import {isEmpty, isStringEmpty, debounce} from "./utils";
+import {debounce, isNumeric, isEmpty, isStringEmpty} from "./utils";
 
 /**
  * Default Color
@@ -123,7 +123,7 @@ class InputSpinner extends Component {
 			const res = await this.props.onChange(num);
 			if (res === false) {
 				return;
-			} else if (this.isNumeric(res)) {
+			} else if (isNumeric(res)) {
 				num = this.parseNum(res);
 			}
 		}
@@ -285,7 +285,7 @@ class InputSpinner extends Component {
 			const res = await this.props.onIncrease(increased_num);
 			if (res === false) {
 				return;
-			} else if (this.isNumeric(res)) {
+			} else if (isNumeric(res)) {
 				num = this.parseNum(res);
 			}
 		}
@@ -313,7 +313,7 @@ class InputSpinner extends Component {
 			const res = await this.props.onDecrease(decreased_num);
 			if (res === false) {
 				return;
-			} else if (this.isNumeric(res)) {
+			} else if (isNumeric(res)) {
 				num = this.parseNum(res);
 			}
 		}
@@ -325,20 +325,6 @@ class InputSpinner extends Component {
 
 		this.decreaseTimer = setTimeout(this.decrease, wait);
 		this.onChange(num);
-	}
-
-	/**
-	 * Detect if is a numeric value
-	 * @param num
-	 * @returns {boolean}
-	 */
-	isNumeric(num) {
-		return (
-			num !== null &&
-			num !== false &&
-			!isNaN(parseFloat(num)) &&
-			!isNaN(num - 0)
-		);
 	}
 
 	/**

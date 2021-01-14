@@ -55,3 +55,18 @@ export const debounce = (callback, wait, context = null) => {
 		timeout = setTimeout(() => callback.apply(context, args), wait);
 	};
 };
+
+/**
+ * Detect if is a numeric value
+ * @param num
+ * @returns {boolean}
+ */
+export const isNumeric = (num) => {
+	return (
+		num !== "" &&
+		num !== null &&
+		num !== false &&
+		!isNaN(parseFloat(num)) &&
+		!isNaN(num - 0)
+	);
+};
