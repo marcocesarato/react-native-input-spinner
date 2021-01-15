@@ -1040,4 +1040,4 @@ InputSpinner.defaultProps = {
 	rightButtonProps: {},
 };
 
-export {InputSpinner};
+export default InputSpinner;
