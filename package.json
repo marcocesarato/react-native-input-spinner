@@ -3,6 +3,7 @@
 	"version": "1.4.0",
 	"description": "React native input with increase and decrease buttons",
 	"main": "./src/index.js",
+	"types": "./src/index.d.ts",
 	"scripts": {
 		"prettify": "prettier --write './src/*.{ts,json,md,yml,js}'",
 		"test": "echo \"Error: no test specified\" && exit 1"
@@ -27,10 +28,6 @@
 		"integer",
 		"decimal"
 	],
-	"peerDependencies": {
-		"react": "*",
-		"react-native": "*"
-	},
 	"publishConfig": {
 		"registry": "https://registry.npmjs.org/"
 	},
@@ -41,6 +38,12 @@
 	},
 	"homepage": "https://github.com/marcocesarato/react-native-input-spinner#readme",
 	"license": "GPL-3.0-or-later",
+	"peerDependencies": {
+		"@types/react": "*",
+		"@types/react-native": "*",
+		"react": "*",
+		"react-native": "*"
+	},
 	"dependencies": {
 		"prop-types": "^15.7.2"
 	},
