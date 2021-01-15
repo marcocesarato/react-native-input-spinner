@@ -47,6 +47,8 @@
 | `onFocus`               | Callback that is called when the text input is focused.                                 | (e) => { ... }   |
 | `onIncrease`            | When increase button is clicked get value increased                                     | Function         |                  | `(increased) => { ... }`          |
 | `onKeyPress`            | Callback that is called when a key is pressed.                                          | (e) => { ... }   |
+| `onLongPressDelay`      | Delay time before start the `onLong` event and increase or decrease and continually     | Number           | `750 `           |                                   |
+| `onLongPressSpeed`      | Speed of increase or decrease and continually                                           | Number           | `7`              | (value from `1` to `10`)          |
 | `onMax`                 | When max is reached get max number permitted                                            | Function         |                  | `(max) => { ... }`                |
 | `onMin`                 | When min is reached get min number permitted                                            | Function         |                  | `(min) => { ... }`                |
 | `onSubmitEditing`       | Callback that is called when the text input's submit button is pressed                  | (e) => { ... }   |
@@ -65,5 +67,6 @@
 | `style`                 | Container style                                                                         | Object           |                  | Could overwrite other props       |
 | `textColor`             | Custom number color                                                                     | String           | `#000000`        |                                   |
 | `type`                  | Type of spinner                                                                         | String           | `int`            | Can be `int` or `real`/`float`... |
+| `typingTime`            | Time before debounce and trigger `onChange` event                                       | Number           | `750`            |                                   |
 | `value`                 | Controlled value of the Spinner                                                         | String<br>Number | `0`              |                                   |
 | `width`                 | Custom width of the Spinner                                                             | Number           | `150`            |                                   |

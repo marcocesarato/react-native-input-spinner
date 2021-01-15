@@ -112,6 +112,8 @@ Check the "[Props List](PROPS.md)" file to have the complete list of component p
 | `maxLength`            | Limits the maximum number of characters that can be entered.                            | Number           |         |                                   |
 | `max`                  | Max number permitted                                                                    | String<br>Number | `null`  |
 | `min`                  | Min value permitted                                                                     | String<br>Number | `0`     |
+| `onLongPressDelay`     | Delay time before start the `onLong` event and increase or decrease and continually     | Number           | `750 `  |                                   |
+| `onLongPressSpeed`     | Speed of increase or decrease and continually                                           | Number           | `7`     | (value from `1` to `10`)          |
 | `placeholder`          | The string that will be rendered when text input value is equal to zero                 | String           | `null`  |                                   |
 | `placeholderTextColor` | The text color of the placeholder string.                                               | String           | `null`  |                                   |
 | `precision`            | Max numbers permitted after comma                                                       | Integer          | `2`     |
@@ -122,6 +124,7 @@ Check the "[Props List](PROPS.md)" file to have the complete list of component p
 | `selectTextOnFocus`    | If `true`, all text will automatically be selected on focus.                            | Bool             | `false` |                                   |
 | `selectionColor`       | The highlight and cursor color of the text input.                                       | String           | `null`  |                                   |
 | `step`                 | Value to increment or decrement the current spinner value                               | String<br>Number | `1`     |
+| `typingTime`           | Time before debounce and trigger `onChange` event                                       | Number           | `750`   |                                   |
 | `type`                 | Type of spinner                                                                         | String           | `int`   | Can be `int` or `real`/`float`... |
 | `value`                | Controlled value of the Spinner                                                         | String<br>Number | `0`     |                                   |
 
