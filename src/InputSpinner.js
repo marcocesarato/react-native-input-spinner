@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import {Text, TextInput, TouchableHighlight, View} from "react-native";
 import PropTypes from "prop-types";
-import {Style} from "./style";
-import {debounce, isNumeric, isEmpty} from "./utils";
+import {Style} from "./Style";
+import {debounce, isNumeric, isEmpty} from "./Utils";
 
 /**
  * Default constants
@@ -17,16 +17,16 @@ const defaultTypingTime = 500;
  * @author Marco Cesarato <cesarato.developer@gmail.com>
  */
 class InputSpinner extends Component {
-	// Timers
-	increaseTimer = null;
-	decreaseTimer = null;
-
 	/**
 	 * Constructor
 	 * @param props
 	 */
 	constructor(props) {
 		super(props);
+
+		// Timers
+		this.increaseTimer = null;
+		this.decreaseTimer = null;
 
 		let spinnerStep = this.parseNum(this.props.step);
 		if (!this.typeDecimal() && spinnerStep < 1) {
@@ -1040,4 +1040,4 @@ InputSpinner.defaultProps = {
 	rightButtonProps: {},
 };
 
-export default InputSpinner;
+export {InputSpinner};
