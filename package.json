@@ -4,7 +4,7 @@
 	"description": "React native input with increase and decrease buttons",
 	"main": "index.js",
 	"scripts": {
-		"prettify": "prettier --write './*.{ts,json,md,yml,js}'",
+		"prettify": "prettier --write '*.{ts,json,md,yml,js}'",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
