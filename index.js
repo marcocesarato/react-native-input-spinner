@@ -10,7 +10,7 @@ import {debounce, isNumeric, isEmpty} from "./utils";
 const defaultColor = "#3E525F";
 const defaultLongPressDelay = 750;
 const defaultLongPressSpeed = 7;
-const defaultDebounceTime = 500;
+const defaultTypingTime = 500;
 
 /**
  * Input Spinner
@@ -44,8 +44,14 @@ class InputSpinner extends Component {
 		initialValue = this.withinRange(initialValue, min, max);
 
 		// Set debounce
-		this._debounceSetMax = debounce(this._setStateMax.bind(this), this.props.debounceTime);
-		this._debounceSetMin = debounce(this._setStateMin.bind(this), this.props.debounceTime);
+		this._debounceSetMax = debounce(
+			this._setStateMax.bind(this),
+			this.props.typingTime,
+		);
+		this._debounceSetMin = debounce(
+			this._setStateMin.bind(this),
+			this.props.typingTime,
+		);
 
 		this.state = {
 			min: min,
@@ -157,7 +163,7 @@ class InputSpinner extends Component {
 			}
 		}
 		if (!isEmpty(value)) {
-			if(parsedNum === num) {
+			if (parsedNum === num) {
 				clearTimeout(this.minTimer);
 				clearTimeout(this.maxTimer);
 			}
@@ -269,11 +275,11 @@ class InputSpinner extends Component {
 		return hasPlaceholder
 			? ""
 			: value.replace(
-				".",
-				!isEmpty(this.props.decimalSeparator)
-					? this.props.decimalSeparator
-					: ".",
-			);
+					".",
+					!isEmpty(this.props.decimalSeparator)
+						? this.props.decimalSeparator
+						: ".",
+			  );
 	}
 
 	/**
@@ -281,7 +287,7 @@ class InputSpinner extends Component {
 	 * @returns {*}
 	 */
 	getPlaceholder() {
-		if(isEmpty(this.props.placeholder)) {
+		if (isEmpty(this.props.placeholder)) {
 			return this.state.min;
 		} else {
 			return this.state.placeholder;
@@ -565,8 +571,8 @@ class InputSpinner extends Component {
 		return this.maxReached()
 			? this._getColorMax()
 			: this.minReached()
-				? this._getColorMin()
-				: this.props.color;
+			? this._getColorMin()
+			: this.props.color;
 	}
 
 	/**
@@ -606,8 +612,8 @@ class InputSpinner extends Component {
 		return this.maxReached()
 			? this._getColorMax()
 			: this.minReached()
-				? this._getColorMin()
-				: color;
+			? this._getColorMin()
+			: color;
 	}
 
 	/**
@@ -960,7 +966,7 @@ InputSpinner.propTypes = {
 	onSubmit: PropTypes.func,
 	onLongPressDelay: PropTypes.number,
 	onLongPressSpeed: PropTypes.number,
-	debounceTime: PropTypes.number,
+	typingTime: PropTypes.number,
 	buttonLeftDisabled: PropTypes.bool,
 	buttonRightDisabled: PropTypes.bool,
 	buttonLeftText: PropTypes.string,
@@ -1018,7 +1024,7 @@ InputSpinner.defaultProps = {
 	height: 50,
 	onLongPressDelay: defaultLongPressDelay,
 	onLongPressSpeed: defaultLongPressSpeed,
-	debounceTime: defaultDebounceTime,
+	typingTime: defaultTypingTime,
 	buttonLeftDisabled: false,
 	buttonRightDisabled: false,
 	buttonLeftText: null,
