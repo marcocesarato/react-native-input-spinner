@@ -97,7 +97,7 @@ class InputSpinner extends Component {
 	 * @private
 	 */
 	_setStateMin(callback = null) {
-		return this.setState({value: this.state.max}, callback);
+		return this.setState({value: this.state.min}, callback);
 	}
 
 	/**
@@ -338,8 +338,9 @@ class InputSpinner extends Component {
 	 */
 	async increase() {
 		if (this._isDisabledButtonRight()) return;
-		let num = this.parseNum(this.state.value) + this.parseNum(this.state.step);
-		if (this.maxReached(num)) {
+		let currentValue = this.parseNum(this.state.value);
+		let num = currentValue + this.parseNum(this.state.step);
+		if (this.maxReached(currentValue)) {
 			return;
 		}
 		if (this.props.onIncrease) {
@@ -366,8 +367,9 @@ class InputSpinner extends Component {
 	 */
 	async decrease() {
 		if (this._isDisabledButtonLeft()) return;
-		let num = this.parseNum(this.state.value) - this.parseNum(this.state.step);
-		if (this.minReached(num)) {
+		let currentValue = this.parseNum(this.state.value);
+		let num = currentValue - this.parseNum(this.state.step);
+		if (this.minReached(currentValue)) {
 			return;
 		}
 		if (this.props.onDecrease) {
