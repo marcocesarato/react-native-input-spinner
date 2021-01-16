@@ -5,7 +5,7 @@
 	"main": "./src/index.js",
 	"types": "./src/index.d.ts",
 	"scripts": {
-		"prettify": "prettier --write './src/*.{ts,json,md,yml,js}'",
+		"prettify": "prettier --write ./src/*.{ts,json,md,yml,js} && prettier --write ./*.{ts,json,md,yml,js}",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
