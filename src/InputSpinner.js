@@ -7,9 +7,9 @@ import {debounce, isNumeric, isEmpty} from "./Utils";
 /**
  * Default constants
  */
+const defaultSpeed = 2.5;
+const defaultAccelerationDelay = 1000;
 const defaultColor = "#3E525F";
-const defaultLongPressDelay = 750;
-const defaultLongPressSpeed = 5;
 const defaultTypingTime = 500;
 
 /**
@@ -27,6 +27,7 @@ class InputSpinner extends Component {
 		// Timers
 		this.increaseTimer = null;
 		this.decreaseTimer = null;
+		this.holdTime = null;
 
 		let spinnerStep = this.parseNum(this.props.step);
 		if (!this.typeDecimal() && spinnerStep < 1) {
@@ -152,14 +153,22 @@ class InputSpinner extends Component {
 	}
 
 	/**
+	 * Clear on change timers
+	 * @private
+	 */
+	_clearOnChangeTimers() {
+		this._clearMaxTimer();
+		this._clearMinTimer();
+	}
+
+	/**
 	 * Clear all timers
 	 * @private
 	 */
-	clearTimers() {
+	_clearTimers() {
+		this._clearOnChangeTimers();
 		this._clearIncreaseTimer();
 		this._clearDecreaseTimer();
-		this._clearMaxTimer();
-		this._clearMinTimer();
 	}
 
 	/**
@@ -167,7 +176,7 @@ class InputSpinner extends Component {
 	 * @param value
 	 */
 	async onChange(value) {
-		this.clearTimers();
+		this._clearOnChangeTimers();
 
 		let num = value;
 		let parsedNum = value;
@@ -188,23 +197,34 @@ class InputSpinner extends Component {
 		num = parsedNum = this.parseNum(String(num).replace(/^0+/, "")) || 0;
 		if (!this.minReached(num)) {
 			if (this.maxReached(num)) {
-				parsedNum = this.state.max;
-				if (!isEmpty(value)) {
-					this.maxTimer = this._debounceSetMax();
-				}
-				if (this.props.onMax) {
-					this.props.onMax(this.state.max);
+				if (this.maxReached(num)) {
+					parsedNum = this.state.max;
+					if (!isEmpty(value)) {
+						this.maxTimer = this._debounceSetMax();
+					}
+					if (this.props.onMax) {
+						this.props.onMax(this.state.max);
+					}
 				}
 			}
 		} else {
-			parsedNum = this.state.min;
-			if (!isEmpty(value)) {
+			if (!isEmpty(value) && !this.isEmptied()) {
+				parsedNum = this.state.min;
 				this.minTimer = this._debounceSetMin();
+			} else if (this.isEmptied()) {
+				parsedNum = null;
+			} else {
+				parsedNum = this.state.min;
 			}
 			if (this.props.onMin) {
-				this.props.onMin(this.state.min);
+				this.props.onMin(parsedNum);
 			}
 		}
+
+		if (isEmpty(value) && this.isEmptied()) {
+			parsedNum = value;
+		}
+
 		if (current_value !== num && this.props.onChange) {
 			const res = await this.props.onChange(parsedNum);
 			if (!isEmpty(value)) {
@@ -220,6 +240,15 @@ class InputSpinner extends Component {
 		} else {
 			this.setState({value: value});
 		}
+	}
+
+	/**
+	 * On buttons press out
+	 * @param e
+	 */
+	onPressOut(e) {
+		this._clearTimers();
+		this._resetHoldTime();
 	}
 
 	/**
@@ -342,8 +371,6 @@ class InputSpinner extends Component {
 			return "";
 		} else {
 			return String(this.state.min);
-		} else {
-			return this.props.placeholder;
 		}
 	}
 
@@ -374,11 +401,56 @@ class InputSpinner extends Component {
 	}
 
 	/**
-	 * Get time to wait before increase/decrease on long press
-	 * @returns {number}
+	 * Update holding time
+	 * @private
 	 */
-	getLongPressWaitingTime() {
-		return 1000 / (this.withinRange(this.props.onLongPressSpeed, 1, 10) * 2);
+	_startHoldTime() {
+		this.holdTime = new Date().getTime();
+	}
+
+	/**
+	 * Get the holding time
+	 * @private
+	 */
+	_getHoldTime() {
+		if (isEmpty(this.holdTime)) {
+			return 0;
+		}
+		let now = new Date().getTime();
+		return now - this.holdTime;
+	}
+
+	/**
+	 * Reset holding time
+	 * @private
+	 */
+	_resetHoldTime() {
+		this.holdTime = null;
+	}
+
+	/**
+	 * Find the interval between changing values after a button has been held for a certain amount of time
+	 * @returns {number}
+	 * @author Tom Hardern <https://gist.github.com/taeh98/f709451457400818094d802cd33694d5>
+	 * @private
+	 */
+	_getHoldChangeInterval() {
+		const MIN_HOLD_CHANGE_INTERVAL = 10; // the minimum time interval between increases or decreases in value when holding a button
+		const HOLD_CHANGE_ACCELERATION_FACTOR = this.props.acceleration; // a factor that controls how fast the speed of the change in value will accelerate while a button is held
+		const HOLD_CHANGE_ACCELERATION_DELAY = this.props.accelerationDelay; // how long to wait after a button is being held before the acceleration of it speed going through values starts
+		const TIME_HOLDING_BUTTON_FOR_MIN_CHANGE_INTERVAL =
+			(Math.exp(MIN_HOLD_CHANGE_INTERVAL / -1) +
+				HOLD_CHANGE_ACCELERATION_DELAY) /
+			HOLD_CHANGE_ACCELERATION_FACTOR;
+		const HOLD_TIME = this._getHoldTime(); // time on hold in ms
+
+		return HOLD_TIME >= TIME_HOLDING_BUTTON_FOR_MIN_CHANGE_INTERVAL
+			? MIN_HOLD_CHANGE_INTERVAL // if the button has been held for long enough, return the minimum interval
+			: -1 *
+					Math.log(
+						HOLD_CHANGE_ACCELERATION_FACTOR * HOLD_TIME -
+							HOLD_CHANGE_ACCELERATION_DELAY,
+					); // otherwise calculate with a logarithm => an exponential increase in speed
 	}
 
 	/**
@@ -401,9 +473,10 @@ class InputSpinner extends Component {
 			}
 		}
 
-		let wait = this.getLongPressWaitingTime();
+		let wait = this._getHoldChangeInterval();
 		if (this.increaseTimer === null) {
-			wait = this.props.onLongPressDelay;
+			this._startHoldTime();
+			wait = this.props.accelerationDelay;
 		} else {
 			if (this.props.onLongPress) {
 				await this.props.onLongPress(num);
@@ -434,9 +507,10 @@ class InputSpinner extends Component {
 			}
 		}
 
-		let wait = this.getLongPressWaitingTime();
+		let wait = this._getHoldChangeInterval();
 		if (this.decreaseTimer === null) {
-			wait = this.props.onLongPressDelay;
+			this._startHoldTime();
+			wait = this.props.accelerationDelay;
 		} else {
 			if (this.props.onLongPress) {
 				await this.props.onLongPress(num);
@@ -892,7 +966,7 @@ class InputSpinner extends Component {
 				disabled={this._isDisabledButtonLeft()}
 				style={buttonStyle}
 				onPressIn={this.decrease.bind(this)}
-				onPressOut={this.clearTimers.bind(this)}
+				onPressOut={this.onPressOut.bind(this)}
 				{...this.props.leftButtonProps}>
 				{this._renderLeftButtonElement()}
 			</TouchableHighlight>
@@ -928,7 +1002,7 @@ class InputSpinner extends Component {
 				disabled={this._isDisabledButtonRight()}
 				style={buttonStyle}
 				onPressIn={this.increase.bind(this)}
-				onPressOut={this.clearTimers.bind(this)}
+				onPressOut={this.onPressOut.bind(this)}
 				{...this.props.rightButtonProps}>
 				{this._renderRightButtonElement()}
 			</TouchableHighlight>
