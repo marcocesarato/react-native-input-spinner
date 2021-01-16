@@ -165,13 +165,13 @@ export default class App extends Component {
 					</View>
 					<View style={styles.col}>
 						<Text style={styles.text}>
-							Min & Max colors (min 0, max 2)
+							Min & Max colors (min 5, max 10)
 						</Text>
 						<InputSpinner
 							value={this.state.value + 1}
 							style={styles.spinner}
-							min={0}
-							max={2}
+							min={5}
+							max={10}
 							colorMax={"#f04048"}
 							colorMin={"#82cc62"}
 						/>
@@ -321,6 +321,20 @@ export default class App extends Component {
 							rounded={false}
 							showBorder={true}
 							editable={false}
+							onChange={(value) => {
+								this.setState({value: value});
+							}}
+						/>
+					</View>
+					<View style={styles.col}>
+						<Text style={styles.text}>Emptied ({this.state.value == null ? "null" : this.state.value})</Text>
+						<InputSpinner
+							style={styles.spinner}
+							step={1}
+							max={10}
+							min={1}
+							emptied={true}
+							value={this.state.value}
 							onChange={(value) => {
 								this.setState({value: value});
 							}}
