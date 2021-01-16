@@ -288,9 +288,9 @@ class InputSpinner extends Component {
 	 */
 	getPlaceholder() {
 		if (isEmpty(this.props.placeholder)) {
-			return this.state.min;
+			return String(this.state.min);
 		} else {
-			return this.state.placeholder;
+			return this.props.placeholder;
 		}
 	}
 
