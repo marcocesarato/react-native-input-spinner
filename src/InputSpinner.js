@@ -103,7 +103,7 @@ class InputSpinner extends Component {
 	 * @private
 	 */
 	_setStateMin(callback = null) {
-		return this.setState({value: this.state.min}, callback);
+		return this.setState({value: ""}, callback);
 	}
 
 	/**
@@ -116,10 +116,59 @@ class InputSpinner extends Component {
 	}
 
 	/**
+	 * Clear min timer
+	 * @private
+	 */
+	_clearMinTimer() {
+		clearTimeout(this.maxTimer);
+		this.maxTimer = null;
+	}
+
+	/**
+	 * Clear max timer
+	 * @private
+	 */
+	_clearMaxTimer() {
+		clearTimeout(this.minTimer);
+		this.minTimer = null;
+	}
+
+	/**
+	 * Clear increase timer
+	 * @private
+	 */
+	_clearIncreaseTimer() {
+		clearTimeout(this.increaseTimer);
+		this.increaseTimer = null;
+	}
+
+	/**
+	 * Clear decrease timer
+	 * @private
+	 */
+	_clearDecreaseTimer() {
+		clearTimeout(this.decreaseTimer);
+		this.decreaseTimer = null;
+	}
+
+	/**
+	 * Clear all timers
+	 * @private
+	 */
+	clearTimers() {
+		this._clearIncreaseTimer();
+		this._clearDecreaseTimer();
+		this._clearMaxTimer();
+		this._clearMinTimer();
+	}
+
+	/**
 	 * On value change
 	 * @param value
 	 */
 	async onChange(value) {
+		this.clearTimers();
+
 		let num = value;
 		let parsedNum = value;
 		if (isEmpty(value)) {
@@ -140,14 +189,18 @@ class InputSpinner extends Component {
 		if (!this.minReached(num)) {
 			if (this.maxReached(num)) {
 				parsedNum = this.state.max;
-				this.maxTimer = this._debounceSetMax();
+				if (!isEmpty(value)) {
+					this.maxTimer = this._debounceSetMax();
+				}
 				if (this.props.onMax) {
 					this.props.onMax(this.state.max);
 				}
 			}
 		} else {
 			parsedNum = this.state.min;
-			this.minTimer = this._debounceSetMin();
+			if (!isEmpty(value)) {
+				this.minTimer = this._debounceSetMin();
+			}
 			if (this.props.onMin) {
 				this.props.onMin(this.state.min);
 			}
@@ -163,10 +216,6 @@ class InputSpinner extends Component {
 			}
 		}
 		if (!isEmpty(value)) {
-			if (parsedNum === num) {
-				clearTimeout(this.minTimer);
-				clearTimeout(this.maxTimer);
-			}
 			this.setState({value: num});
 		} else {
 			this.setState({value: value});
@@ -318,17 +367,6 @@ class InputSpinner extends Component {
 			type === "decimal" ||
 			type === "real"
 		);
-	}
-
-	clearTimers() {
-		if (this.increaseTimer) {
-			clearTimeout(this.increaseTimer);
-			this.increaseTimer = null;
-		}
-		if (this.decreaseTimer) {
-			clearTimeout(this.decreaseTimer);
-			this.decreaseTimer = null;
-		}
 	}
 
 	/**

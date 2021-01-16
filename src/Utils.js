@@ -33,17 +33,15 @@ export const isEmpty = (x) => {
  * Debounce
  * @param callback
  * @param wait
- * @param context
  * @returns {function(...[*]=): void}
  */
-export const debounce = (callback, wait, context = null) => {
+export const debounce = (callback, wait) => {
 	let timeout;
-	return (...args) => {
-		if (context === null) {
-			context = this;
-		}
+	return function (...args) {
+		const context = this;
 		clearTimeout(timeout);
 		timeout = setTimeout(() => callback.apply(context, args), wait);
+		return timeout;
 	};
 };
 
