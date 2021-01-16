@@ -362,6 +362,10 @@ class InputSpinner extends Component {
 		let wait = this.getLongPressWaitingTime();
 		if (this.increaseTimer === null) {
 			wait = this.props.onLongPressDelay;
+		} else {
+			if (this.props.onLongPress) {
+				await this.props.onLongPress(num);
+			}
 		}
 
 		this.increaseTimer = setTimeout(this.increase.bind(this), wait);
@@ -391,6 +395,10 @@ class InputSpinner extends Component {
 		let wait = this.getLongPressWaitingTime();
 		if (this.decreaseTimer === null) {
 			wait = this.props.onLongPressDelay;
+		} else {
+			if (this.props.onLongPress) {
+				await this.props.onLongPress(num);
+			}
 		}
 
 		this.decreaseTimer = setTimeout(this.decrease.bind(this), wait);
@@ -964,6 +972,7 @@ InputSpinner.propTypes = {
 	onIncrease: PropTypes.func,
 	onDecrease: PropTypes.func,
 	onSubmit: PropTypes.func,
+	onLongPress: PropTypes.func,
 	onLongPressDelay: PropTypes.number,
 	onLongPressSpeed: PropTypes.number,
 	typingTime: PropTypes.number,
