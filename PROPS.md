@@ -4,6 +4,7 @@
 
 | Property                | Description                                                                              | Type             | Default          | Note                              |
 | ----------------------- | ---------------------------------------------------------------------------------------- | ---------------- | ---------------- | --------------------------------- |
+| `accelerationDelay`     | Delay time before start the `onLongPress` event and increase or decrease and continually | Number           | `750 `           |                                   |
 | `activeOpacity`         | Opacity on pressed button                                                                | Number           | `0.85`           |
 | `append`                | Custom element before right button                                                       | Component        |                  |
 | `arrows`                | Labels on button will be arrows (< and >) instead of plus and minus                      | Boolean          | `false`          |
@@ -31,6 +32,7 @@
 | `color`                 | Custom color of the Spinner                                                              | String           | `#3E525F`        |                                   |
 | `disabled`              | Disable the Spinner or not                                                               | Boolean          | `false`          |                                   |
 | `editable`              | Set if input number field is editable or not                                             | Boolean          | `true`           |                                   |
+| `emptied`               | Set if input can be empty                                                                | Boolean          | `false`          |                                   |
 | `fontFamily`            | Custom fontFamily of the text input of the Spinner                                       | String           | System Default   |                                   |
 | `fontSize`              | Custom fontSize of the text input of the Spinner                                         | Number           | `14`             |                                   |
 | `height`                | Custom height of the Spinner                                                             | Number           | `50`             |                                   |
@@ -48,8 +50,6 @@
 | `onIncrease`            | When increase button is clicked get value increased                                      | Function         |                  | `(increased) => { ... }`          |
 | `onKeyPress`            | Callback that is called when a key is pressed.                                           | (e) => { ... }   |
 | `onLongPress`           | Callback that is called when holding the right or the left button                        | Function         |                  |                                   |
-| `onLongPressDelay`      | Delay time before start the `onLongPress` event and increase or decrease and continually | Number           | `750 `           |                                   |
-| `onLongPressSpeed`      | Speed of increase or decrease and continually                                            | Number           | `7`              | (value from `1` to `10`)          |
 | `onMax`                 | When max is reached get max number permitted                                             | Function         |                  | `(max) => { ... }`                |
 | `onMin`                 | When min is reached get min number permitted                                             | Function         |                  | `(min) => { ... }`                |
 | `onSubmitEditing`       | Callback that is called when the text input's submit button is pressed                   | (e) => { ... }   |
@@ -66,6 +66,7 @@
 | `showBorder`            | Show the border of the Spinner or not                                                    | Boolean          | `false`          | Use with `rounded={false}`        |
 | `step`                  | Value to increment or decrement the current spinner value                                | String<br>Number | `1`              |                                   |
 | `style`                 | Container style                                                                          | Object           |                  | Could overwrite other props       |
+| `speed`                 | Speed acceleration ratio of increase or decrease `onLongPress`                           | Number           | `7`              | (value from `1` to `10`)          |
 | `textColor`             | Custom number color                                                                      | String           | `#000000`        |                                   |
 | `type`                  | Type of spinner                                                                          | String           | `int`            | Can be `int` or `real`/`float`... |
 | `typingTime`            | Time before debounce and trigger `onChange` event                                        | Number           | `750`            |                                   |

@@ -336,7 +336,11 @@ class InputSpinner extends Component {
 	 * @returns {*}
 	 */
 	getPlaceholder() {
-		if (isEmpty(this.props.placeholder)) {
+		if (!isEmpty(this.props.placeholder)) {
+			return this.props.placeholder;
+		} else if (isEmpty(this.state.value) && this.isEmptied()) {
+			return "";
+		} else {
 			return String(this.state.min);
 		} else {
 			return this.props.placeholder;
@@ -546,6 +550,14 @@ class InputSpinner extends Component {
 	 */
 	isEditable() {
 		return !this.props.disabled && this.props.editable;
+	}
+
+	/**
+	 * If input can be empty
+	 * @returns {boolean|Boolean}
+	 */
+	isEmptied() {
+		return this.props.emptied;
 	}
 
 	/**
@@ -1011,8 +1023,9 @@ InputSpinner.propTypes = {
 	onDecrease: PropTypes.func,
 	onSubmit: PropTypes.func,
 	onLongPress: PropTypes.func,
-	onLongPressDelay: PropTypes.number,
-	onLongPressSpeed: PropTypes.number,
+	accelerationDelay: PropTypes.number,
+	speed: PropTypes.number,
+	emptied: PropTypes.bool,
 	typingTime: PropTypes.number,
 	buttonLeftDisabled: PropTypes.bool,
 	buttonRightDisabled: PropTypes.bool,
@@ -1069,8 +1082,9 @@ InputSpinner.defaultProps = {
 	returnKeyType: null,
 	width: 150,
 	height: 50,
-	onLongPressDelay: defaultLongPressDelay,
-	onLongPressSpeed: defaultLongPressSpeed,
+	accelerationDelay: defaultAccelerationDelay,
+	speed: defaultSpeed,
+	emptied: false,
 	typingTime: defaultTypingTime,
 	buttonLeftDisabled: false,
 	buttonRightDisabled: false,
