@@ -31,6 +31,7 @@ export const Style = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 		borderRadius: 999,
+		outlineWidth: 0,
 	},
 	buttonText: {
 		color: "white",
@@ -40,5 +41,6 @@ export const Style = StyleSheet.create({
 		flex: 1,
 		textAlign: "center",
 		justifyContent: "center",
+		outlineWidth: 0,
 	},
 });
