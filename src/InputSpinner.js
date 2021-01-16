@@ -7,7 +7,7 @@ import {debounce, isNumeric, isEmpty} from "./Utils";
 /**
  * Default constants
  */
-const defaultSpeed = 2.5;
+const defaultSpeed = 7;
 const defaultAccelerationDelay = 1000;
 const defaultColor = "#3E525F";
 const defaultTypingTime = 500;
@@ -176,15 +176,17 @@ class InputSpinner extends Component {
 	 * @param value
 	 */
 	async onChange(value) {
+		const isEmptyValue = isEmpty(value);
 		this._clearOnChangeTimers();
 
 		let num = value;
 		let parsedNum = value;
-		if (isEmpty(value)) {
+		if (isEmptyValue) {
 			num = this.state.min;
 		}
+
 		if (this.props.disabled) return;
-		const current_value = this.state.value;
+
 		const separator = !isEmpty(this.props.decimalSeparator)
 			? this.props.decimalSeparator
 			: ".";
@@ -199,7 +201,7 @@ class InputSpinner extends Component {
 			if (this.maxReached(num)) {
 				if (this.maxReached(num)) {
 					parsedNum = this.state.max;
-					if (!isEmpty(value)) {
+					if (!isEmptyValue) {
 						this.maxTimer = this._debounceSetMax();
 					}
 					if (this.props.onMax) {
@@ -208,26 +210,28 @@ class InputSpinner extends Component {
 				}
 			}
 		} else {
-			if (!isEmpty(value) && !this.isEmptied()) {
-				parsedNum = this.state.min;
+			if (!isEmptyValue) {
 				this.minTimer = this._debounceSetMin();
-			} else if (this.isEmptied()) {
-				parsedNum = null;
+			}
+
+			if (isEmptyValue && this.isEmptied()) {
+				num = parsedNum = null;
 			} else {
 				parsedNum = this.state.min;
 			}
+
 			if (this.props.onMin) {
 				this.props.onMin(parsedNum);
 			}
 		}
 
-		if (isEmpty(value) && this.isEmptied()) {
-			parsedNum = value;
+		if (isEmptyValue && this.isEmptied()) {
+			num = parsedNum = null;
 		}
 
-		if (current_value !== num && this.props.onChange) {
+		if (this.state.value !== num && this.props.onChange) {
 			const res = await this.props.onChange(parsedNum);
-			if (!isEmpty(value)) {
+			if (!isEmptyValue) {
 				if (res === false) {
 					return;
 				} else if (isNumeric(res)) {
@@ -235,7 +239,8 @@ class InputSpinner extends Component {
 				}
 			}
 		}
-		if (!isEmpty(value)) {
+
+		if (!isEmptyValue) {
 			this.setState({value: num});
 		} else {
 			this.setState({value: value});
@@ -435,22 +440,9 @@ class InputSpinner extends Component {
 	 * @private
 	 */
 	_getHoldChangeInterval() {
-		const MIN_HOLD_CHANGE_INTERVAL = 10; // the minimum time interval between increases or decreases in value when holding a button
-		const HOLD_CHANGE_ACCELERATION_FACTOR = this.props.acceleration; // a factor that controls how fast the speed of the change in value will accelerate while a button is held
-		const HOLD_CHANGE_ACCELERATION_DELAY = this.props.accelerationDelay; // how long to wait after a button is being held before the acceleration of it speed going through values starts
-		const TIME_HOLDING_BUTTON_FOR_MIN_CHANGE_INTERVAL =
-			(Math.exp(MIN_HOLD_CHANGE_INTERVAL / -1) +
-				HOLD_CHANGE_ACCELERATION_DELAY) /
-			HOLD_CHANGE_ACCELERATION_FACTOR;
-		const HOLD_TIME = this._getHoldTime(); // time on hold in ms
-
-		return HOLD_TIME >= TIME_HOLDING_BUTTON_FOR_MIN_CHANGE_INTERVAL
-			? MIN_HOLD_CHANGE_INTERVAL // if the button has been held for long enough, return the minimum interval
-			: -1 *
-					Math.log(
-						HOLD_CHANGE_ACCELERATION_FACTOR * HOLD_TIME -
-							HOLD_CHANGE_ACCELERATION_DELAY,
-					); // otherwise calculate with a logarithm => an exponential increase in speed
+		const minInterval = 10;
+		var time = (10 - Math.log(this.props.speed * this._getHoldTime())) * 100;
+		return time < minInterval ? minInterval : time;
 	}
 
 	/**
