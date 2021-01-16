@@ -9,7 +9,7 @@ import {debounce, isNumeric, isEmpty} from "./Utils";
  */
 const defaultColor = "#3E525F";
 const defaultLongPressDelay = 750;
-const defaultLongPressSpeed = 7;
+const defaultLongPressSpeed = 5;
 const defaultTypingTime = 500;
 
 /**
@@ -336,7 +336,7 @@ class InputSpinner extends Component {
 	 * @returns {number}
 	 */
 	getLongPressWaitingTime() {
-		return 1000 / this.withinRange(this.props.onLongPressSpeed, 1, 10);
+		return 1000 / (this.withinRange(this.props.onLongPressSpeed, 1, 10) * 2);
 	}
 
 	/**
