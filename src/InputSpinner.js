@@ -1048,6 +1048,7 @@ InputSpinner.propTypes = {
 	min: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	max: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	initialValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	step: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	precision: PropTypes.number,
 	rounded: PropTypes.bool,

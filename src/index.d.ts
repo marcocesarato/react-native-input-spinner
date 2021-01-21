@@ -1,4 +1,4 @@
-import {Component} from "react";
+import React, {Component} from "react";
 import {StyleProp, ViewStyle} from "react-native";
 
 export interface ReactNativeInputSpinnerProps {
@@ -6,6 +6,7 @@ export interface ReactNativeInputSpinnerProps {
 	min?: string | number;
 	max?: string | number;
 	value?: string | number;
+	initialValue?: string | number;
 	step?: string | number;
 	precision?: number;
 	rounded?: boolean;
