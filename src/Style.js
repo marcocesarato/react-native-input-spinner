@@ -30,8 +30,7 @@ export const Style = StyleSheet.create({
 	buttonRounded: {
 		alignItems: "center",
 		justifyContent: "center",
-		borderRadius: 999,
-		outlineWidth: 0,
+		borderRadius: 999
 	},
 	buttonText: {
 		color: "white",
@@ -40,7 +39,6 @@ export const Style = StyleSheet.create({
 	numberText: {
 		flex: 1,
 		textAlign: "center",
-		justifyContent: "center",
-		outlineWidth: 0,
+		justifyContent: "center"
 	},
 });
