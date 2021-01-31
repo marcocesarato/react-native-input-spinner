@@ -807,8 +807,7 @@ class InputSpinner extends Component {
 				fontFamily: this.props.fontFamily,
 				borderColor: this.props.showBorder ? this._getColor() : "transparent",
 				backgroundColor: this.props.background,
-				height: this.props.height,
-				flex: 1,
+				height: this.props.height
 			},
 			this.props.inputStyle,
 		];

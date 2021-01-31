@@ -3,7 +3,7 @@
  * @author Marco Cesarato <cesarato.developer@gmail.com>
  */
 
-import {StyleSheet} from "react-native";
+import {Platform, StyleSheet} from "react-native";
 
 export const Style = StyleSheet.create({
 	container: {
@@ -31,7 +31,12 @@ export const Style = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 		borderRadius: 999,
-		outlineWidth: 0,
+		...Platform.select({
+			web: {
+				outlineWidth: 0,
+				outline: "none"
+			},
+		})
 	},
 	buttonText: {
 		color: "white",
@@ -41,6 +46,12 @@ export const Style = StyleSheet.create({
 		flex: 1,
 		textAlign: "center",
 		justifyContent: "center",
-		outlineWidth: 0,
+		borderWidth: 0,
+		...Platform.select({
+			web: {
+				outlineWidth: 0,
+				outline: "none"
+			},
+		})
 	},
 });
