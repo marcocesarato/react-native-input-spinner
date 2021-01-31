@@ -53,6 +53,9 @@ class InputSpinner extends Component {
 			this._setStateMin.bind(this),
 			this.props.typingTime,
 		);
+		this._updateValue = debounce((value) => {
+			this.setState({value: value});
+		}, 250);
 
 		this.state = {
 			min: min,
@@ -74,7 +77,7 @@ class InputSpinner extends Component {
 		if (this.props.value !== prevProps.value) {
 			let newValue = this.parseNum(this.props.value);
 			newValue = this.withinRange(newValue);
-			this.setState({value: newValue});
+			this._updateValue(newValue);
 		}
 		// Parse Min
 		if (this.props.min !== prevProps.min) {
