@@ -1149,7 +1149,7 @@ InputSpinner.defaultProps = {
 	selectionColor: null,
 	returnKeyLabel: null,
 	returnKeyType: null,
-	width: 'auto',
+	width: "auto",
 	height: 50,
 	accelerationDelay: defaultAccelerationDelay,
 	speed: defaultSpeed,
