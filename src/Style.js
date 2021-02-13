@@ -12,6 +12,8 @@ export const Style = StyleSheet.create({
 		flexDirection: "row",
 		overflow: "hidden",
 		width: 150,
+		alignItems: "center",
+		justifyContent: "center",
 	},
 	buttonLeft: {
 		alignItems: "center",
@@ -34,9 +36,9 @@ export const Style = StyleSheet.create({
 		...Platform.select({
 			web: {
 				outlineWidth: 0,
-				outline: "none"
+				outline: "none",
 			},
-		})
+		}),
 	},
 	buttonText: {
 		color: "white",
@@ -50,8 +52,8 @@ export const Style = StyleSheet.create({
 		...Platform.select({
 			web: {
 				outlineWidth: 0,
-				outline: "none"
+				outline: "none",
 			},
-		})
+		}),
 	},
 });
