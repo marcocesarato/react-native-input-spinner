@@ -29,20 +29,20 @@ class InputSpinner extends Component {
 		this.decreaseTimer = null;
 		this.holdTime = null;
 
-		let spinnerStep = this.parseNum(this.props.step);
-		if (!this.typeDecimal() && spinnerStep < 1) {
+		let spinnerStep = this._parseNum(this.props.step);
+		if (!this.isTypeDecimal() && spinnerStep < 1) {
 			spinnerStep = 1;
 		}
 
-		const min = this.props.min != null ? this.parseNum(this.props.min) : null;
-		const max = this.props.max != null ? this.parseNum(this.props.max) : null;
+		const min = this.props.min != null ? this._parseNum(this.props.min) : null;
+		const max = this.props.max != null ? this._parseNum(this.props.max) : null;
 
 		let initialValue =
 			this.props.initialValue != null && !isNaN(12)
 				? this.props.initialValue
 				: this.props.value;
-		initialValue = this.parseNum(initialValue);
-		initialValue = this.withinRange(initialValue, min, max);
+		initialValue = this._parseNum(initialValue);
+		initialValue = this._withinRange(initialValue, min, max);
 
 		// Set debounce
 		this._debounceSetMax = debounce(
@@ -75,26 +75,26 @@ class InputSpinner extends Component {
 	componentDidUpdate(prevProps) {
 		// Parse Value
 		if (this.props.value !== prevProps.value) {
-			let newValue = this.parseNum(this.props.value);
-			newValue = this.withinRange(newValue);
+			let newValue = this._parseNum(this.props.value);
+			newValue = this._withinRange(newValue);
 			this._updateValue(newValue);
 		}
 		// Parse Min
 		if (this.props.min !== prevProps.min) {
 			this.setState({
-				min: this.props.min != null ? this.parseNum(this.props.min) : null,
+				min: this.props.min != null ? this._parseNum(this.props.min) : null,
 			});
 		}
 		// Parse Max
 		if (this.props.max !== prevProps.max) {
 			this.setState({
-				max: this.props.max != null ? this.parseNum(this.props.max) : null,
+				max: this.props.max != null ? this._parseNum(this.props.max) : null,
 			});
 		}
 		// Parse Step
 		if (this.props.step !== prevProps.step) {
-			let spinnerStep = this.parseNum(this.props.step);
-			if (!this.typeDecimal() && spinnerStep < 1) {
+			let spinnerStep = this._parseNum(this.props.step);
+			if (!this.isTypeDecimal() && spinnerStep < 1) {
 				spinnerStep = 1;
 			}
 			this.setState({step: spinnerStep});
@@ -175,6 +175,58 @@ class InputSpinner extends Component {
 	}
 
 	/**
+	 * On increase event
+	 * @param number
+	 */
+	onIncrease(number) {
+		if (this._isCallable(this.props.onIncrease)) {
+			return this.props.onIncrease(number);
+		}
+		return true;
+	}
+
+	/**
+	 * On decrease event
+	 * @param number
+	 */
+	onDecrease(number) {
+		if (this._isCallable(this.props.onDecrease)) {
+			return this.props.onDecrease(number);
+		}
+		return true;
+	}
+
+	/**
+	 * On max reached event
+	 * @param number
+	 */
+	onMax(number) {
+		if (this._isCallable(this.props.onMax)) {
+			this.props.onMax(number);
+		}
+	}
+
+	/**
+	 * On min reached event
+	 * @param number
+	 */
+	onMin(number) {
+		if (this._isCallable(this.props.onMin)) {
+			this.props.onMin(number);
+		}
+	}
+
+	/**
+	 * On long press event.
+	 * @param number
+	 */
+	onLongPress(number) {
+		if (this._isCallable(this.props.onLongPress)) {
+			this.props.onLongPress(number);
+		}
+	}
+
+	/**
 	 * On value change
 	 * @param value
 	 * @param isPressEvent
@@ -200,17 +252,15 @@ class InputSpinner extends Component {
 		) {
 			this.decimalInput = true;
 		}
-		num = parsedNum = this.parseNum(String(num).replace(/^0+/, "")) || 0;
-		if (!this.minReached(num)) {
-			if (this.maxReached(num)) {
-				if (this.maxReached(num)) {
+		num = parsedNum = this._parseNum(String(num).replace(/^0+/, "")) || 0;
+		if (!this.isMinReached(num)) {
+			if (this.isMaxReached(num)) {
+				if (this.isMaxReached(num)) {
 					parsedNum = this.state.max;
 					if (!isEmptyValue) {
 						this.maxTimer = this._debounceSetMax();
 					}
-					if (this.props.onMax) {
-						this.props.onMax(this.state.max);
-					}
+					this.onMax(parsedNum);
 				}
 			}
 		} else {
@@ -224,22 +274,20 @@ class InputSpinner extends Component {
 				parsedNum = this.state.min;
 			}
 
-			if (this.props.onMin) {
-				this.props.onMin(parsedNum);
-			}
+			this.onMin(parsedNum);
 		}
 
 		if (isEmptyValue && this.isEmptied()) {
 			num = parsedNum = null;
 		}
 
-		if (this.state.value !== num && this.props.onChange) {
+		if (this.state.value !== num && this._isCallable(this.props.onChange)) {
 			const res = await this.props.onChange(parsedNum);
 			if (!isEmptyValue) {
 				if (res === false) {
 					return;
 				} else if (isNumeric(res)) {
-					num = this.parseNum(res);
+					num = this._parseNum(res);
 				}
 			}
 		}
@@ -276,11 +324,59 @@ class InputSpinner extends Component {
 	}
 
 	/**
-	 * Round number to props precision
-	 * @param num
+	 * On Submit keyboard
+	 * @returns {*}
+	 * @param e
 	 */
-	roundNum(num) {
-		if (this.typeDecimal()) {
+	onSubmit(e) {
+		if (this._isCallable(this.props.onSubmit)) {
+			this.props.onSubmit(this._parseNum(e.nativeEvent.text));
+		}
+	}
+
+	/**
+	 * On Focus
+	 * @returns {*}
+	 * @param e
+	 */
+	onFocus(e) {
+		if (this.props.onFocus) {
+			this.props.onFocus(e);
+		}
+		this.setState({focused: true});
+	}
+
+	/**
+	 * On Blur
+	 * @returns {*}
+	 * @param e
+	 */
+	onBlur(e) {
+		if (this.props.onBlur) {
+			this.props.onBlur(e);
+		}
+		this.setState({focused: false});
+	}
+
+	/**
+	 * On Key Press
+	 * @returns {*}
+	 * @param e
+	 */
+	onKeyPress(e) {
+		if (this.props.onKeyPress) {
+			this.props.onKeyPress(e);
+		}
+	}
+
+	/**
+	 * Round number to props precision
+	 * @private
+	 * @param num
+	 * @returns float|int
+	 */
+	_roundNum(num) {
+		if (this.isTypeDecimal()) {
 			let val = num * Math.pow(10, this.props.precision);
 			let fraction = Math.round((val - parseInt(val)) * 10) / 10;
 			if (fraction === -0.5) {
@@ -296,12 +392,13 @@ class InputSpinner extends Component {
 
 	/**
 	 * Limit value to be within max and min range
+	 * @private
 	 * @param value
 	 * @param min
 	 * @param max
-	 * @returns {*}
+	 * @returns float|int
 	 */
-	withinRange(value, min = null, max = null) {
+	_withinRange(value, min = null, max = null) {
 		if (min == null && this.state && this.state.min != null) {
 			min = this.state.min;
 		}
@@ -319,15 +416,16 @@ class InputSpinner extends Component {
 
 	/**
 	 * Parse number type
+	 * @private
 	 * @param num
-	 * @returns {*}
+	 * @returns float|int
 	 */
-	parseNum(num) {
+	_parseNum(num) {
 		num = String(num).replace(
 			!isEmpty(this.props.decimalSeparator) ? this.props.decimalSeparator : ".",
 			".",
 		);
-		if (this.typeDecimal()) {
+		if (this.isTypeDecimal()) {
 			num = parseFloat(num);
 		} else {
 			num = parseInt(num);
@@ -335,7 +433,7 @@ class InputSpinner extends Component {
 		if (isNaN(num)) {
 			num = 0;
 		}
-		this.roundNum(num);
+		this._roundNum(num);
 		return num;
 	}
 
@@ -348,15 +446,15 @@ class InputSpinner extends Component {
 		if (isEmpty(value)) {
 			return "";
 		}
-		if (this.typeDecimal() && this.decimalInput) {
+		if (this.isTypeDecimal() && this.decimalInput) {
 			this.decimalInput = false;
-			value = this.parseNum(value).toFixed(1).replace(/0+$/, "");
-		} else if (this.typeDecimal()) {
+			value = this._parseNum(value).toFixed(1).replace(/0+$/, "");
+		} else if (this.isTypeDecimal()) {
 			value = String(
-				this.parseNum(this.parseNum(value).toFixed(this.props.precision)),
+				this._parseNum(this._parseNum(value).toFixed(this.props.precision)),
 			);
 		} else {
-			value = String(this.parseNum(value));
+			value = String(this._parseNum(value));
 		}
 		let hasPlaceholder = value === "0" && !isEmpty(this.props.placeholder);
 		return hasPlaceholder
@@ -399,7 +497,7 @@ class InputSpinner extends Component {
 	 * Detect if type is decimal
 	 * @returns {boolean}
 	 */
-	typeDecimal() {
+	isTypeDecimal() {
 		let type = this.getType();
 		return (
 			type === "float" ||
@@ -454,27 +552,25 @@ class InputSpinner extends Component {
 	 */
 	async increase() {
 		if (this._isDisabledButtonRight()) return;
-		let currentValue = this.parseNum(this.state.value);
-		let num = currentValue + this.parseNum(this.state.step);
+		let currentValue = this._parseNum(this.state.value);
+		let num = currentValue + this._parseNum(this.state.step);
 
 		if (
-			this.maxReached(currentValue) &&
+			this.isMaxReached(currentValue) &&
 			!this.isEmptied() &&
 			this.isContinuos()
 		) {
 			// Continuity mode
 			num = this.state.min;
-		} else if (this.maxReached(currentValue)) {
+		} else if (this.isMaxReached(currentValue)) {
 			return;
 		}
-		if (this.props.onIncrease) {
-			let increased_num = num;
-			const res = await this.props.onIncrease(increased_num);
-			if (res === false) {
-				return;
-			} else if (isNumeric(res)) {
-				num = this.parseNum(res);
-			}
+
+		const res = await this.onIncrease(num);
+		if (res === false) {
+			return;
+		} else if (isNumeric(res)) {
+			num = this._parseNum(res);
 		}
 
 		let wait = this._getHoldChangeInterval();
@@ -482,9 +578,7 @@ class InputSpinner extends Component {
 			this._startHoldTime();
 			wait = this.props.accelerationDelay;
 		} else {
-			if (this.props.onLongPress) {
-				await this.props.onLongPress(num);
-			}
+			this.onLongPress(num);
 		}
 
 		this.increaseTimer = setTimeout(this.increase.bind(this), wait);
@@ -496,28 +590,25 @@ class InputSpinner extends Component {
 	 */
 	async decrease() {
 		if (this._isDisabledButtonLeft()) return;
-		let currentValue = this.parseNum(this.state.value);
-		let num = currentValue - this.parseNum(this.state.step);
+		let currentValue = this._parseNum(this.state.value);
+		let num = currentValue - this._parseNum(this.state.step);
 
 		if (
-			this.minReached(currentValue) &&
+			this.isMinReached(currentValue) &&
 			!this.isEmptied() &&
 			this.isContinuos()
 		) {
 			// Continuity mode
 			num = this.state.max;
-		} else if (this.minReached(currentValue)) {
+		} else if (this.isMinReached(currentValue)) {
 			return;
 		}
 
-		if (this.props.onDecrease) {
-			let decreased_num = num;
-			const res = await this.props.onDecrease(decreased_num);
-			if (res === false) {
-				return;
-			} else if (isNumeric(res)) {
-				num = this.parseNum(res);
-			}
+		const res = await this.onDecrease(num);
+		if (res === false) {
+			return;
+		} else if (isNumeric(res)) {
+			num = this._parseNum(res);
 		}
 
 		let wait = this._getHoldChangeInterval();
@@ -525,9 +616,7 @@ class InputSpinner extends Component {
 			this._startHoldTime();
 			wait = this.props.accelerationDelay;
 		} else {
-			if (this.props.onLongPress) {
-				await this.props.onLongPress(num);
-			}
+			this.onLongPress(num);
 		}
 
 		this.decreaseTimer = setTimeout(this.decrease.bind(this), wait);
@@ -535,57 +624,11 @@ class InputSpinner extends Component {
 	}
 
 	/**
-	 * On Submit keyboard
-	 * @returns {*}
-	 * @param e
-	 */
-	onSubmit(e) {
-		if (this.props.onSubmit) {
-			this.props.onSubmit(this.parseNum(e.nativeEvent.text));
-		}
-	}
-
-	/**
-	 * On Focus
-	 * @returns {*}
-	 * @param e
-	 */
-	onFocus(e) {
-		if (this.props.onFocus) {
-			this.props.onFocus(e);
-		}
-		this.setState({focused: true});
-	}
-
-	/**
-	 * On Blur
-	 * @returns {*}
-	 * @param e
-	 */
-	onBlur(e) {
-		if (this.props.onBlur) {
-			this.props.onBlur(e);
-		}
-		this.setState({focused: false});
-	}
-
-	/**
-	 * On Key Press
-	 * @returns {*}
-	 * @param e
-	 */
-	onKeyPress(e) {
-		if (this.props.onKeyPress) {
-			this.props.onKeyPress(e);
-		}
-	}
-
-	/**
 	 * Max is reached
 	 * @param num
 	 * @returns {boolean}
 	 */
-	maxReached(num = null) {
+	isMaxReached(num = null) {
 		if (this.state.max != null) {
 			if (num == null) {
 				num = this.state.value;
@@ -600,7 +643,7 @@ class InputSpinner extends Component {
 	 * @param num
 	 * @returns {boolean}
 	 */
-	minReached(num = null) {
+	isMinReached(num = null) {
 		if (this.state.min != null) {
 			if (num == null) {
 				num = this.state.value;
@@ -629,6 +672,19 @@ class InputSpinner extends Component {
 	 */
 	clear() {
 		this.textInput.clear();
+	}
+
+	/**
+	 * Is variable callable
+	 * @private
+	 * @param callback
+	 * @returns {boolean}
+	 */
+	_isCallable(callback) {
+		return (
+			callback != null &&
+			(callback instanceof Function || typeof callback === "function")
+		);
 	}
 
 	/**
@@ -714,7 +770,7 @@ class InputSpinner extends Component {
 	_getKeyboardType() {
 		// Keyboard type
 		let keyboardType = "numeric";
-		if (this.typeDecimal()) {
+		if (this.isTypeDecimal()) {
 			keyboardType = "decimal-pad";
 		} else {
 			keyboardType = "number-pad";
@@ -728,9 +784,9 @@ class InputSpinner extends Component {
 	 * @private
 	 */
 	_getColor() {
-		return this.maxReached()
+		return this.isMaxReached()
 			? this._getColorMax()
-			: this.minReached()
+			: this.isMinReached()
 			? this._getColorMin()
 			: this.props.color;
 	}
@@ -769,9 +825,9 @@ class InputSpinner extends Component {
 			this.props.colorPress !== defaultColor
 				? this.props.colorPress
 				: this.props.color;
-		return this.maxReached()
+		return this.isMaxReached()
 			? this._getColorMax()
-			: this.minReached()
+			: this.isMinReached()
 			? this._getColorMin()
 			: color;
 	}
