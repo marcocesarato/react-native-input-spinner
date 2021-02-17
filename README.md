@@ -102,7 +102,7 @@ Check the "[Props List](PROPS.md)" file to have the complete list of component p
 ### Props
 
 | Property               | Description                                                                                                                    | Type             | Default | Note                              |
-|------------------------|--------------------------------------------------------------------------------------------------------------------------------|------------------|---------|-----------------------------------|
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ---------------- | ------- | --------------------------------- |
 | `accelerationDelay`    | Delay time before start the `onLongPress` event and increase or decrease and continually                                       | Number           | `750 `  |                                   |
 | `append`               | Custom element before right button                                                                                             | Component        |         |                                   |
 | `autofocus`            | If `true`, focuses the input on `componentDidMount`.                                                                           |                  | `false` |                                   |

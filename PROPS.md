@@ -3,7 +3,7 @@
 ## 💡 Props List
 
 | Property                | Description                                                                                                                    | Type             | Default          | Note                              |
-|-------------------------|--------------------------------------------------------------------------------------------------------------------------------|------------------|------------------|-----------------------------------|
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ---------------- | ---------------- | --------------------------------- |
 | `accelerationDelay`     | Delay time before start the `onLongPress` event and increase or decrease and continually                                       | Number           | `750 `           |                                   |
 | `activeOpacity`         | Opacity on pressed button                                                                                                      | Number           | `0.85`           |                                   |
 | `append`                | Custom element before right button                                                                                             | Component        |                  |                                   |
