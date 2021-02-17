@@ -1,23 +1,25 @@
 import React, {Component} from "react";
 import {
-	StyleSheet,
 	Text,
 	View,
 	ScrollView,
 	Image,
 	FlatList,
-	StatusBar,
 	SafeAreaView,
 	Button,
 } from "react-native";
 import InputSpinner from "react-native-input-spinner";
+import Styles from "./Styles";
 
 export default class App extends Component {
 	constructor(props) {
 		super(props);
 		let data = [];
 		for (var i = 0; i < 10; i++) {
-			data.push({key: String(i), value: Math.floor(Math.random() * 100) + 1});
+			data.push({
+				key: String(i),
+				value: Math.floor(Math.random() * 100) + 1,
+			});
 		}
 		this.state = {
 			value: 1,
@@ -30,7 +32,7 @@ export default class App extends Component {
 
 	renderItem({item}) {
 		return (
-			<View style={styles.item}>
+			<View style={Styles.item}>
 				<Text style={{marginRight: 20}}>
 					Key: {item.key}
 					{"\n"}Value: {item.value}
@@ -58,7 +60,7 @@ export default class App extends Component {
 				</View>
 				<InputSpinner
 					value={item.value}
-					style={styles.spinner}
+					style={Styles.spinner}
 					onChange={(num) => {
 						var data = this.state.data;
 						data[item.key].value = num;
@@ -80,79 +82,79 @@ export default class App extends Component {
 
 	render() {
 		return (
-			<SafeAreaView style={styles.mainContainer}>
-				<ScrollView style={styles.container}>
-					<Text style={styles.title}>
+			<SafeAreaView style={Styles.mainContainer}>
+				<ScrollView style={Styles.container}>
+					<Text style={Styles.title}>
 						Example{"\n"}react-native-input-spinner
 					</Text>
-					<View style={styles.col}>
-						<Text style={styles.text}>Standard</Text>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>Standard</Text>
 						<InputSpinner
 							value={this.state.value}
-							style={styles.spinner}
+							style={Styles.spinner}
 						/>
 					</View>
-					<View style={styles.col}>
-						<Text style={styles.text}>Custom color</Text>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>Custom color</Text>
 						<InputSpinner
 							value={this.state.value}
-							style={styles.spinner}
+							style={Styles.spinner}
 							color={"#40c5f4"}
 						/>
 					</View>
-					<View style={styles.col}>
-						<Text style={styles.text}>Arrows</Text>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>Arrows</Text>
 						<InputSpinner
 							value={this.state.value}
-							style={styles.spinner}
+							style={Styles.spinner}
 							arrows
 						/>
 					</View>
-					<View style={styles.col}>
-						<Text style={styles.text}>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>
 							Custom button text and fontSize
 						</Text>
 						<InputSpinner
 							value={this.state.value}
-							style={styles.spinner}
+							style={Styles.spinner}
 							buttonFontSize={10}
 							buttonLeftText={"▲"}
 							buttonRightText={"▼"}
 						/>
 					</View>
-					<View style={styles.col}>
-						<Text style={styles.text}>Disabled</Text>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>Disabled</Text>
 						<InputSpinner
 							value={this.state.value}
-							style={styles.spinner}
+							style={Styles.spinner}
 							disabled
 						/>
 					</View>
-					<View style={styles.col}>
-						<Text style={styles.text}>Not editable</Text>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>Not editable</Text>
 						<InputSpinner
 							value={this.state.value}
-							style={styles.spinner}
+							style={Styles.spinner}
 							editable={false}
 						/>
 					</View>
-					<View style={styles.col}>
-						<Text style={styles.text}>onChange</Text>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>onChange</Text>
 						<InputSpinner
 							value={this.state.value}
-							style={styles.spinner}
+							style={Styles.spinner}
 							onChange={(num) => {
 								alert("onChange new value: " + num);
 							}}
 						/>
 					</View>
-					<View style={styles.col}>
-						<Text style={styles.text}>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>
 							onMin and onMax (min 0, max 3)
 						</Text>
 						<InputSpinner
 							value={this.state.value}
-							style={styles.spinner}
+							style={Styles.spinner}
 							min={0}
 							max={3}
 							onMax={() => {
@@ -163,61 +165,61 @@ export default class App extends Component {
 							}}
 						/>
 					</View>
-					<View style={styles.col}>
-						<Text style={styles.text}>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>
 							Min & Max colors (min 5, max 10)
 						</Text>
 						<InputSpinner
 							value={this.state.value + 1}
-							style={styles.spinner}
+							style={Styles.spinner}
 							min={5}
 							max={10}
 							colorMax={"#f04048"}
 							colorMin={"#82cc62"}
 						/>
 					</View>
-					<View style={styles.col}>
-						<Text style={styles.text}>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>
 							Type real (step 0.5, precision 1)
 						</Text>
 						<InputSpinner
 							value={this.state.valueReal}
-							style={styles.spinner}
+							style={Styles.spinner}
 							type={"real"}
 							step={0.5}
 							precision={1}
 						/>
 					</View>
-					<View style={styles.col}>
-						<Text style={styles.text}>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>
 							Type real (step 0.05, precision 2)
 						</Text>
 						<InputSpinner
 							value={this.state.valueReal}
-							style={styles.spinner}
+							style={Styles.spinner}
 							type={"real"}
 							step={0.05}
 							precision={2}
 						/>
 					</View>
-					<View style={styles.col}>
-						<Text style={styles.text}>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>
 							rounded false and showBorder
 						</Text>
 						<InputSpinner
 							value={this.state.value}
-							style={styles.spinner}
+							style={Styles.spinner}
 							rounded={false}
 							showBorder
 						/>
 					</View>
-					<View style={styles.col}>
-						<Text style={styles.text}>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>
 							color, background and textColor
 						</Text>
 						<InputSpinner
 							value={this.state.value}
-							style={styles.spinner}
+							style={Styles.spinner}
 							textColor={"#FFF"}
 							color={"#25863f"}
 							background={"#82cc62"}
@@ -225,11 +227,11 @@ export default class App extends Component {
 							showBorder
 						/>
 					</View>
-					<View style={styles.col}>
-						<Text style={styles.text}>Button image</Text>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>Button image</Text>
 						<InputSpinner
 							value={this.state.value}
-							style={styles.spinner}
+							style={Styles.spinner}
 							color={"#FFF"}
 							colorPress={"#0F0"}
 							height={50}
@@ -253,13 +255,13 @@ export default class App extends Component {
 							}
 						/>
 					</View>
-					<View style={styles.col}>
-						<Text style={styles.text}>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>
 							colorLeft and colorRight
 						</Text>
 						<InputSpinner
 							value={this.state.value}
-							style={styles.spinner}
+							style={Styles.spinner}
 							colorPress={"#F00"}
 							colorLeft={this.state.colorLeft}
 							colorRight={this.state.colorRight}
@@ -272,48 +274,48 @@ export default class App extends Component {
 							}}
 						/>
 					</View>
-					<View style={styles.col}>
-						<Text style={styles.text}>Colors on press</Text>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>Colors on press</Text>
 						<InputSpinner
 							value={this.state.value}
-							style={styles.spinner}
+							style={Styles.spinner}
 							color={"#C4C4C4"}
 							colorPress={"#F00"}
 							buttonTextColor={"#000"}
 							buttonPressTextColor={"#FFF"}
 						/>
 					</View>
-					<View style={styles.col}>
-						<Text style={styles.text}>Children</Text>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>Children</Text>
 						<InputSpinner
 							value={this.state.value}
-							style={styles.spinner}>
-							<Text style={styles.simbol}>$</Text>
+							style={Styles.spinner}>
+							<Text style={Styles.simbol}>$</Text>
 						</InputSpinner>
 					</View>
-					<View style={styles.col}>
-						<Text style={styles.text}>Prepend and append</Text>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>Prepend and append</Text>
 						<InputSpinner
 							value={this.state.value}
-							style={styles.spinner}
-							append={<Text style={styles.simbol}>Append</Text>}
+							style={Styles.spinner}
+							append={<Text style={Styles.simbol}>Append</Text>}
 							prepend={
-								<Text style={styles.simbol}>Prepend</Text>
+								<Text style={Styles.simbol}>Prepend</Text>
 							}>
-							<Text style={styles.simbol}>$</Text>
+							<Text style={Styles.simbol}>$</Text>
 						</InputSpinner>
 					</View>
-					<View style={styles.col}>
-						<Text style={styles.text}>Placeholder</Text>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>Placeholder</Text>
 						<InputSpinner
-							style={styles.spinner}
+							style={Styles.spinner}
 							placeholder={"Placeholder"}
 						/>
 					</View>
-					<View style={styles.col}>
-						<Text style={styles.text}>Mixed</Text>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>Mixed</Text>
 						<InputSpinner
-							style={styles.spinner}
+							style={Styles.spinner}
 							value={80}
 							min={18}
 							max={48}
@@ -326,10 +328,16 @@ export default class App extends Component {
 							}}
 						/>
 					</View>
-					<View style={styles.col}>
-						<Text style={styles.text}>Emptied ({this.state.value == null ? "null" : this.state.value})</Text>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>
+							Emptied (
+							{this.state.value == null
+								? "null"
+								: this.state.value}
+							)
+						</Text>
 						<InputSpinner
-							style={styles.spinner}
+							style={Styles.spinner}
 							step={1}
 							max={10}
 							min={1}
@@ -340,7 +348,7 @@ export default class App extends Component {
 							}}
 						/>
 					</View>
-					<Text style={styles.title}>List</Text>
+					<Text style={Styles.title}>List</Text>
 					<FlatList
 						style={{height: 500}}
 						data={this.state.data}
@@ -352,54 +360,3 @@ export default class App extends Component {
 		);
 	}
 }
-
-const styles = StyleSheet.create({
-	mainContainer: {
-		flex: 1,
-		marginTop: StatusBar.currentHeight || 0,
-	},
-	item: {
-		padding: 20,
-		marginVertical: 8,
-		marginHorizontal: 16,
-		flexDirection: "row",
-		justifyContent: "center",
-		alignItems: "center",
-		textAlign: "center",
-		textAlignVertical: "center",
-	},
-	container: {
-		flex: 1,
-		backgroundColor: "#fff",
-		padding: 20,
-		paddingTop: 40,
-	},
-	col: {
-		flex: 1,
-		marginBottom: 20,
-		flexDirection: "row",
-	},
-	text: {
-		flex: 3,
-		marginRight: 20,
-	},
-	title: {
-		marginBottom: 40,
-		fontSize: 30,
-	},
-	spinner: {
-		flex: 1,
-		width: "auto",
-		minWidth: 300,
-	},
-	simbol: {
-		marginLeft: 10,
-		marginRight: 10,
-		height: "100%",
-		justifyContent: "center",
-		alignItems: "center",
-		textAlign: "center",
-		textAlignVertical: "center",
-		lineHeight: 50,
-	},
-});
