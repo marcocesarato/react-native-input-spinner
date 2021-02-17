@@ -878,6 +878,11 @@ class InputSpinner extends Component {
 				width: this.props.width,
 				height: this.props.height,
 			},
+			this.props.showBorder
+				? {borderWidth: 0.5, borderColor: this._getColor()}
+				: {},
+			this.props.shadow ? Style.containerShadow : {},
+			this.props.rounded ? {borderRadius: this.props.height / 2} : {},
 			this.props.style,
 		];
 	}
@@ -894,10 +899,12 @@ class InputSpinner extends Component {
 				color: this.props.textColor,
 				fontSize: this.props.fontSize,
 				fontFamily: this.props.fontFamily,
-				borderColor: this.props.showBorder ? this._getColor() : "transparent",
 				backgroundColor: this.props.background,
 				height: this.props.height,
 			},
+			this.props.showBorder
+				? {borderWidth: 0.5, borderColor: this._getColor()}
+				: {},
 			this.props.inputStyle,
 		];
 	}
@@ -1142,6 +1149,7 @@ InputSpinner.propTypes = {
 	initialValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	step: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	precision: PropTypes.number,
+	shadow: PropTypes.bool,
 	rounded: PropTypes.bool,
 	activeOpacity: PropTypes.number,
 	color: PropTypes.string,
@@ -1216,6 +1224,7 @@ InputSpinner.defaultProps = {
 	step: 1,
 	precision: 2,
 	rounded: true,
+	shadow: false,
 	activeOpacity: 0.85,
 	color: defaultColor,
 	colorPress: defaultColor,

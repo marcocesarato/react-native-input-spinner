@@ -9,6 +9,7 @@ export interface ReactNativeInputSpinnerProps {
 	initialValue?: string | number;
 	step?: string | number;
 	precision?: number;
+	shadow?: boolean;
 	rounded?: boolean;
 	activeOpacity?: number;
 	color?: string;

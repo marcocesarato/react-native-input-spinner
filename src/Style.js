@@ -15,6 +15,17 @@ export const Style = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 	},
+	containerShadow: {
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 6,
+		},
+		shadowOpacity: 0.39,
+		shadowRadius: 8.3,
+
+		elevation: 10,
+	},
 	buttonLeft: {
 		alignItems: "center",
 		justifyContent: "center",
