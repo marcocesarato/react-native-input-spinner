@@ -636,7 +636,10 @@ class InputSpinner extends Component {
 	 * @returns {boolean|Boolean}
 	 */
 	isEditable() {
-		return !this.props.disabled && this.props.editable;
+		return (
+			(this.props.disabled !== true || this.props.disabled != null) &&
+			this.props.editable !== false
+		);
 	}
 
 	/**
@@ -652,7 +655,7 @@ class InputSpinner extends Component {
 	 * @returns {boolean|Boolean}
 	 */
 	isEmptied() {
-		return this.props.emptied;
+		return this.props.emptied !== false;
 	}
 
 	/**
@@ -660,7 +663,7 @@ class InputSpinner extends Component {
 	 * @returns {boolean|Boolean}
 	 */
 	isFocused() {
-		return this.state.focus;
+		return this.state.focus !== false;
 	}
 
 	/**
@@ -669,7 +672,9 @@ class InputSpinner extends Component {
 	 * @private
 	 */
 	_isDisabledButtonLeft() {
-		return this.props.disabled || this.props.buttonLeftDisabled;
+		return (
+			this.props.disabled !== false || this.props.buttonLeftDisabled !== false
+		);
 	}
 
 	/**
@@ -678,7 +683,9 @@ class InputSpinner extends Component {
 	 * @private
 	 */
 	_isDisabledButtonRight() {
-		return this.props.disabled || this.props.buttonRightDisabled;
+		return (
+			this.props.disabled !== false || this.props.buttonRightDisabled !== false
+		);
 	}
 
 	/**
