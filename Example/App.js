@@ -111,6 +111,17 @@ export default class App extends Component {
 						/>
 					</View>
 					<View style={Styles.col}>
+						<Text style={Styles.text}>Continuity mode</Text>
+						<InputSpinner
+							value={this.state.value}
+							style={Styles.spinner}
+							min={10}
+							max={30}
+							arrows
+							continuity
+						/>
+					</View>
+					<View style={Styles.col}>
 						<Text style={Styles.text}>
 							Custom button text and fontSize
 						</Text>
