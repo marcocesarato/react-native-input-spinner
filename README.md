@@ -174,11 +174,12 @@ Check the "[Props List](PROPS.md)" file to have the complete list of component p
 
 ### Props Container Style
 
-| Property     | Description                           | Type    | Default | Note                        |
-| ------------ | ------------------------------------- | ------- | ------- | --------------------------- |
+| Property     | Description                           | Type    | Default | Note                                             |
+| ------------ | ------------------------------------- | ------- | ------- | ------------------------------------------------ |
 | `height`     | Custom height of the Spinner          | Number  | `50`    |
-| `showBorder` | Show the border of the Spinner or not | Boolean | `false` | Use with `rounded={false}`  |
-| `style`      | Container style                       | Object  |         | Could overwrite other props |
+| `shadow`     | Show container shadow                 | Boolean | `false` | Use with `background` like `background={"#FFF"}` |
+| `showBorder` | Show the border of the Spinner or not | Boolean | `false` | Use with `rounded={false}`                       |
+| `style`      | Container style                       | Object  |         | Could overwrite other props                      |
 | `width`      | Custom width of the Spinner           | Number  | `150`   |
 
 ### Props Buttons Style
