@@ -460,7 +460,7 @@ class InputSpinner extends Component {
 		if (
 			this.maxReached(currentValue) &&
 			!this.isEmptied() &&
-			this.props.continuity !== false
+			this.isContinuos()
 		) {
 			// Continuity mode
 			num = this.state.min;
@@ -502,7 +502,7 @@ class InputSpinner extends Component {
 		if (
 			this.minReached(currentValue) &&
 			!this.isEmptied() &&
-			this.props.continuity !== false
+			this.isContinuos()
 		) {
 			// Continuity mode
 			num = this.state.max;
@@ -637,6 +637,14 @@ class InputSpinner extends Component {
 	 */
 	isEditable() {
 		return !this.props.disabled && this.props.editable;
+	}
+
+	/**
+	 * If continuity mode enabled
+	 * @returns {boolean|Boolean}
+	 */
+	isContinuos() {
+		return this.props.continuity !== false;
 	}
 
 	/**
