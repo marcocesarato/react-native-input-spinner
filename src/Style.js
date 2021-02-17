@@ -36,7 +36,6 @@ export const Style = StyleSheet.create({
 		...Platform.select({
 			web: {
 				outlineWidth: 0,
-				outline: "none",
 			},
 		}),
 	},
@@ -52,7 +51,6 @@ export const Style = StyleSheet.create({
 		...Platform.select({
 			web: {
 				outlineWidth: 0,
-				outline: "none",
 			},
 		}),
 	},
