@@ -25,6 +25,9 @@ export default StyleSheet.create({
 		flex: 1,
 		marginBottom: 20,
 		flexDirection: "row",
+		alignItems: "center",
+		textAlign: "left",
+		textAlignVertical: "center",
 	},
 	text: {
 		flex: 3,
@@ -38,6 +41,7 @@ export default StyleSheet.create({
 		flex: 1,
 		width: "auto",
 		minWidth: 300,
+		marginRight: 10,
 	},
 	simbol: {
 		marginLeft: 10,

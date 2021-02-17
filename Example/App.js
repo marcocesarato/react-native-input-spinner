@@ -7,6 +7,7 @@ import {
 	FlatList,
 	SafeAreaView,
 	Button,
+	Platform,
 } from "react-native";
 import InputSpinner from "react-native-input-spinner";
 import Styles from "./Styles";
@@ -215,6 +216,120 @@ export default class App extends Component {
 					</View>
 					<View style={Styles.col}>
 						<Text style={Styles.text}>
+							Customize shadow, color white and buttonTextColor,
+							buttonPressTextColor black and buttonFontFamily
+						</Text>
+						<InputSpinner
+							value={this.state.value}
+							style={Styles.spinner}
+							shadow
+							color={"#FFF"}
+							background={"#FFF"}
+							buttonTextColor={"#000"}
+							buttonPressTextColor={"#888"}
+							fontFamily={Platform.select({
+								ios: "San Francisco",
+								default: "sans-serif",
+							})}
+							buttonFontFamily={Platform.select({
+								ios: "San Francisco",
+								default: "sans-serif",
+							})}
+						/>
+					</View>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>
+							Customize shadow, color, colorPress,
+							buttonTextColor, buttonPressTextColor and
+							buttonFontFamily
+						</Text>
+						<InputSpinner
+							value={this.state.value}
+							style={[
+								Styles.spinner,
+								{padding: 10, borderRadius: 3},
+							]}
+							height={30}
+							shadow
+							color={"#eeeafd"}
+							background={"#FFF"}
+							colorPress={"#a28df6"}
+							buttonTextColor={"#a28df6"}
+							buttonPressTextColor={"#dbd2ef"}
+							fontFamily={Platform.select({
+								ios: "San Francisco",
+								default: "sans-serif",
+							})}
+							buttonFontFamily={Platform.select({
+								ios: "San Francisco",
+								default: "sans-serif",
+							})}
+						/>
+					</View>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>Customize styles 1</Text>
+						<InputSpinner
+							value={this.state.value}
+							style={[
+								Styles.spinner,
+								{backgroundColor: "#898aff"},
+							]}
+							shadow
+							color={"#898aff"}
+							colorPress={"#898aff"}
+							buttonTextColor={"#dbd2ef"}
+							buttonPressTextColor={"#dbd2ef"}
+							fontFamily={Platform.select({
+								ios: "San Francisco",
+								default: "sans-serif",
+							})}
+							buttonFontFamily={Platform.select({
+								ios: "San Francisco",
+								default: "sans-serif",
+							})}
+							inputStyle={{
+								borderRadius: 30,
+								backgroundColor: "#FFF",
+							}}
+						/>
+					</View>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>Customize styles 2</Text>
+						<InputSpinner
+							value={this.state.value}
+							style={[
+								Styles.spinner,
+								{
+									backgroundColor: "#898aff",
+									minWidth: 150,
+									maxWidth: 150,
+								},
+							]}
+							shadow
+							width={150}
+							color={"#898aff"}
+							colorPress={"#898aff"}
+							buttonTextColor={"#dbd2ef"}
+							buttonPressTextColor={"#dbd2ef"}
+							fontFamily={Platform.select({
+								ios: "San Francisco",
+								default: "sans-serif",
+							})}
+							buttonFontFamily={Platform.select({
+								ios: "San Francisco",
+								default: "sans-serif",
+							})}
+							inputStyle={{
+								borderRadius: 30,
+								backgroundColor: "#FFF",
+								minWidth: 50,
+								maxWidth: 50,
+								height: 50,
+							}}
+						/>
+					</View>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>
 							rounded false and showBorder
 						</Text>
 						<InputSpinner
@@ -251,7 +366,7 @@ export default class App extends Component {
 									style={{width: 50, height: 50}}
 									source={{
 										uri:
-											"https://image.flaticon.com/icons/png/512/54/54194.png",
+											"https://freeiconshop.com/wp-content/uploads/edd/like-flat.png",
 									}}
 								/>
 							}
@@ -260,7 +375,7 @@ export default class App extends Component {
 									style={{width: 50, height: 50}}
 									source={{
 										uri:
-											"https://image.flaticon.com/icons/png/512/69/69301.png",
+											"https://freeiconshop.com/wp-content/uploads/edd/heart-compact-flat.png",
 									}}
 								/>
 							}
@@ -334,26 +449,6 @@ export default class App extends Component {
 							rounded={false}
 							showBorder={true}
 							editable={false}
-							onChange={(value) => {
-								this.setState({value: value});
-							}}
-						/>
-					</View>
-					<View style={Styles.col}>
-						<Text style={Styles.text}>
-							Emptied (
-							{this.state.value == null
-								? "null"
-								: this.state.value}
-							)
-						</Text>
-						<InputSpinner
-							style={Styles.spinner}
-							step={1}
-							max={10}
-							min={1}
-							emptied={true}
-							value={this.state.value}
 							onChange={(value) => {
 								this.setState({value: value});
 							}}
