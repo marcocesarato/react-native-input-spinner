@@ -47,6 +47,7 @@ export interface ReactNativeInputSpinnerProps {
 	onIncrease?(...args: unknown[]): unknown;
 	onDecrease?(...args: unknown[]): unknown;
 	onSubmit?(...args: unknown[]): unknown;
+	onLongPress?(...args: unknown[]): unknown;
 	accelerationDelay?: number;
 	speed?: number;
 	emptied?: boolean;
