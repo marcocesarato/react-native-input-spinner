@@ -874,9 +874,9 @@ class InputSpinner extends Component {
 		return [
 			Style.container,
 			{
-				borderColor: this.props.showBorder ? this._getColor() : "transparent",
+				minHeight: this.props.height,
 				width: this.props.width,
-				height: this.props.height,
+				backgroundColor: this.props.background,
 			},
 			this.props.showBorder
 				? {borderWidth: 0.5, borderColor: this._getColor()}
@@ -944,6 +944,8 @@ class InputSpinner extends Component {
 			{
 				fontSize: this.props.buttonFontSize,
 				fontFamily: this.props.buttonFontFamily,
+				lineHeight: this.props.height,
+				verticalAlign: "middle",
 			},
 		];
 	}

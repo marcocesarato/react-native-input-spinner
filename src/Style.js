@@ -7,10 +7,9 @@ import {Platform, StyleSheet} from "react-native";
 
 export const Style = StyleSheet.create({
 	container: {
-		borderWidth: 0.5,
 		borderRadius: 4,
 		flexDirection: "row",
-		overflow: "hidden",
+		overflow: "visible",
 		width: 150,
 		alignItems: "center",
 		justifyContent: "center",
