@@ -50,6 +50,7 @@ export interface ReactNativeInputSpinnerProps {
 	accelerationDelay?: number;
 	speed?: number;
 	emptied?: boolean;
+	continuity?: boolean;
 	typingTime?: number;
 	buttonLeftDisabled?: boolean;
 	buttonRightDisabled?: boolean;

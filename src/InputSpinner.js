@@ -177,8 +177,9 @@ class InputSpinner extends Component {
 	/**
 	 * On value change
 	 * @param value
+	 * @param isPressEvent
 	 */
-	async onChange(value) {
+	async onChange(value, isPressEvent = false) {
 		const isEmptyValue = isEmpty(value);
 		this._clearOnChangeTimers();
 
@@ -455,7 +456,15 @@ class InputSpinner extends Component {
 		if (this._isDisabledButtonRight()) return;
 		let currentValue = this.parseNum(this.state.value);
 		let num = currentValue + this.parseNum(this.state.step);
-		if (this.maxReached(currentValue)) {
+
+		if (
+			this.maxReached(currentValue) &&
+			!this.isEmptied() &&
+			this.props.continuity !== false
+		) {
+			// Continuity mode
+			num = this.state.min;
+		} else if (this.maxReached(currentValue)) {
 			return;
 		}
 		if (this.props.onIncrease) {
@@ -479,7 +488,7 @@ class InputSpinner extends Component {
 		}
 
 		this.increaseTimer = setTimeout(this.increase.bind(this), wait);
-		this.onChange(num);
+		this.onChange(num, true);
 	}
 
 	/**
@@ -489,9 +498,18 @@ class InputSpinner extends Component {
 		if (this._isDisabledButtonLeft()) return;
 		let currentValue = this.parseNum(this.state.value);
 		let num = currentValue - this.parseNum(this.state.step);
-		if (this.minReached(currentValue)) {
+
+		if (
+			this.minReached(currentValue) &&
+			!this.isEmptied() &&
+			this.props.continuity !== false
+		) {
+			// Continuity mode
+			num = this.state.max;
+		} else if (this.minReached(currentValue)) {
 			return;
 		}
+
 		if (this.props.onDecrease) {
 			let decreased_num = num;
 			const res = await this.props.onDecrease(decreased_num);
@@ -513,7 +531,7 @@ class InputSpinner extends Component {
 		}
 
 		this.decreaseTimer = setTimeout(this.decrease.bind(this), wait);
-		this.onChange(num);
+		this.onChange(num, true);
 	}
 
 	/**
@@ -1095,6 +1113,7 @@ InputSpinner.propTypes = {
 	accelerationDelay: PropTypes.number,
 	speed: PropTypes.number,
 	emptied: PropTypes.bool,
+	continuity: PropTypes.bool,
 	typingTime: PropTypes.number,
 	buttonLeftDisabled: PropTypes.bool,
 	buttonRightDisabled: PropTypes.bool,
@@ -1154,6 +1173,7 @@ InputSpinner.defaultProps = {
 	accelerationDelay: defaultAccelerationDelay,
 	speed: defaultSpeed,
 	emptied: false,
+	continuity: false,
 	typingTime: defaultTypingTime,
 	buttonLeftDisabled: false,
 	buttonRightDisabled: false,
