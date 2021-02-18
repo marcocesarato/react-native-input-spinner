@@ -1,5 +1,11 @@
 import React, {Component} from "react";
-import {Text, TextInput, TouchableHighlight, View} from "react-native";
+import {
+	Text,
+	TextInput,
+	TouchableHighlight,
+	View,
+	Platform,
+} from "react-native";
 import PropTypes from "prop-types";
 import {Style} from "./Style";
 import {debounce, isNumeric, isEmpty} from "./Utils";
@@ -1215,6 +1221,7 @@ class InputSpinner extends Component {
 
 InputSpinner.propTypes = {
 	type: PropTypes.string,
+	skin: PropTypes.string,
 	min: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	max: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -1290,6 +1297,7 @@ InputSpinner.propTypes = {
 
 InputSpinner.defaultProps = {
 	type: "int",
+	skin: null,
 	min: 0,
 	max: null,
 	value: 0,
