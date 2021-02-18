@@ -945,7 +945,6 @@ class InputSpinner extends Component {
 				fontSize: this.props.buttonFontSize,
 				fontFamily: this.props.buttonFontFamily,
 				lineHeight: this.props.height,
-				verticalAlign: "middle",
 			},
 		];
 	}

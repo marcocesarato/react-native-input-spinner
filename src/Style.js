@@ -52,11 +52,16 @@ export const Style = StyleSheet.create({
 	buttonText: {
 		color: "white",
 		textAlign: "center",
+		justifyContent: "center",
+		alignItems: "center",
+		textAlignVertical: "center",
 	},
 	numberText: {
 		flex: 1,
 		textAlign: "center",
 		justifyContent: "center",
+		alignItems: "center",
+		textAlignVertical: "center",
 		borderWidth: 0,
 		...Platform.select({
 			web: {
