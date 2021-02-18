@@ -570,7 +570,7 @@ class InputSpinner extends Component {
 		let currentValue = this._parseNum(this.state.value);
 		let num = currentValue + this._parseNum(isLongPress ? this.state.longStep : this.state.step);
 		if (isLongPress && this.state.longStep > 1) {
-			num = Math.round(num / this.longStep) * this.longStep;
+			num = Math.round(num / this.state.longStep) * this.state.longStep;
 		}
 
 		if (
@@ -611,7 +611,7 @@ class InputSpinner extends Component {
 		let currentValue = this._parseNum(this.state.value);
 		let num = currentValue - this._parseNum(isLongPress ? this.state.longStep : this.state.step);
 		if (isLongPress && this.state.longStep > 1) {
-			num = Math.round(num / this.longStep) * this.longStep;
+			num = Math.round(num / this.state.longStep) * this.state.longStep;
 		}
 
 		if (
