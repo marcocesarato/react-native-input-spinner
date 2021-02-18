@@ -52,9 +52,9 @@ export const debounce = (callback, wait) => {
  */
 export const isNumeric = (num) => {
 	return (
-		num !== "" &&
-		num !== null &&
+		num != null &&
 		num !== false &&
+		num !== "" &&
 		!isNaN(parseFloat(num)) &&
 		!isNaN(num - 0)
 	);

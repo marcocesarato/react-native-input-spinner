@@ -561,6 +561,15 @@ class InputSpinner extends Component {
 	}
 
 	/**
+	 * On hold increase
+	 * @param event
+	 * @returns {Promise<void>}
+	 */
+	async increaseHold(event) {
+		this.increase(event, true);
+	}
+
+	/**
 	 * Increase
 	 * @param event
 	 * @param isLongPress
@@ -599,18 +608,30 @@ class InputSpinner extends Component {
 		}
 
 		let wait = this._getHoldChangeInterval();
-		if (this.increaseTimer === null) {
+		if (!isLongPress && this.increaseTimer === null) {
 			this._startHoldTime();
 			wait = this.props.accelerationDelay;
-		} else {
+		} else if (isLongPress) {
 			this.onLongPress(num);
 		}
 
-		this.increaseTimer = setTimeout(
-			this.increase.bind(this, event, true),
-			wait,
-		);
+		if (isLongPress) {
+			this.increaseTimer = setTimeout(
+				this.increase.bind(this, event, true),
+				wait,
+			);
+		}
+
 		this.onChange(num, true);
+	}
+
+	/**
+	 * On hold decrease
+	 * @param event
+	 * @returns {Promise<void>}
+	 */
+	async decreaseHold(event) {
+		this.decrease(event, true);
 	}
 
 	/**
@@ -652,17 +673,20 @@ class InputSpinner extends Component {
 		}
 
 		let wait = this._getHoldChangeInterval();
-		if (this.decreaseTimer === null) {
+		if (!isLongPress && this.decreaseTimer === null) {
 			this._startHoldTime();
 			wait = this.props.accelerationDelay;
-		} else {
+		} else if (isLongPress) {
 			this.onLongPress(num);
 		}
 
-		this.decreaseTimer = setTimeout(
-			this.decrease.bind(this, event, true),
-			wait,
-		);
+		if (isLongPress) {
+			this.decreaseTimer = setTimeout(
+				this.decrease.bind(this, event, true),
+				wait,
+			);
+		}
+
 		this.onChange(num, true);
 	}
 
@@ -1101,6 +1125,8 @@ class InputSpinner extends Component {
 				style={buttonStyle}
 				onPressIn={this.decrease.bind(this)}
 				onPressOut={this.onPressOut.bind(this)}
+				onLongPress={this.decreaseHold.bind(this)}
+				delayLongPress={this.props.accelerationDelay}
 				{...this.props.leftButtonProps}>
 				{this._renderLeftButtonElement()}
 			</TouchableHighlight>
@@ -1137,6 +1163,8 @@ class InputSpinner extends Component {
 				style={buttonStyle}
 				onPressIn={this.increase.bind(this)}
 				onPressOut={this.onPressOut.bind(this)}
+				onLongPress={this.increaseHold.bind(this)}
+				delayLongPress={this.props.accelerationDelay}
 				{...this.props.rightButtonProps}>
 				{this._renderRightButtonElement()}
 			</TouchableHighlight>
