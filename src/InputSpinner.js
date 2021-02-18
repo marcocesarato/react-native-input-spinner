@@ -1245,7 +1245,7 @@ InputSpinner.defaultProps = {
 	value: 0,
 	initialValue: null,
 	step: 1,
-	longStep: 1,
+	longStep: 0,
 	precision: 2,
 	rounded: true,
 	shadow: false,
