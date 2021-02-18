@@ -59,3 +59,14 @@ export const isNumeric = (num) => {
 		!isNaN(num - 0)
 	);
 };
+
+export const mergeViewStyle = (style, defaultStyle) => {
+	if (Array.isArray(style) && Array.isArray(defaultStyle)) {
+		defaultStyle.concat(style);
+	} else if (Array.isArray(style)) {
+		style.unshift(defaultStyle);
+	} else {
+		style = [defaultStyle, style];
+	}
+	return style;
+};
