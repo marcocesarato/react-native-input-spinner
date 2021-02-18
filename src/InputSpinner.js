@@ -204,6 +204,7 @@ class InputSpinner extends Component {
 		if (this._isCallable(this.props.onMax)) {
 			this.props.onMax(number);
 		}
+		this._resetHoldTime();
 	}
 
 	/**
@@ -214,6 +215,7 @@ class InputSpinner extends Component {
 		if (this._isCallable(this.props.onMin)) {
 			this.props.onMin(number);
 		}
+		this._resetHoldTime();
 	}
 
 	/**
@@ -304,7 +306,6 @@ class InputSpinner extends Component {
 	 * @param e
 	 */
 	onPressOut(e) {
-		this._clearTimers();
 		this._resetHoldTime();
 	}
 
@@ -533,6 +534,7 @@ class InputSpinner extends Component {
 	 */
 	_resetHoldTime() {
 		this.holdTime = null;
+		this._clearTimers();
 	}
 
 	/**
