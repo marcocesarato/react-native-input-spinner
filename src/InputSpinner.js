@@ -35,7 +35,7 @@ class InputSpinner extends Component {
 		}
 		let spinnerLongStep = this._parseNum(this.props.longStep);
 		if (!this.isTypeDecimal() && spinnerLongStep < 1) {
-			spinnerLongStep = spinnerStep;
+			spinnerLongStep = 0;
 		}
 
 		const min = this.props.min != null ? this._parseNum(this.props.min) : null;
@@ -97,9 +97,8 @@ class InputSpinner extends Component {
 			});
 		}
 		// Parse Step
-		let spinnerStep;
 		if (this.props.step !== prevProps.step) {
-			spinnerStep = this._parseNum(this.props.step);
+			let spinnerStep = this._parseNum(this.props.step);
 			if (!this.isTypeDecimal() && spinnerStep < 1) {
 				spinnerStep = 1;
 			}
@@ -109,7 +108,7 @@ class InputSpinner extends Component {
 		if (this.props.longStep !== prevProps.longStep) {
 			let spinnerLongStep = this._parseNum(this.props.longStep);
 			if (!this.isTypeDecimal() && spinnerLongStep < 1) {
-				spinnerLongStep = spinnerStep;
+				spinnerLongStep = 0;
 			}
 			this.setState({longStep: spinnerLongStep});
 		}
@@ -568,8 +567,8 @@ class InputSpinner extends Component {
 	async increase(event) {
 		if (this._isDisabledButtonRight()) return;
 		let currentValue = this._parseNum(this.state.value);
-		let num = currentValue + this._parseNum(!event ? this.state.longStep : this.state.step);
-		if (!event && this.state.longStep > 1) {
+		let num = currentValue + this._parseNum((!event && this.state.longStep > 0) ? this.state.longStep : this.state.step);
+		if (!event && this.state.longStep > 0) {
 			num = Math.round(num / this.state.longStep) * this.state.longStep;
 		}
 
@@ -609,8 +608,8 @@ class InputSpinner extends Component {
 	async decrease(event) {
 		if (this._isDisabledButtonLeft()) return;
 		let currentValue = this._parseNum(this.state.value);
-		let num = currentValue - this._parseNum(!event ? this.state.longStep : this.state.step);
-		if (!event && this.state.longStep > 1) {
+		let num = currentValue - this._parseNum((!event && this.state.longStep > 0) ? this.state.longStep : this.state.step);
+		if (!event && this.state.longStep > 0) {
 			num = Math.round(num / this.state.longStep) * this.state.longStep;
 		}
 
