@@ -8,6 +8,7 @@ export interface ReactNativeInputSpinnerProps {
 	value?: string | number;
 	initialValue?: string | number;
 	step?: string | number;
+	longStep?: string | number;
 	precision?: number;
 	shadow?: boolean;
 	rounded?: boolean;
