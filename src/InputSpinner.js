@@ -112,7 +112,6 @@ class InputSpinner extends Component {
 			}
 			this.setState({longStep: spinnerLongStep});
 		}
-
 	}
 
 	/**
@@ -563,12 +562,21 @@ class InputSpinner extends Component {
 
 	/**
 	 * Increase
+	 * @param event
+	 * @param isLongPress
+	 * @returns {Promise<void>}
 	 */
-	async increase(event) {
+	async increase(event, isLongPress = false) {
 		if (this._isDisabledButtonRight()) return;
 		let currentValue = this._parseNum(this.state.value);
-		let num = currentValue + this._parseNum((!event && this.state.longStep > 0) ? this.state.longStep : this.state.step);
-		if (!event && this.state.longStep > 0) {
+		let num =
+			currentValue +
+			this._parseNum(
+				isLongPress && this.state.longStep > 0
+					? this.state.longStep
+					: this.state.step,
+			);
+		if (isLongPress && this.state.longStep > 0) {
 			num = Math.round(num / this.state.longStep) * this.state.longStep;
 		}
 
@@ -598,18 +606,30 @@ class InputSpinner extends Component {
 			this.onLongPress(num);
 		}
 
-		this.increaseTimer = setTimeout(this.increase.bind(this), wait);
+		this.increaseTimer = setTimeout(
+			this.increase.bind(this, event, true),
+			wait,
+		);
 		this.onChange(num, true);
 	}
 
 	/**
 	 * Decrease
+	 * @param event
+	 * @param isLongPress
+	 * @returns {Promise<void>}
 	 */
-	async decrease(event) {
+	async decrease(event, isLongPress = false) {
 		if (this._isDisabledButtonLeft()) return;
 		let currentValue = this._parseNum(this.state.value);
-		let num = currentValue - this._parseNum((!event && this.state.longStep > 0) ? this.state.longStep : this.state.step);
-		if (!event && this.state.longStep > 0) {
+		let num =
+			currentValue -
+			this._parseNum(
+				isLongPress && this.state.longStep > 0
+					? this.state.longStep
+					: this.state.step,
+			);
+		if (isLongPress && this.state.longStep > 0) {
 			num = Math.round(num / this.state.longStep) * this.state.longStep;
 		}
 
@@ -639,7 +659,10 @@ class InputSpinner extends Component {
 			this.onLongPress(num);
 		}
 
-		this.decreaseTimer = setTimeout(this.decrease.bind(this), wait);
+		this.decreaseTimer = setTimeout(
+			this.decrease.bind(this, event, true),
+			wait,
+		);
 		this.onChange(num, true);
 	}
 
