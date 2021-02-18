@@ -33,6 +33,10 @@ class InputSpinner extends Component {
 		if (!this.isTypeDecimal() && spinnerStep < 1) {
 			spinnerStep = 1;
 		}
+		let spinnerLongStep = this._parseNum(this.props.longStep);
+		if (!this.isTypeDecimal() && spinnerLongStep < 1) {
+			spinnerLongStep = 0;
+		}
 
 		const min = this.props.min != null ? this._parseNum(this.props.min) : null;
 		const max = this.props.max != null ? this._parseNum(this.props.max) : null;
@@ -62,6 +66,7 @@ class InputSpinner extends Component {
 			max: max,
 			value: initialValue,
 			step: spinnerStep,
+			longStep: spinnerLongStep,
 			focused: false,
 			buttonPress: null,
 		};
@@ -98,6 +103,14 @@ class InputSpinner extends Component {
 				spinnerStep = 1;
 			}
 			this.setState({step: spinnerStep});
+		}
+		// Parse longStep
+		if (this.props.longStep !== prevProps.longStep) {
+			let spinnerLongStep = this._parseNum(this.props.longStep);
+			if (!this.isTypeDecimal() && spinnerLongStep < 1) {
+				spinnerLongStep = 0;
+			}
+			this.setState({longStep: spinnerLongStep});
 		}
 	}
 
@@ -549,11 +562,23 @@ class InputSpinner extends Component {
 
 	/**
 	 * Increase
+	 * @param event
+	 * @param isLongPress
+	 * @returns {Promise<void>}
 	 */
-	async increase() {
+	async increase(event, isLongPress = false) {
 		if (this._isDisabledButtonRight()) return;
 		let currentValue = this._parseNum(this.state.value);
-		let num = currentValue + this._parseNum(this.state.step);
+		let num =
+			currentValue +
+			this._parseNum(
+				isLongPress && this.state.longStep > 0
+					? this.state.longStep
+					: this.state.step,
+			);
+		if (isLongPress && this.state.longStep > 0) {
+			num = Math.round(num / this.state.longStep) * this.state.longStep;
+		}
 
 		if (
 			this.isMaxReached(currentValue) &&
@@ -581,17 +606,32 @@ class InputSpinner extends Component {
 			this.onLongPress(num);
 		}
 
-		this.increaseTimer = setTimeout(this.increase.bind(this), wait);
+		this.increaseTimer = setTimeout(
+			this.increase.bind(this, event, true),
+			wait,
+		);
 		this.onChange(num, true);
 	}
 
 	/**
 	 * Decrease
+	 * @param event
+	 * @param isLongPress
+	 * @returns {Promise<void>}
 	 */
-	async decrease() {
+	async decrease(event, isLongPress = false) {
 		if (this._isDisabledButtonLeft()) return;
 		let currentValue = this._parseNum(this.state.value);
-		let num = currentValue - this._parseNum(this.state.step);
+		let num =
+			currentValue -
+			this._parseNum(
+				isLongPress && this.state.longStep > 0
+					? this.state.longStep
+					: this.state.step,
+			);
+		if (isLongPress && this.state.longStep > 0) {
+			num = Math.round(num / this.state.longStep) * this.state.longStep;
+		}
 
 		if (
 			this.isMinReached(currentValue) &&
@@ -619,7 +659,10 @@ class InputSpinner extends Component {
 			this.onLongPress(num);
 		}
 
-		this.decreaseTimer = setTimeout(this.decrease.bind(this), wait);
+		this.decreaseTimer = setTimeout(
+			this.decrease.bind(this, event, true),
+			wait,
+		);
 		this.onChange(num, true);
 	}
 
@@ -1149,6 +1192,7 @@ InputSpinner.propTypes = {
 	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	initialValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	step: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	longStep: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	precision: PropTypes.number,
 	shadow: PropTypes.bool,
 	rounded: PropTypes.bool,
@@ -1223,6 +1267,7 @@ InputSpinner.defaultProps = {
 	value: 0,
 	initialValue: null,
 	step: 1,
+	longStep: 0,
 	precision: 2,
 	rounded: true,
 	shadow: false,
