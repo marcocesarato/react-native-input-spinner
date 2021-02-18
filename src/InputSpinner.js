@@ -568,7 +568,7 @@ class InputSpinner extends Component {
 	async increase(event) {
 		if (this._isDisabledButtonRight()) return;
 		let currentValue = this._parseNum(this.state.value);
-		let num = currentValue + this._parseNum(isLongPress ? this.state.longStep : this.state.step);
+		let num = currentValue + this._parseNum(!event ? this.state.longStep : this.state.step);
 		if (!event && this.state.longStep > 1) {
 			num = Math.round(num / this.state.longStep) * this.state.longStep;
 		}
@@ -609,7 +609,7 @@ class InputSpinner extends Component {
 	async decrease(event) {
 		if (this._isDisabledButtonLeft()) return;
 		let currentValue = this._parseNum(this.state.value);
-		let num = currentValue - this._parseNum(isLongPress ? this.state.longStep : this.state.step);
+		let num = currentValue - this._parseNum(!event ? this.state.longStep : this.state.step);
 		if (!event && this.state.longStep > 1) {
 			num = Math.round(num / this.state.longStep) * this.state.longStep;
 		}
