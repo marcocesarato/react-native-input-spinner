@@ -903,10 +903,9 @@ class InputSpinner extends Component {
 	 * @private
 	 */
 	_getColorPress() {
-		let color = this.props.color;
-		if (this.props.colorAsBackground) {
-			color = defaultTransparent;
-		}
+		const color = this.props.colorAsBackground
+			? defaultTransparent
+			:  this.props.color;
 		return this.props.colorPress !== defaultColor
 			? this.props.colorPress
 			: color;
@@ -918,12 +917,15 @@ class InputSpinner extends Component {
 	 * @private
 	 */
 	_getColorPressText() {
+		const color = this.props.colorAsBackground
+			? this._getColorBackground()
+			: this._getColorPress();
 		const pressColor = this.props.buttonPressTextColor
 			? this.props.buttonPressTextColor
-			: getColorContrast(this._getColorPress());
+			: this._getColorText();
 		return this.props.buttonPressTextColor !== this.props.buttonTextColor
 			? pressColor
-			: this._getColorText();
+			: getColorContrast(color);
 	}
 
 	/**
