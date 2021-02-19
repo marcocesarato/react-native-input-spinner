@@ -35,42 +35,55 @@ export const isEmpty = (x) => {
  * @returns {number[]}
  */
 export const parseColor = (color) => {
-	let cache;
-	let p = parseInt;
-	color = color.replace(/\s/g, "");
+	let colors;
+	const colorString = color.replace(/\s/g, "");
 	if (
-		(cache = /#([\da-fA-F]{2})([\da-fA-F]{2})([\da-fA-F]{2})([\da-fA-F]{2})/.exec(
-			color,
+		(colors = /#([\da-fA-F]{2})([\da-fA-F]{2})([\da-fA-F]{2})([\da-fA-F]{2})/.exec(
+			colorString,
 		))
 	) {
 		// #000000FF
-		cache = [
-			p(cache[1], 16),
-			p(cache[2], 16),
-			p(cache[3], 16),
-			p(cache[4], 16),
+		colors = [
+			parseInt(colors[1], 16),
+			parseInt(colors[2], 16),
+			parseInt(colors[3], 16),
+			parseInt(colors[4], 16),
 		];
 	} else if (
-		(cache = /#([\da-fA-F]{2})([\da-fA-F]{2})([\da-fA-F]{2})/.exec(color))
+		(colors = /#([\da-fA-F]{2})([\da-fA-F]{2})([\da-fA-F]{2})/.exec(
+			colorString,
+		))
 	) {
 		// #000000
-		cache = [p(cache[1], 16), p(cache[2], 16), p(cache[3], 16)];
-	} else if ((cache = /#([\da-fA-F])([\da-fA-F])([\da-fA-F])/.exec(color))) {
-		cache = [p(cache[1], 16) * 17, p(cache[2], 16) * 17, p(cache[3], 16) * 17];
+		colors = [
+			parseInt(colors[1], 16),
+			parseInt(colors[2], 16),
+			parseInt(colors[3], 16),
+		];
 	} else if (
+		(colors = /#([\da-fA-F])([\da-fA-F])([\da-fA-F])/.exec(colorString))
+	) {
 		// #000
-		(cache = /rgba\(([\d]+),([\d]+),([\d]+),([\d]+|[\d]*.[\d]+)\)/.exec(color))
+		colors = [
+			parseInt(colors[1], 16) * 17,
+			parseInt(colors[2], 16) * 17,
+			parseInt(colors[3], 16) * 17,
+		];
+	} else if (
+		(colors = /rgba\(([\d]+),([\d]+),([\d]+),([\d]+|[\d]*.[\d]+)\)/.exec(
+			colorString,
+		))
 	) {
 		// rgba(255,255,255,255)
-		cache = [+cache[1], +cache[2], +cache[3], +cache[4]];
-	} else if ((cache = /rgb\(([\d]+),([\d]+),([\d]+)\)/.exec(color))) {
+		colors = [+colors[1], +colors[2], +colors[3], +colors[4]];
+	} else if ((colors = /rgb\(([\d]+),([\d]+),([\d]+)\)/.exec(colorString))) {
 		// rgb(255,255,255)
-		cache = [+cache[1], +cache[2], +cache[3]];
+		colors = [+colors[1], +colors[2], +colors[3]];
 	} else {
-		cache = [0, 0, 0, 0];
+		colors = [0, 0, 0, 0];
 	}
-	isNaN(cache[3]) && (cache[3] = 1);
-	return cache.slice(0, 4);
+	isNaN(colors[3]) && (colors[3] = 1);
+	return colors.slice(0, 4);
 };
 
 /**
