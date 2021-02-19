@@ -20,6 +20,7 @@ export interface ReactNativeInputSpinnerProps {
 	colorLeft?: string;
 	colorMax?: string;
 	colorMin?: string;
+	colorAsBackground?: boolean;
 	background?: string;
 	textColor?: string;
 	arrows?: boolean;

@@ -7,7 +7,7 @@ export const getProps = (props) => {
 	return {
 		shadow: props.shadow ? props.shadow : true,
 		color: backgroundFallback,
-		background: props.background ? props.background : backgroundFallback,
+		colorAsBackground: true,
 		buttonTextColor: props.buttonTextColor
 			? props.buttonTextColor
 			: colorFallback,

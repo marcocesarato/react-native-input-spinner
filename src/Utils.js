@@ -30,6 +30,19 @@ export const isEmpty = (x) => {
 };
 
 /**
+ * Is variable callable
+ * @private
+ * @param callback
+ * @returns {boolean}
+ */
+export const isCallable = (callback) => {
+	return (
+		callback != null &&
+		(callback instanceof Function || typeof callback === "function")
+	);
+};
+
+/**
  * Debounce
  * @param callback
  * @param wait

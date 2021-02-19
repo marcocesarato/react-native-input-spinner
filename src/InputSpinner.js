@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import PropTypes from "prop-types";
 import {Style, defaultColor} from "./Style";
-import {debounce, isNumeric, isEmpty} from "./Utils";
+import {debounce, isNumeric, isEmpty, isCallable} from "./Utils";
 
 /**
  * Default constants
@@ -197,7 +197,7 @@ class InputSpinner extends Component {
 	 * @param number
 	 */
 	onIncrease(number) {
-		if (this._isCallable(this.props.onIncrease)) {
+		if (isCallable(this.props.onIncrease)) {
 			return this.props.onIncrease(number);
 		}
 		return true;
@@ -208,7 +208,7 @@ class InputSpinner extends Component {
 	 * @param number
 	 */
 	onDecrease(number) {
-		if (this._isCallable(this.props.onDecrease)) {
+		if (isCallable(this.props.onDecrease)) {
 			return this.props.onDecrease(number);
 		}
 		return true;
@@ -219,7 +219,7 @@ class InputSpinner extends Component {
 	 * @param number
 	 */
 	onMax(number) {
-		if (this._isCallable(this.props.onMax)) {
+		if (isCallable(this.props.onMax)) {
 			this.props.onMax(number);
 		}
 		this._resetHoldTime();
@@ -230,7 +230,7 @@ class InputSpinner extends Component {
 	 * @param number
 	 */
 	onMin(number) {
-		if (this._isCallable(this.props.onMin)) {
+		if (isCallable(this.props.onMin)) {
 			this.props.onMin(number);
 		}
 		this._resetHoldTime();
@@ -241,7 +241,7 @@ class InputSpinner extends Component {
 	 * @param number
 	 */
 	onLongPress(number) {
-		if (this._isCallable(this.props.onLongPress)) {
+		if (isCallable(this.props.onLongPress)) {
 			this.props.onLongPress(number);
 		}
 	}
@@ -301,7 +301,7 @@ class InputSpinner extends Component {
 			num = parsedNum = null;
 		}
 
-		if (this.state.value !== num && this._isCallable(this.props.onChange)) {
+		if (this.state.value !== num && isCallable(this.props.onChange)) {
 			const res = await this.props.onChange(parsedNum);
 			if (!isEmptyValue) {
 				if (res === false) {
@@ -348,7 +348,7 @@ class InputSpinner extends Component {
 	 * @param e
 	 */
 	onSubmit(e) {
-		if (this._isCallable(this.props.onSubmit)) {
+		if (isCallable(this.props.onSubmit)) {
 			this.props.onSubmit(this._parseNum(e.nativeEvent.text));
 		}
 	}
@@ -749,19 +749,6 @@ class InputSpinner extends Component {
 	}
 
 	/**
-	 * Is variable callable
-	 * @private
-	 * @param callback
-	 * @returns {boolean}
-	 */
-	_isCallable(callback) {
-		return (
-			callback != null &&
-			(callback instanceof Function || typeof callback === "function")
-		);
-	}
-
-	/**
 	 * Is text input editable
 	 * @returns {boolean|Boolean}
 	 */
@@ -945,12 +932,13 @@ class InputSpinner extends Component {
 	 * @private
 	 */
 	_getContainerStyle() {
+		const backgroundColor = this.props.colorAsBackground ? this._getColor() : this.props.background;
 		return [
 			Style.container,
 			{
 				minHeight: this.props.height,
 				width: this.props.width,
-				backgroundColor: this.props.background,
+				backgroundColor: backgroundColor,
 			},
 			this.props.showBorder
 				? {borderWidth: 0.5, borderColor: this._getColor()}
@@ -1239,6 +1227,7 @@ InputSpinner.propTypes = {
 	colorLeft: PropTypes.string,
 	colorMax: PropTypes.string,
 	colorMin: PropTypes.string,
+	colorAsBackground: PropTypes.bool,
 	background: PropTypes.string,
 	textColor: PropTypes.string,
 	arrows: PropTypes.bool,
@@ -1333,6 +1322,7 @@ InputSpinner.defaultProps = {
 	colorPress: defaultColor,
 	colorRight: defaultColor,
 	colorLeft: defaultColor,
+	colorAsBackground: false,
 	background: "transparent",
 	textColor: "#000000",
 	arrows: false,
