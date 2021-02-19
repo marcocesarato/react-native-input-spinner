@@ -136,7 +136,9 @@ export const isNumeric = (num) => {
  * @returns {*[]}
  */
 export const mergeViewStyle = (style, defaultStyle) => {
-	if (Array.isArray(style) && Array.isArray(defaultStyle)) {
+	if (style == null) {
+		style = defaultStyle;
+	} else if (Array.isArray(style) && Array.isArray(defaultStyle)) {
 		defaultStyle.concat(style);
 	} else if (Array.isArray(style)) {
 		style.unshift(defaultStyle);
