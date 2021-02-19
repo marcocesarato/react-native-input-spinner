@@ -580,7 +580,7 @@ class InputSpinner extends Component {
 			num = Math.round(num / this.state.longStep) * this.state.longStep;
 		}
 		if (this.isTypeDecimal()) {
-			num = num.toFixed(this.props.precision) * 1
+			num = Number(num.toFixed(this.props.precision));
 		}
 
 		if (
@@ -636,9 +636,9 @@ class InputSpinner extends Component {
 			num = Math.round(num / this.state.longStep) * this.state.longStep;
 		}
 		if (this.isTypeDecimal()) {
-			num = num.toFixed(this.props.precision) * 1
+			num = Number(num.toFixed(this.props.precision));
 		}
-		
+
 		if (
 			this.isMinReached(currentValue) &&
 			!this.isEmptied() &&
