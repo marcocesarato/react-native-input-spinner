@@ -7,16 +7,15 @@ import {
 	Platform,
 } from "react-native";
 import PropTypes from "prop-types";
-import {Style} from "./Style";
+import {Style, defaultColor} from "./Style";
 import {debounce, isNumeric, isEmpty} from "./Utils";
 
 /**
  * Default constants
  */
-const defaultSpeed = 7;
-const defaultAccelerationDelay = 1000;
-const defaultColor = "#3E525F";
-const defaultTypingTime = 500;
+export const defaultSpeed = 7;
+export const defaultAccelerationDelay = 1000;
+export const defaultTypingTime = 500;
 
 /**
  * Input Spinner

@@ -1,10 +1,13 @@
-/**
- * Input Spinner - Style
- * @author Marco Cesarato <cesarato.developer@gmail.com>
- */
-
 import {Platform, StyleSheet} from "react-native";
 
+/**
+ * Palette constants
+ */
+export const defaultColor = "#3E525F";
+
+/**
+ * Default style
+ */
 export const Style = StyleSheet.create({
 	container: {
 		borderRadius: 4,
