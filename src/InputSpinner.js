@@ -1070,7 +1070,7 @@ class InputSpinner extends Component {
 		} else {
 			const text =
 				this.props.arrows !== false
-					? "<"
+					? "❮"
 					: this.props.buttonLeftText
 					? this.props.buttonLeftText
 					: "-";
@@ -1094,7 +1094,7 @@ class InputSpinner extends Component {
 		} else {
 			const text =
 				this.props.arrows !== false
-					? ">"
+					? "❯"
 					: this.props.buttonRightText
 					? this.props.buttonRightText
 					: "+";
