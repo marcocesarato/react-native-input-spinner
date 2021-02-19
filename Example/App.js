@@ -155,6 +155,7 @@ export default class App extends Component {
 						<InputSpinner
 							value={this.state.value}
 							style={Styles.spinner}
+							max={10}
 							onChange={(num) => {
 								alert("onChange new value: " + num);
 							}}
@@ -215,128 +216,44 @@ export default class App extends Component {
 						/>
 					</View>
 					<View style={Styles.col}>
-						<Text style={Styles.text}>
-							Customize shadow, color white and buttonTextColor,
-							buttonPressTextColor black and buttonFontFamily
-						</Text>
+						<Text style={Styles.text}>Skin Round</Text>
 						<InputSpinner
 							value={this.state.value}
 							style={Styles.spinner}
-							shadow
-							color={"#FFF"}
-							background={"#FFF"}
-							buttonTextColor={"#000"}
-							buttonPressTextColor={"#888"}
-							fontFamily={Platform.select({
-								ios: "San Francisco",
-								default: "sans-serif",
-							})}
-							buttonFontFamily={Platform.select({
-								ios: "San Francisco",
-								default: "sans-serif",
-							})}
+							skin="round"
 						/>
 					</View>
 					<View style={Styles.col}>
-						<Text style={Styles.text}>
-							Customize shadow, color, colorPress,
-							buttonTextColor, buttonPressTextColor and
-							buttonFontFamily
-						</Text>
+						<Text style={Styles.text}>Skin Square</Text>
 						<InputSpinner
 							value={this.state.value}
-							style={[
-								Styles.spinner,
-								{padding: 10, borderRadius: 3},
-							]}
+							style={Styles.spinner}
+							skin="square"
+						/>
+					</View>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>Skin Paper</Text>
+						<InputSpinner
+							value={this.state.value}
+							style={Styles.spinner}
 							height={30}
-							shadow
-							color={"#eeeafd"}
-							background={"#FFF"}
-							colorPress={"#a28df6"}
-							buttonTextColor={"#a28df6"}
-							buttonPressTextColor={"#dbd2ef"}
-							fontFamily={Platform.select({
-								ios: "San Francisco",
-								default: "sans-serif",
-							})}
-							buttonFontFamily={Platform.select({
-								ios: "San Francisco",
-								default: "sans-serif",
-							})}
+							skin="paper"
 						/>
 					</View>
 					<View style={Styles.col}>
-						<Text style={Styles.text}>Customize styles 1</Text>
-						<InputSpinner
-							value={this.state.value}
-							style={[
-								Styles.spinner,
-								{backgroundColor: "#898aff"},
-							]}
-							shadow
-							color={"#898aff"}
-							colorPress={"#898aff"}
-							buttonTextColor={"#dbd2ef"}
-							buttonPressTextColor={"#dbd2ef"}
-							fontFamily={Platform.select({
-								ios: "San Francisco",
-								default: "sans-serif",
-							})}
-							buttonFontFamily={Platform.select({
-								ios: "San Francisco",
-								default: "sans-serif",
-							})}
-							inputStyle={{
-								borderRadius: 30,
-								backgroundColor: "#FFF",
-							}}
-						/>
-					</View>
-					<View style={Styles.col}>
-						<Text style={Styles.text}>Customize styles 2</Text>
-						<InputSpinner
-							value={this.state.value}
-							style={[
-								Styles.spinner,
-								{
-									backgroundColor: "#898aff",
-									minWidth: 150,
-									maxWidth: 150,
-								},
-							]}
-							shadow
-							width={150}
-							color={"#898aff"}
-							colorPress={"#898aff"}
-							buttonTextColor={"#dbd2ef"}
-							buttonPressTextColor={"#dbd2ef"}
-							fontFamily={Platform.select({
-								ios: "San Francisco",
-								default: "sans-serif",
-							})}
-							buttonFontFamily={Platform.select({
-								ios: "San Francisco",
-								default: "sans-serif",
-							})}
-							inputStyle={{
-								borderRadius: 30,
-								backgroundColor: "#FFF",
-								minWidth: 50,
-								maxWidth: 50,
-								height: 50,
-							}}
-						/>
-					</View>
-					<View style={Styles.col}>
-						<Text style={Styles.text}>
-							rounded false and showBorder
-						</Text>
+						<Text style={Styles.text}>Skin Clean</Text>
 						<InputSpinner
 							value={this.state.value}
 							style={Styles.spinner}
-							rounded={false}
-							showBorder
+							skin="clean"
+						/>
+					</View>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>Skin Modern</Text>
+						<InputSpinner
+							value={this.state.value}
+							style={Styles.spinner}
+							skin="modern"
 						/>
 					</View>
 					<View style={Styles.col}>

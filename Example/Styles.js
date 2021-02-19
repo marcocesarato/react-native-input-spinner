@@ -40,7 +40,6 @@ export default StyleSheet.create({
 	spinner: {
 		flex: 1,
 		width: "auto",
-		minWidth: 300,
 		marginRight: 10,
 	},
 	simbol: {

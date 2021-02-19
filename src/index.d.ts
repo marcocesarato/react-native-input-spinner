@@ -3,11 +3,13 @@ import {StyleProp, ViewStyle} from "react-native";
 
 export interface ReactNativeInputSpinnerProps {
 	type?: string;
+	skin?: string;
 	min?: string | number;
 	max?: string | number;
 	value?: string | number;
 	initialValue?: string | number;
 	step?: string | number;
+	longStep?: string | number;
 	precision?: number;
 	shadow?: boolean;
 	rounded?: boolean;

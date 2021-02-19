@@ -1,11 +1,11 @@
 {
 	"name": "react-native-input-spinner",
-	"version": "1.5.2",
+	"version": "1.6.0",
 	"description": "React native input with increase and decrease buttons",
 	"main": "./src/index.js",
 	"types": "./src/index.d.ts",
 	"scripts": {
-		"prettify": "prettier --write './src/*.{ts,json,md,yml,js}' && prettier --write './*.{ts,json,md,yml,js}'",
+		"prettify": "prettier --write './src/**/*.{ts,json,md,yml,js}' && prettier --write './*.{ts,json,md,yml,js}'",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {

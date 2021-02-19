@@ -52,10 +52,27 @@ export const debounce = (callback, wait) => {
  */
 export const isNumeric = (num) => {
 	return (
-		num !== "" &&
-		num !== null &&
+		num != null &&
 		num !== false &&
+		num !== "" &&
 		!isNaN(parseFloat(num)) &&
 		!isNaN(num - 0)
 	);
+};
+
+/**
+ * Merge styles
+ * @param style
+ * @param defaultStyle
+ * @returns {*[]}
+ */
+export const mergeViewStyle = (style, defaultStyle) => {
+	if (Array.isArray(style) && Array.isArray(defaultStyle)) {
+		defaultStyle.concat(style);
+	} else if (Array.isArray(style)) {
+		style.unshift(defaultStyle);
+	} else {
+		style = [defaultStyle, style];
+	}
+	return style;
 };
