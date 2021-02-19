@@ -1,21 +1,21 @@
 import React, {Component} from "react";
 import {
+	Platform,
 	Text,
 	TextInput,
 	TouchableHighlight,
 	View,
-	Platform,
 } from "react-native";
 import PropTypes from "prop-types";
-import {Style, defaultColor, defaultTransparent} from "./Style";
+import {defaultColor, defaultTransparent, Style} from "./Style";
 import {
 	debounce,
-	isNumeric,
-	isEmpty,
-	isCallable,
 	getColorContrast,
-	mergeViewStyle,
+	isCallable,
+	isEmpty,
+	isNumeric,
 	isTransparentColor,
+	mergeViewStyle,
 } from "./Utils";
 
 /**
@@ -905,7 +905,7 @@ class InputSpinner extends Component {
 	_getColorPress() {
 		const color = this.props.colorAsBackground
 			? defaultTransparent
-			:  this.props.color;
+			: this.props.color;
 		return this.props.colorPress !== defaultColor
 			? this.props.colorPress
 			: color;
