@@ -8,14 +8,8 @@ export const getProps = (props) => {
 		style: mergeViewStyle(props.style, {padding: 10, borderRadius: 3}),
 		height: props.height ? props.height : 30,
 		shadow: props.shadow ? props.shadow : true,
-		color: colorFallback,
 		background: props.background ? props.background : "#FFF",
+		color: colorFallback,
 		colorPress: props.colorPress ? props.colorPress : colorPressFallback,
-		buttonTextColor: props.buttonTextColor
-			? props.buttonTextColor
-			: colorPressFallback,
-		buttonPressTextColor: props.buttonPressTextColor
-			? props.buttonPressTextColor
-			: "#FFF",
 	};
 };

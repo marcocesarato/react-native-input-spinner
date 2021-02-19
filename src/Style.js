@@ -4,6 +4,7 @@ import {Platform, StyleSheet} from "react-native";
  * Palette constants
  */
 export const defaultColor = "#3E525F";
+export const defaultTransparent = "#FFFFFF00";
 
 /**
  * Default style

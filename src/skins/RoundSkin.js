@@ -5,9 +5,7 @@ export const getProps = (props) => {
 	return {
 		shadow: props.shadow ? props.shadow : true,
 		colorAsBackground: true,
-		buttonPressTextColor: props.buttonPressTextColor
-			? props.buttonPressTextColor
-			: "#EEE",
+		textColor: "#000",
 		inputStyle: mergeViewStyle(props.inputStyle, {
 			backgroundColor: "#FFF",
 		}),

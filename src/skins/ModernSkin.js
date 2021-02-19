@@ -10,13 +10,9 @@ export const getProps = (props) => {
 		}),
 		shadow: props.shadow ? props.shadow : true,
 		width: props.width ? props.width : 150,
-		background: props.background ? props.background : colorFallback,
+		colorAsBackground: true,
 		color: colorFallback,
-		colorPress: props.colorPress ? props.colorPress : colorFallback,
-		buttonTextColor: props.buttonTextColor ? props.buttonTextColor : "#dbd2ef",
-		buttonPressTextColor: props.buttonPressTextColor
-			? props.buttonPressTextColor
-			: "#EEE",
+		textColor: "#000",
 		inputStyle: mergeViewStyle(props.inputStyle, {
 			borderRadius: 30,
 			backgroundColor: "#FFF",
