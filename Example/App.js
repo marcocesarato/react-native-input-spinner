@@ -7,7 +7,6 @@ import {
 	FlatList,
 	SafeAreaView,
 	Button,
-	Platform,
 } from "react-native";
 import InputSpinner from "react-native-input-spinner";
 import Styles from "./Styles";
