@@ -90,10 +90,7 @@ export default class App extends Component {
 					</Text>
 					<View style={Styles.col}>
 						<Text style={Styles.text}>Standard</Text>
-						<InputSpinner
-							value={this.state.value}
-							style={Styles.spinner}
-						/>
+						<InputSpinner value={this.state.value} style={Styles.spinner} />
 					</View>
 					<View style={Styles.col}>
 						<Text style={Styles.text}>Custom color</Text>
@@ -123,9 +120,7 @@ export default class App extends Component {
 						/>
 					</View>
 					<View style={Styles.col}>
-						<Text style={Styles.text}>
-							Custom button text and fontSize
-						</Text>
+						<Text style={Styles.text}>Custom button text and fontSize</Text>
 						<InputSpinner
 							value={this.state.value}
 							style={Styles.spinner}
@@ -162,9 +157,7 @@ export default class App extends Component {
 						/>
 					</View>
 					<View style={Styles.col}>
-						<Text style={Styles.text}>
-							onMin and onMax (min 0, max 3)
-						</Text>
+						<Text style={Styles.text}>onMin and onMax (min 0, max 3)</Text>
 						<InputSpinner
 							value={this.state.value}
 							style={Styles.spinner}
@@ -179,9 +172,7 @@ export default class App extends Component {
 						/>
 					</View>
 					<View style={Styles.col}>
-						<Text style={Styles.text}>
-							Min & Max colors (min 5, max 10)
-						</Text>
+						<Text style={Styles.text}>Min & Max colors (min 5, max 10)</Text>
 						<InputSpinner
 							value={this.state.value + 1}
 							style={Styles.spinner}
@@ -192,9 +183,7 @@ export default class App extends Component {
 						/>
 					</View>
 					<View style={Styles.col}>
-						<Text style={Styles.text}>
-							Type real (step 0.5, precision 1)
-						</Text>
+						<Text style={Styles.text}>Type real (step 0.5, precision 1)</Text>
 						<InputSpinner
 							value={this.state.valueReal}
 							style={Styles.spinner}
@@ -204,9 +193,7 @@ export default class App extends Component {
 						/>
 					</View>
 					<View style={Styles.col}>
-						<Text style={Styles.text}>
-							Type real (step 0.05, precision 2)
-						</Text>
+						<Text style={Styles.text}>Type real (step 0.05, precision 2)</Text>
 						<InputSpinner
 							value={this.state.valueReal}
 							style={Styles.spinner}
@@ -257,9 +244,7 @@ export default class App extends Component {
 						/>
 					</View>
 					<View style={Styles.col}>
-						<Text style={Styles.text}>
-							color, background and textColor
-						</Text>
+						<Text style={Styles.text}>color, background and textColor</Text>
 						<InputSpinner
 							value={this.state.value}
 							style={Styles.spinner}
@@ -299,9 +284,7 @@ export default class App extends Component {
 						/>
 					</View>
 					<View style={Styles.col}>
-						<Text style={Styles.text}>
-							colorLeft and colorRight
-						</Text>
+						<Text style={Styles.text}>colorLeft and colorRight</Text>
 						<InputSpinner
 							value={this.state.value}
 							style={Styles.spinner}
@@ -330,9 +313,7 @@ export default class App extends Component {
 					</View>
 					<View style={Styles.col}>
 						<Text style={Styles.text}>Children</Text>
-						<InputSpinner
-							value={this.state.value}
-							style={Styles.spinner}>
+						<InputSpinner value={this.state.value} style={Styles.spinner}>
 							<Text style={Styles.simbol}>$</Text>
 						</InputSpinner>
 					</View>
@@ -342,18 +323,13 @@ export default class App extends Component {
 							value={this.state.value}
 							style={Styles.spinner}
 							append={<Text style={Styles.simbol}>Append</Text>}
-							prepend={
-								<Text style={Styles.simbol}>Prepend</Text>
-							}>
+							prepend={<Text style={Styles.simbol}>Prepend</Text>}>
 							<Text style={Styles.simbol}>$</Text>
 						</InputSpinner>
 					</View>
 					<View style={Styles.col}>
 						<Text style={Styles.text}>Placeholder</Text>
-						<InputSpinner
-							style={Styles.spinner}
-							placeholder={"Placeholder"}
-						/>
+						<InputSpinner style={Styles.spinner} placeholder={"Placeholder"} />
 					</View>
 					<View style={Styles.col}>
 						<Text style={Styles.text}>Mixed</Text>

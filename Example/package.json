@@ -16,18 +16,6 @@
 		"react-native-input-spinner": "^1.6.0",
 		"react-native-web": "~0.15.0"
 	},
-	"prettier": {
-		"tabWidth": 4,
-		"useTabs": true,
-		"semi": true,
-		"singleQuote": false,
-		"trailingComma": "es5",
-		"bracketSpacing": false,
-		"jsxBracketSameLine": true,
-		"arrowParens": "always",
-		"requirePragma": false,
-		"insertPragma": false
-	},
 	"devDependencies": {
 		"babel-preset-expo": "8.3.0"
 	},
