@@ -58,7 +58,9 @@ For more examples check the `Example` directory the `App.js` file
 
 ### High customization
 
-<img src="images/customization.png" />
+| Skins                                     | Customization                          |
+| ----------------------------------------- | -------------------------------------- |
+| <img src="images/skins.png" width="300"/> | <img src="images/customization.png" /> |
 
 ## ⚡️ Run example
 
