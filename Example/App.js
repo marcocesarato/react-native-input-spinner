@@ -201,12 +201,28 @@ export default class App extends Component {
 							precision={2}
 						/>
 					</View>
+					<Text style={Styles.title}>
+						Skins
+					</Text>
+					<View style={Styles.col}>
+						<Text style={Styles.text}>Skin Default</Text>
+						<InputSpinner
+							value={this.state.value}
+							style={Styles.spinner}
+							max={10}
+							colorMax={"#f04048"}
+							colorMin={"#82cc62"}
+						/>
+					</View>
 					<View style={Styles.col}>
 						<Text style={Styles.text}>Skin Round</Text>
 						<InputSpinner
 							value={this.state.value}
 							style={Styles.spinner}
 							skin="round"
+							max={10}
+							colorMax={"#f04048"}
+							colorMin={"#82cc62"}
 						/>
 					</View>
 					<View style={Styles.col}>
@@ -215,6 +231,9 @@ export default class App extends Component {
 							value={this.state.value}
 							style={Styles.spinner}
 							skin="square"
+							max={10}
+							colorMax={"#f04048"}
+							colorMin={"#82cc62"}
 						/>
 					</View>
 					<View style={Styles.col}>
@@ -224,6 +243,9 @@ export default class App extends Component {
 							style={Styles.spinner}
 							height={30}
 							skin="paper"
+							max={10}
+							colorMax={"#f04048"}
+							colorMin={"#82cc62"}
 						/>
 					</View>
 					<View style={Styles.col}>
@@ -232,6 +254,9 @@ export default class App extends Component {
 							value={this.state.value}
 							style={Styles.spinner}
 							skin="clean"
+							max={10}
+							colorMax={"#f04048"}
+							colorMin={"#82cc62"}
 						/>
 					</View>
 					<View style={Styles.col}>
@@ -240,10 +265,16 @@ export default class App extends Component {
 							value={this.state.value}
 							style={Styles.spinner}
 							skin="modern"
+							max={10}
+							colorMax={"#f04048"}
+							colorMin={"#82cc62"}
 						/>
 					</View>
+					<Text style={Styles.title}>
+						Customization
+					</Text>
 					<View style={Styles.col}>
-						<Text style={Styles.text}>color, background and textColor</Text>
+						<Text style={Styles.text}>color, background, rounded false, showBorder false and textColor</Text>
 						<InputSpinner
 							value={this.state.value}
 							style={Styles.spinner}
@@ -335,7 +366,7 @@ export default class App extends Component {
 						<InputSpinner
 							style={Styles.spinner}
 							value={80}
-							min={18}
+							min={5}
 							max={48}
 							step={2}
 							rounded={false}
