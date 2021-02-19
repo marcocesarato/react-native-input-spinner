@@ -60,6 +60,12 @@ export const isNumeric = (num) => {
 	);
 };
 
+/**
+ * Merge styles
+ * @param style
+ * @param defaultStyle
+ * @returns {*[]}
+ */
 export const mergeViewStyle = (style, defaultStyle) => {
 	if (Array.isArray(style) && Array.isArray(defaultStyle)) {
 		defaultStyle.concat(style);
