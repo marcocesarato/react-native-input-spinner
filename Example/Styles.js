@@ -1,4 +1,4 @@
-import {StatusBar, StyleSheet} from "react-native";
+import {Platform, StatusBar, StyleSheet} from "react-native";
 
 export default StyleSheet.create({
 	mainContainer: {
@@ -39,8 +39,13 @@ export default StyleSheet.create({
 	},
 	spinner: {
 		flex: 1,
-		width: "auto",
 		marginRight: 10,
+		...Platform.select({
+			web: {},
+			default: {
+				minWidth: 150,
+			},
+		}),
 	},
 	simbol: {
 		marginLeft: 10,
