@@ -2,7 +2,6 @@ import React from "react";
 import {mergeViewStyle} from "../Utils";
 
 export const getProps = (props) => {
-	console.log(mergeViewStyle(props.style, {padding: 10, borderRadius: 3}));
 	return {
 		style: mergeViewStyle(props.style, {padding: 10, borderRadius: 3}),
 		height: props.height ? props.height : 30,

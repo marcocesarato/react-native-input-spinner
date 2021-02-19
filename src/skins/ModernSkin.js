@@ -1,4 +1,3 @@
-import {Platform} from "react-native";
 import React from "react";
 import {mergeViewStyle} from "../Utils";
 
