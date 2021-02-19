@@ -10,8 +10,9 @@ import * as SquareSkin from "./skins/SquareSkin";
 
 // Export
 export default (props) => {
-	let skinProps = {};
-	switch (props.skin) {
+	const skin = String(props.skin).trim().toLowerCase();
+	let skinProps;
+	switch (skin) {
 		case "clean":
 			skinProps = CleanSkin.getProps(props);
 			break;
@@ -27,6 +28,8 @@ export default (props) => {
 		case "square":
 			skinProps = SquareSkin.getProps(props);
 			break;
+		default:
+			skinProps = {};
 	}
 	let overwriteProps = {...props, ...skinProps};
 	return <InputSpinner {...overwriteProps} />;
