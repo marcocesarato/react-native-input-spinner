@@ -143,27 +143,29 @@ Check the "[Props List](PROPS.md)" file to have the complete list of component p
 
 ### Props Styles
 
-| Property           | Description                   | Type   | Default | Note                        |
-| ------------------ | ----------------------------- | ------ | ------- | --------------------------- |
-| `buttonPressStyle` | Button style on Pressed state | Object |         | Could overwrite other props |
-| `buttonStyle`      | Button style                  | Object |         | Could overwrite other props |
-| `inputStyle`       | Text Input style              | Object |         | Could overwrite other props |
-| `style`            | Container style               | Object |         | Could overwrite other props |
+| Property           | Description                   | Type   | Default | Note                                          |
+| ------------------ | ----------------------------- | ------ | ------- | --------------------------------------------- |
+| `buttonPressStyle` | Button style on Pressed state | Object |         | Could overwrite other props                   |
+| `buttonStyle`      | Button style                  | Object |         | Could overwrite other props                   |
+| `inputStyle`       | Text Input style              | Object |         | Could overwrite other props                   |
+| `skin`             | Skin layout                   | String |         | `clean`, `modern`, `paper`, `round`, `square` |
+| `style`            | Container style               | Object |         | Could overwrite other props                   |
 
 ### Props Colors
 
 | Property               | Description                                                | Type   | Default       | Note |
 | ---------------------- | ---------------------------------------------------------- | ------ | ------------- | ---- |
 | `background`           | Custom input text background color                         | String | `transparent` |
-| `buttonPressTextColor` | Custom color of the button of the Spinner on Pressed state | String | `#FFFFFF`     |
-| `buttonTextColor`      | Custom color of the labels's button of the Spinner         | String | `#FFFFFF`     |
+| `buttonPressTextColor` | Custom color of the button of the Spinner on Pressed state | String | Auto          |
+| `buttonTextColor`      | Custom color of the label's button of the Spinner          | String | Auto          |
+| `colorAsBackground`    | Use color as background                                    | Bool   | `false`       |
 | `colorLeft`            | Custom color of the Spinner left button                    | String | `#3E525F`     |
 | `colorMax`             | Custom color of the Spinner when reach max value           | String |               |
 | `colorMin`             | Custom color of the Spinner when reach min value           | String |               |
 | `colorPress`           | Custom color of the Spinner button on touch press          | String | `#3E525F`     |
 | `colorRight`           | Custom color of the Spinner right button                   | String | `#3E525F`     |
 | `color`                | Custom color of the Spinner                                | String | `#3E525F`     |
-| `textColor`            | Custom input text number color                             | String | `#000000`     |
+| `textColor`            | Custom input text number color                             | String | Auto          |
 
 #### Screenshots
 
