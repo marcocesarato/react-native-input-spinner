@@ -4,8 +4,7 @@ import {getSkin} from "./Skins";
 
 // Export
 export default (props) => {
-	const skin = String(props.skin).trim().toLowerCase();
-	const skinProps = getSkin(skin, props);
-	const overwriteProps = {...props, ...skinProps};
-	return <InputSpinner {...overwriteProps} />;
+	const skinProps = getSkin(props.skin, props);
+	const finalProps = {...props, ...skinProps};
+	return <InputSpinner {...finalProps} />;
 };

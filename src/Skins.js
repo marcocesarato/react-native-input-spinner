@@ -9,6 +9,7 @@ import * as SquareSkin from "./skins/SquareSkin";
  * @returns {*}
  */
 export const getSkin = (skin, props) => {
+	skin = String(props.skin).trim().toLowerCase();
 	switch (skin) {
 		case "clean":
 			return CleanSkin.getProps(props);
