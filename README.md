@@ -60,7 +60,7 @@ For more examples check the `Example` directory the `App.js` file
 
 | Skins                                     | Customization                          |
 | ----------------------------------------- | -------------------------------------- |
-| <img src="images/skins.png" width="300"/> | <img src="images/customization.png" /> |
+| <img src="images/skins.png" width="500"/> | <img src="images/customization.png" /> |
 
 ## ⚡️ Run example
 
@@ -74,9 +74,7 @@ expo start
 
 Open Expo Client on your device. Use it to scan the QR code printed by `expo start`. You may have to wait a minute while your project bundles and loads for the first time.
 
-### Example app
-
-<img src="images/example_app.png" />
+[Example App Screenshot](images/example_app.png)
 
 ## 💡 Props
 
