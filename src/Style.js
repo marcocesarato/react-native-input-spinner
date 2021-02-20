@@ -5,6 +5,11 @@ import {Platform, StyleSheet} from "react-native";
  */
 export const defaultColor = "#3E525F";
 export const defaultTransparent = "#FFFFFF00";
+export const defaultFont = Platform.select({
+	ios: "System",
+	android: "System",
+	web: "sans-serif",
+});
 
 /**
  * Default style

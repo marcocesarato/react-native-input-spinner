@@ -1465,15 +1465,9 @@ InputSpinner.defaultProps = {
 	arrows: false,
 	showBorder: false,
 	fontSize: 14,
-	fontFamily: Platform.select({
-		ios: "San Francisco",
-		default: "sans-serif",
-	}),
+	fontFamily: defaultFont,
 	buttonFontSize: 25,
-	buttonFontFamily: Platform.select({
-		ios: "San Francisco",
-		default: "sans-serif",
-	}),
+	buttonFontFamily: defaultFont,
 	buttonTextColor: null,
 	buttonPressTextColor: null,
 	maxLength: null,
