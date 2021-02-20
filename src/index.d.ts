@@ -66,7 +66,9 @@ export interface ReactNativeInputSpinnerProps {
 	buttonPressLeftImage?: React.ReactElement;
 	buttonPressRightImage?: React.ReactElement;
 	buttonStyle?: StyleProp<ViewStyle>;
+	buttonTextStyle?: StyleProp<ViewStyle>;
 	buttonPressStyle?: StyleProp<ViewStyle>;
+	buttonPressTextStyle?: StyleProp<ViewStyle>;
 	inputStyle?: StyleProp<ViewStyle>;
 	style?: StyleProp<ViewStyle>;
 	append?: React.ReactElement;
