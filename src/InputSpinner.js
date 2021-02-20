@@ -9,6 +9,7 @@ import {
 import PropTypes from "prop-types";
 import {defaultColor, defaultTransparent, Style} from "./Style";
 import {
+	colorsToHex,
 	debounce,
 	getColorContrast,
 	isCallable,
@@ -16,6 +17,7 @@ import {
 	isNumeric,
 	isTransparentColor,
 	mergeViewStyle,
+	parseColor,
 } from "./Utils";
 
 /**
@@ -509,6 +511,23 @@ class InputSpinner extends Component {
 	}
 
 	/**
+	 * Get Placeholder
+	 * @returns {*}
+	 */
+	getPlaceholderColor() {
+		if (this.props.placeholderTextColor) {
+			return this.props.placeholderTextColor;
+		}
+		let textColor = this._getInputTextColor();
+		let parse = parseColor(textColor);
+		parse[3] = Math.round(0.6 * 255);
+
+		console.log(colorsToHex(parse));
+
+		return colorsToHex(parse);
+	}
+
+	/**
 	 * Get Type
 	 * @returns {String}
 	 */
@@ -858,13 +877,24 @@ class InputSpinner extends Component {
 	 * @returns {String|*}
 	 * @private
 	 */
-	_getColor() {
+	_getMainColor() {
 		let color = this.props.color;
 		if (this.props.colorAsBackground) {
 			color = defaultTransparent;
 		} else if (isTransparentColor(color)) {
 			color = defaultTransparent;
 		}
+
+		return color;
+	}
+
+	/**
+	 * Get button color
+	 * @returns {String|*}
+	 * @private
+	 */
+	_getColor() {
+		const color = this._getMainColor();
 
 		return this.isMaxReached()
 			? this._getColorMax()
@@ -923,9 +953,15 @@ class InputSpinner extends Component {
 		const pressColor = this.props.buttonPressTextColor
 			? this.props.buttonPressTextColor
 			: this._getColorText();
-		return this.props.buttonPressTextColor !== this.props.buttonTextColor
-			? pressColor
-			: getColorContrast(color);
+		let textColor =
+			this.props.buttonPressTextColor !== this.props.buttonTextColor
+				? pressColor
+				: "auto";
+		if (String(textColor).toLowerCase().trim() === "auto") {
+			textColor = getColorContrast(color);
+		}
+
+		return textColor;
 	}
 
 	/**
@@ -937,9 +973,17 @@ class InputSpinner extends Component {
 		const color = this.props.colorAsBackground
 			? this._getColorBackground()
 			: this._getColor();
-		return this.props.buttonTextColor
-			? this.props.buttonTextColor
-			: getColorContrast(color);
+		let textColor =
+			this._getColor() !== this._getMainColor()
+				? "auto"
+				: this.props.buttonTextColor
+				? this.props.buttonTextColor
+				: "auto";
+		if (String(textColor).toLowerCase().trim() === "auto") {
+			textColor = getColorContrast(color);
+		}
+
+		return textColor;
 	}
 
 	/**
@@ -1011,6 +1055,18 @@ class InputSpinner extends Component {
 	}
 
 	/**
+	 * Get input text color
+	 * @returns {string|*}
+	 * @private
+	 */
+	_getInputTextColor() {
+		const backgroundColor = this._getColorBackground();
+		return this.props.textColor
+			? this.props.textColor
+			: getColorContrast(backgroundColor);
+	}
+
+	/**
 	 * Get input text style
 	 * @returns {*[]}
 	 * @private
@@ -1020,9 +1076,7 @@ class InputSpinner extends Component {
 		return [
 			Style.numberText,
 			{
-				color: this.props.textColor
-					? this.props.textColor
-					: getColorContrast(backgroundColor),
+				color: this._getInputTextColor(),
 				fontSize: this.props.fontSize,
 				fontFamily: this.props.fontFamily,
 				backgroundColor: backgroundColor,
@@ -1072,6 +1126,7 @@ class InputSpinner extends Component {
 				fontFamily: this.props.buttonFontFamily,
 				lineHeight: this.props.height,
 			},
+			this.props.buttonTextStyle ? this.props.buttonTextStyle : {},
 		];
 	}
 
@@ -1089,6 +1144,7 @@ class InputSpinner extends Component {
 					? this._getColorPressText()
 					: this._getColorText(),
 			},
+			this._isLeftButtonPressed() ? this.props.buttonPressTextStyle : {},
 		];
 	}
 
@@ -1106,6 +1162,7 @@ class InputSpinner extends Component {
 					? this._getColorPressText()
 					: this._getColorText(),
 			},
+			this._isRightButtonPressed() ? this.props.buttonPressTextStyle : {},
 		];
 	}
 
@@ -1250,7 +1307,7 @@ class InputSpinner extends Component {
 					style={this._getInputTextStyle()}
 					value={this.getValue()}
 					placeholder={this.getPlaceholder()}
-					placeholderTextColor={this.props.placeholderTextColor}
+					placeholderTextColor={this.getPlaceholderColor()}
 					selectionColor={this.props.selectionColor}
 					selectTextOnFocus={this.props.selectTextOnFocus}
 					returnKeyType={this.props.returnKeyType}
@@ -1346,7 +1403,19 @@ InputSpinner.propTypes = {
 		PropTypes.number,
 		PropTypes.string,
 	]),
+	buttonTextStyle: PropTypes.oneOfType([
+		PropTypes.object,
+		PropTypes.array,
+		PropTypes.number,
+		PropTypes.string,
+	]),
 	buttonPressStyle: PropTypes.oneOfType([
+		PropTypes.object,
+		PropTypes.array,
+		PropTypes.number,
+		PropTypes.string,
+	]),
+	buttonPressTextStyle: PropTypes.oneOfType([
 		PropTypes.object,
 		PropTypes.array,
 		PropTypes.number,
@@ -1427,7 +1496,9 @@ InputSpinner.defaultProps = {
 	buttonLeftText: null,
 	buttonRightText: null,
 	buttonStyle: null,
+	buttonTextStyle: null,
 	buttonPressStyle: null,
+	buttonPressTextStyle: null,
 	inputStyle: null,
 	style: null,
 	decimalSeparator: ".",
