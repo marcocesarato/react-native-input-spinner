@@ -10,7 +10,6 @@ export const isEmpty = (x) => {
 	}
 
 	if (!x) return true;
-	if (x === "") return true;
 	if (x === {}) return true;
 	if (x === []) return true;
 	if (x == null) return true;
@@ -85,8 +84,30 @@ export const parseColor = (color) => {
 	} else {
 		colors = [0, 0, 0, 0];
 	}
-	isNaN(colors[3]) && (colors[3] = 1);
-	return colors.slice(0, 4);
+
+	// Add alpha if missing
+	if (isNaN(colors[3])) {
+		colors[3] = 255;
+	}
+
+	return colors;
+};
+
+/**
+ * Parsed colors to hex code
+ * @param colors
+ * @returns {string}
+ */
+export const colorsToHex = (colors) => {
+	const hexColors = colors.map((color) => {
+		color = color.toString(16);
+		while (color.length < 2) {
+			color += "0";
+		}
+		return color;
+	});
+
+	return "#" + hexColors.join("");
 };
 
 /**
