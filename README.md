@@ -205,6 +205,8 @@ Check the "[Props List](PROPS.md)" file to have the complete list of component p
 | `buttonRightText`       | Custom text on the button right of the spinner                     | String    |                |
 | `buttonStyle`           | Button Style (Plus and Minus buttons)                              | Object    |                |
 | `buttonTextColor`       | Custom color of the labels's button of the Spinner                 | String    | `#FFFFFF`      |
+| `buttonPressTextStyle`  | Button Style on Pressed state (Plus and Minus buttons)             | Object    |                | Could overwrite other props |
+| `buttonTextStyle`       | Button text Style state (Plus and Minus buttons)                   | Object    |                | Could overwrite other props |
 | `rounded`               | Use circular button                                                | Boolean   | `true`         |
 
 ### Props Text Input Style
