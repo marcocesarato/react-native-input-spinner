@@ -4,7 +4,10 @@
  * @returns {boolean}
  */
 export const isEmpty = (x) => {
-	if (typeof x === typeof "") x = x.replace(/\s/g, "");
+	if (typeof x === typeof "") {
+		x = x.replace(/\s/g, "");
+		return x === "";
+	}
 
 	if (!x) return true;
 	if (x === "") return true;
