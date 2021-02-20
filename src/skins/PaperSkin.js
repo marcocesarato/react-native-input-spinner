@@ -11,5 +11,7 @@ export const getProps = (props) => {
 		background: props.background ? props.background : "#FFF",
 		color: colorFallback,
 		colorPress: props.colorPress ? props.colorPress : colorPressFallback,
+		buttonTextColor: colorPressFallback,
+		buttonPressTextColor: "auto",
 	};
 };
