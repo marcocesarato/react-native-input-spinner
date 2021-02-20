@@ -7,7 +7,7 @@ import {
 	View,
 } from "react-native";
 import PropTypes from "prop-types";
-import {defaultColor, defaultTransparent, Style} from "./Style";
+import {defaultColor, defaultTransparent, defaultFont, Style} from "./Style";
 import {
 	colorsToHex,
 	debounce,
