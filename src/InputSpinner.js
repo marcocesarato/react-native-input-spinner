@@ -522,8 +522,6 @@ class InputSpinner extends Component {
 		let parse = parseColor(textColor);
 		parse[3] = Math.round(0.6 * 255);
 
-		console.log(colorsToHex(parse));
-
 		return colorsToHex(parse);
 	}
 
