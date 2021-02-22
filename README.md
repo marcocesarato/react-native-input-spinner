@@ -1,14 +1,17 @@
+<div align="center">
+
 <img src="images/logo_full.png" width="100%"/>
 
-[![NPM version](http://img.shields.io/npm/v/react-native-input-spinner.svg?style=flat-square)](http://npmjs.org/package/react-native-input-spinner)
-[![npm](https://img.shields.io/npm/dy/react-native-input-spinner?style=flat-square)](http://npmjs.org/package/react-native-input-spinner)
-[![Package Quality](https://npm.packagequality.com/shield/react-native-input-spinner.svg?style=flat-square)](https://packagequality.com/#?package=react-native-input-spinner)
-[![js-prittier-style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://prettier.io/)
-[![Compatibility](https://img.shields.io/badge/platform-android%20%7C%20ios%20%7C%20expo-blue.svg?style=flat-square)](http://npmjs.org/package/react-native-input-spinner)
-
-[![NPM](https://nodei.co/npm/react-native-input-spinner.png?mini=true)](https://nodei.co/npm/react-native-input-spinner/)
-
 ### If this project has helped you out, please support us with a star 🌟
+
+<br>
+
+[![NPM version](http://img.shields.io/npm/v/react-native-input-spinner.svg?style=for-the-badge)](http://npmjs.org/package/react-native-input-spinner)
+[![Package Quality](https://npm.packagequality.com/shield/react-native-input-spinner.svg?style=for-the-badge)](https://packagequality.com/#?package=react-native-input-spinner)
+[![js-prittier-style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=for-the-badge)](https://prettier.io/)
+[![Compatibility](https://img.shields.io/badge/platform-android%20%7C%20ios%20%7C%20expo-blue.svg?style=for-the-badge)](http://npmjs.org/package/react-native-input-spinner)
+
+</div>
 
 ## 📘 Description
 
@@ -28,6 +31,9 @@ Install the library from npm or yarn just running one of the following command l
 | npm                                             | yarn                                  |
 | ----------------------------------------------- | ------------------------------------- |
 | `npm install react-native-input-spinner --save` | `yarn add react-native-input-spinner` |
+
+
+[![NPM](https://nodei.co/npm/react-native-input-spinner.png?mini=true)](https://nodei.co/npm/react-native-input-spinner/)
 
 ## 💻 Usage
 
