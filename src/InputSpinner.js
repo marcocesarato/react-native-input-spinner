@@ -309,6 +309,8 @@ class InputSpinner extends Component {
 
 		if (isEmptyValue && this.isEmptied()) {
 			num = parsedNum = null;
+		} else {
+			num = this._withinRange(num);
 		}
 
 		if (this.state.value !== num && isCallable(this.props.onChange)) {
@@ -322,11 +324,7 @@ class InputSpinner extends Component {
 			}
 		}
 
-		if (!isEmptyValue) {
-			this.setState({value: num});
-		} else {
-			this.setState({value: value});
-		}
+		this.setState({value: num});
 	}
 
 	/**
