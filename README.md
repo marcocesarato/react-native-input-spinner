@@ -32,7 +32,6 @@ Install the library from npm or yarn just running one of the following command l
 | ----------------------------------------------- | ------------------------------------- |
 | `npm install react-native-input-spinner --save` | `yarn add react-native-input-spinner` |
 
-
 [![NPM](https://nodei.co/npm/react-native-input-spinner.png?mini=true)](https://nodei.co/npm/react-native-input-spinner/)
 
 ## 💻 Usage
