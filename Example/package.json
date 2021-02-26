@@ -6,7 +6,7 @@
 		"ios": "expo start --ios",
 		"web": "expo start --web",
 		"eject": "expo eject",
-		"prettify": "prettier --write './src/**/*.{ts,json,md,yml,js}' && prettier --write './*.{ts,json,md,yml,js}'"
+		"prettify": "npx prettier --write './src/**/*.{ts,json,md,yml,js}' && npx prettier --write './*.{ts,json,md,yml,js}'"
 	},
 	"dependencies": {
 		"expo": "^40.0.1",
