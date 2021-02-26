@@ -1,13 +1,5 @@
 import React, {Component} from "react";
-import {
-	Text,
-	View,
-	ScrollView,
-	Image,
-	FlatList,
-	SafeAreaView,
-	Button,
-} from "react-native";
+import {Text, View, ScrollView, Image, SafeAreaView} from "react-native";
 import InputSpinner from "react-native-input-spinner";
 import Styles from "./Styles";
 
@@ -28,47 +20,6 @@ export default class App extends Component {
 			colorRight: this.getRandomColor(),
 			data: data,
 		};
-	}
-
-	renderItem({item}) {
-		return (
-			<View style={Styles.item}>
-				<Text style={{marginRight: 20}}>
-					Key: {item.key}
-					{"\n"}Value: {item.value}
-				</Text>
-				<View style={{marginRight: 20}}>
-					<Button
-						style={{marginRight: 20}}
-						onPress={() => {
-							var data = this.state.data;
-							data[item.key].value = data[item.key].value - 5;
-							this.setState({data: data});
-						}}
-						title="- 5"
-					/>
-				</View>
-				<View style={{marginRight: 20}}>
-					<Button
-						onPress={() => {
-							var data = this.state.data;
-							data[item.key].value = data[item.key].value + 5;
-							this.setState({data: data});
-						}}
-						title="+ 5"
-					/>
-				</View>
-				<InputSpinner
-					value={item.value}
-					style={Styles.spinner}
-					onChange={(num) => {
-						var data = this.state.data;
-						data[item.key].value = num;
-						this.setState({data: data});
-					}}
-				/>
-			</View>
-		);
 	}
 
 	getRandomColor() {
@@ -201,9 +152,7 @@ export default class App extends Component {
 							precision={2}
 						/>
 					</View>
-					<Text style={Styles.title}>
-						Skins
-					</Text>
+					<Text style={Styles.title}>Skins</Text>
 					<View style={Styles.col}>
 						<Text style={Styles.text}>Skin Default</Text>
 						<InputSpinner
@@ -263,18 +212,21 @@ export default class App extends Component {
 						<Text style={Styles.text}>Skin Modern</Text>
 						<InputSpinner
 							value={this.state.value}
-							style={Styles.spinner}
+							style={[
+								Styles.spinner,
+								{minWidth: 150} /*reset minWidth set on Style.spinner*/,
+							]}
 							skin="modern"
 							max={10}
 							colorMax={"#f04048"}
 							colorMin={"#82cc62"}
 						/>
 					</View>
-					<Text style={Styles.title}>
-						Customization
-					</Text>
+					<Text style={Styles.title}>Customization</Text>
 					<View style={Styles.col}>
-						<Text style={Styles.text}>color, background, rounded false, showBorder false and textColor</Text>
+						<Text style={Styles.text}>
+							color, background, rounded false, showBorder false and textColor
+						</Text>
 						<InputSpinner
 							value={this.state.value}
 							style={Styles.spinner}
@@ -348,16 +300,6 @@ export default class App extends Component {
 						</InputSpinner>
 					</View>
 					<View style={Styles.col}>
-						<Text style={Styles.text}>Prepend and append</Text>
-						<InputSpinner
-							value={this.state.value}
-							style={Styles.spinner}
-							append={<Text style={Styles.simbol}>Append</Text>}
-							prepend={<Text style={Styles.simbol}>Prepend</Text>}>
-							<Text style={Styles.simbol}>$</Text>
-						</InputSpinner>
-					</View>
-					<View style={Styles.col}>
 						<Text style={Styles.text}>Placeholder</Text>
 						<InputSpinner style={Styles.spinner} placeholder={"Placeholder"} />
 					</View>
@@ -377,13 +319,16 @@ export default class App extends Component {
 							}}
 						/>
 					</View>
-					<Text style={Styles.title}>List</Text>
-					<FlatList
-						style={{height: 500}}
-						data={this.state.data}
-						renderItem={this.renderItem.bind(this)}
-						keyExtractor={(item) => item.key}
-					/>
+					<Text style={Styles.title}>Append/Prepend</Text>
+					<View style={Styles.col}>
+						<InputSpinner
+							value={this.state.value}
+							style={[Styles.spinner, {minWidth: 300}]}
+							append={<Text style={Styles.simbol}>Append</Text>}
+							prepend={<Text style={Styles.simbol}>Prepend</Text>}>
+							<Text style={Styles.simbol}>$</Text>
+						</InputSpinner>
+					</View>
 				</ScrollView>
 			</SafeAreaView>
 		);
