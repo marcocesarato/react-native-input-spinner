@@ -66,7 +66,7 @@ export const Style = StyleSheet.create({
 		textAlignVertical: "center",
 	},
 	numberText: {
-		flex: 1,
+		flexGrow: 1,
 		textAlign: "center",
 		justifyContent: "center",
 		alignItems: "center",
@@ -74,6 +74,7 @@ export const Style = StyleSheet.create({
 		borderWidth: 0,
 		...Platform.select({
 			web: {
+				width: "100%",
 				outlineWidth: 0,
 			},
 		}),
