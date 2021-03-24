@@ -859,13 +859,26 @@ class InputSpinner extends Component {
 	 */
 	_getKeyboardType() {
 		// Keyboard type
-		let keyboardType = "numeric";
+		let keyboardType = "number-pad";
 		if (this.isTypeDecimal()) {
 			keyboardType = "decimal-pad";
-		} else {
-			keyboardType = "number-pad";
 		}
 		return keyboardType;
+	}
+
+	/**
+	 * Get auto capitalize
+	 * @returns {string}
+	 * @private
+	 */
+	_getAutoCapitalize() {
+		let autoCapitalize = this.props.autoCapitalize
+			? this.props.autoCapitalize
+			: "none";
+		if (this.isTypeDecimal()) {
+			autoCapitalize = "words";
+		}
+		return autoCapitalize;
 	}
 
 	/**
@@ -1309,6 +1322,7 @@ class InputSpinner extends Component {
 					returnKeyType={this.props.returnKeyType}
 					returnKeyLabel={this.props.returnKeyLabel}
 					autofocus={this.props.autofocus}
+					autoCapitalize={this._getAutoCapitalize()} // Bug fix for Samsung Keyboard
 					editable={this.isEditable()}
 					maxLength={this.props.maxLength}
 					onKeyPress={this.onKeyPress.bind(this)}
