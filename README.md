@@ -22,6 +22,8 @@
 An extendible input number spinner component for react-native highly customizable.
 This component enhance a text input for entering numeric values, with increase and decrease buttons.
 
+Try it on the published demo web app: [https://marcocesarato.github.io/react-native-input-spinner/](https://marcocesarato.github.io/react-native-input-spinner/)
+
 _Compatible with: Android, iOS, Windows, Web and Expo._
 
 ## 📖 Install
@@ -67,7 +69,13 @@ For more examples check the `Example` directory the `App.js` file
 | ----------------------------------------- | -------------------------------------- |
 | <img src="images/skins.png" width="500"/> | <img src="images/customization.png" /> |
 
-## ⚡️ Run example
+## ⚡️ Example
+
+### Web
+
+[https://marcocesarato.github.io/react-native-input-spinner/](https://marcocesarato.github.io/react-native-input-spinner/)
+
+### Expo
 
 Clone or download repo and after:
 
