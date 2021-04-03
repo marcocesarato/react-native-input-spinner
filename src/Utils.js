@@ -177,8 +177,10 @@ export const mergeViewStyle = (style, defaultStyle) => {
 		style = defaultStyle;
 	} else if (Array.isArray(style) && Array.isArray(defaultStyle)) {
 		defaultStyle.concat(style);
+		style = defaultStyle;
 	} else if (Array.isArray(defaultStyle)) {
 		defaultStyle.push(style);
+		style = defaultStyle;
 	} else if (Array.isArray(style)) {
 		style.unshift(defaultStyle);
 	} else {
