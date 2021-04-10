@@ -1321,7 +1321,7 @@ class InputSpinner extends Component {
 					selectTextOnFocus={this.props.selectTextOnFocus}
 					returnKeyType={this.props.returnKeyType}
 					returnKeyLabel={this.props.returnKeyLabel}
-					autofocus={this.props.autofocus}
+					autoFocus={this.props.autoFocus}
 					autoCapitalize={this._getAutoCapitalize()} // Bug fix for Samsung Keyboard
 					editable={this.isEditable()}
 					maxLength={this.props.maxLength}
@@ -1375,7 +1375,7 @@ InputSpinner.propTypes = {
 	maxLength: PropTypes.number,
 	disabled: PropTypes.bool,
 	editable: PropTypes.bool,
-	autofocus: PropTypes.bool,
+	autoFocus: PropTypes.bool,
 	selectTextOnFocus: PropTypes.bool,
 	placeholder: PropTypes.string,
 	placeholderTextColor: PropTypes.string,
@@ -1483,7 +1483,7 @@ InputSpinner.defaultProps = {
 	maxLength: null,
 	disabled: false,
 	editable: true,
-	autofocus: false,
+	autoFocus: false,
 	selectTextOnFocus: null,
 	selectionColor: null,
 	returnKeyLabel: null,

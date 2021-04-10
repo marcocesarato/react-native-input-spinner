@@ -33,7 +33,7 @@ export interface ReactNativeInputSpinnerProps {
 	maxLength?: number;
 	disabled?: boolean;
 	editable?: boolean;
-	autofocus?: boolean;
+	autoFocus?: boolean;
 	selectTextOnFocus?: boolean;
 	placeholder?: string;
 	placeholderTextColor?: string;
