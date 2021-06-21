@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {StyleProp, ViewStyle} from "react-native";
+import {StyleProp, TextProps, ViewStyle} from "react-native";
 
 export interface ReactNativeInputSpinnerProps {
 	type?: string;
@@ -78,5 +78,6 @@ export interface ReactNativeInputSpinnerProps {
 	inputProps?: object;
 	leftButtonProps?: object;
 	rightButtonProps?: object;
+	buttonTextProps?: TextProps;
 }
 export default class InputSpinner extends Component<ReactNativeInputSpinnerProps> {}
