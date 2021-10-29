@@ -16,7 +16,7 @@
 		"react": "17.0.2",
 		"react-dom": "17.0.2",
 		"react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
-		"react-native-input-spinner": "^1.7.11",
+		"react-native-input-spinner": "^1.7.12",
 		"react-native-web": "~0.15.5"
 	},
 	"devDependencies": {
