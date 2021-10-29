@@ -9,6 +9,7 @@ export const isEmpty = (x) => {
 		return x === "";
 	}
 
+	if (x===0) return false;
 	if (!x) return true;
 	if (x === {}) return true;
 	if (x === []) return true;
