@@ -21,7 +21,7 @@
 	},
 	"devDependencies": {
 		"babel-preset-expo": "9.2.2",
-		"gh-pages": "^4.0.0"
+		"gh-pages": "^5.0.0"
 	},
 	"private": true
 }
