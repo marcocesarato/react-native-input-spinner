@@ -12,7 +12,7 @@
 		"prettify": "npx prettier --write './src/**/*.{ts,json,md,yml,js}' && npx prettier --write './*.{ts,json,md,yml,js}'"
 	},
 	"dependencies": {
-		"expo": "^47.0.0",
+		"expo": "^48.0.0",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
 		"react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
