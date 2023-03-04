@@ -116,7 +116,7 @@ Check the "[Props List](PROPS.md)" file to have the complete list of component p
 
 | Property               | Description                                                                                                                    | Type             | Default | Note                              |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ---------------- | ------- | --------------------------------- |
-| `accelerationDelay`    | Delay time before start the `onLongPress` event and increase or decrease and continually                                       | Number           | `750 `  |                                   |
+| `accelerationDelay`    | Delay time before start the `onLongPress` event and increase or decrease and continually                                       | Number           | `1000`  |                                   |
 | `append`               | Custom element before right button                                                                                             | Component        |         |                                   |
 | `autoFocus`            | If `true`, focuses the input on `componentDidMount`.                                                                           |                  | `false` |                                   |
 | `continuity`           | On min value is reached next decrease value will be the max value, if max is reached next increase value will be the min value | Boolean          | `false` |                                   |
