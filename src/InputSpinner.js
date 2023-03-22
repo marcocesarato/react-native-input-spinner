@@ -494,7 +494,8 @@ class InputSpinner extends Component {
 					: ".",
 		  );
 
-		if (this.props.formatter !== null && typeof(this.props.formatter) === 'function') {
+		// Only apply the formatter if the field is not user-editable
+		if (this.props.formatter !== null && typeof(this.props.formatter) === 'function' && !this.props.editable) {
 			return this.props.formatter(value)
 		}
 		else {

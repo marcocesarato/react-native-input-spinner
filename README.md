@@ -145,7 +145,7 @@ Check the "[Props List](PROPS.md)" file to have the complete list of component p
 | `typingTime`           | Time before debounce and trigger `onChange` event                                                                              | Number           | `750`   |                                   |
 | `type`                 | Type of spinner                                                                                                                | String           | `int`   | Can be `int` or `real`/`float`... |
 | `value`                | Controlled value of the Spinner                                                                                                | String<br>Number | `0`     |                                   |
-| `formatter`            | An optional function that is called to format the value for display                                                            | Function         | `null`  | Should return a `string`          |
+| `formatter`            | An optional function that is called to format the value for display                                                            | Function         | `null`  | Should return a `string`.  `editable` must be `false`.          |
 
 #### Screenshots
 
