@@ -484,14 +484,22 @@ class InputSpinner extends Component {
 			value = String(this._parseNum(value));
 		}
 		let hasPlaceholder = value === "0" && !isEmpty(this.props.placeholder);
-		return hasPlaceholder
-			? ""
-			: value.replace(
-					".",
-					!isEmpty(this.props.decimalSeparator)
-						? this.props.decimalSeparator
-						: ".",
-			  );
+		
+		let accountingForDecimals = hasPlaceholder
+		? ""
+		: value.replace(
+				".",
+				!isEmpty(this.props.decimalSeparator)
+					? this.props.decimalSeparator
+					: ".",
+		  );
+
+		if (this.props.formatter !== null && typeof(this.props.formatter) === 'function') {
+			return this.props.formatter(value)
+		}
+		else {
+			return accountingForDecimals
+		}
 	}
 
 	/**
@@ -1451,6 +1459,7 @@ InputSpinner.propTypes = {
 	leftButtonProps: PropTypes.object,
 	rightButtonProps: PropTypes.object,
 	buttonTextProps: PropTypes.object,
+	formatter: PropTypes.func,
 };
 
 InputSpinner.defaultProps = {
@@ -1512,6 +1521,7 @@ InputSpinner.defaultProps = {
 	leftButtonProps: null,
 	rightButtonProps: null,
 	buttonTextProps: null,
+	formatter: null,
 };
 
 export default InputSpinner;
