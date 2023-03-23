@@ -20,7 +20,7 @@
 		"react-native-web": "~0.18.0"
 	},
 	"devDependencies": {
-		"babel-preset-expo": "9.3.0",
+		"babel-preset-expo": "9.3.1",
 		"gh-pages": "^5.0.0"
 	},
 	"private": true
