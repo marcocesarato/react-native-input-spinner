@@ -79,5 +79,6 @@ export interface ReactNativeInputSpinnerProps {
 	leftButtonProps?: object;
 	rightButtonProps?: object;
 	buttonTextProps?: TextProps;
+	formatter?(...args: unknown[]): unknown;
 }
 export default class InputSpinner extends Component<ReactNativeInputSpinnerProps> {}
