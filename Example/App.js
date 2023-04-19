@@ -39,6 +39,10 @@ export default class App extends Component {
 						Example{"\n"}react-native-input-spinner
 					</Text>
 					<View style={Styles.col}>
+						<Text style={Styles.text}>Prevent auto increment on scroll</Text>
+						<InputSpinner value={this.state.value} style={Styles.spinner} delayPressIn={100}/>
+					</View>
+					<View style={Styles.col}>
 						<Text style={Styles.text}>Standard</Text>
 						<InputSpinner value={this.state.value} style={Styles.spinner} />
 					</View>
