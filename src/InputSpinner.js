@@ -25,6 +25,8 @@ import {
  */
 export const defaultSpeed = 7;
 export const defaultAccelerationDelay = 1000;
+export const defaultDelayPressIn = 0;
+export const defaultDelayPressOut = 0;
 export const defaultTypingTime = 500;
 
 /**
@@ -1260,7 +1262,9 @@ class InputSpinner extends Component {
 				disabled={this._isDisabledButtonLeft()}
 				style={buttonStyle}
 				onPressIn={this.decrease.bind(this)}
+				delayPressIn={this.props.delayPressIn}
 				onPressOut={this.onPressOut.bind(this)}
+				delayPressOut={this.props.delayPressOut}
 				onLongPress={this.decreaseHold.bind(this)}
 				delayLongPress={this.props.accelerationDelay}
 				{...this.props.leftButtonProps}>
@@ -1300,7 +1304,9 @@ class InputSpinner extends Component {
 				disabled={this._isDisabledButtonRight()}
 				style={buttonStyle}
 				onPressIn={this.increase.bind(this)}
+				delayPressIn={this.props.delayPressIn}
 				onPressOut={this.onPressOut.bind(this)}
+				delayPressOut={this.props.delayPressOut}
 				onLongPress={this.increaseHold.bind(this)}
 				delayLongPress={this.props.accelerationDelay}
 				{...this.props.rightButtonProps}>
@@ -1502,6 +1508,8 @@ InputSpinner.defaultProps = {
 	width: "auto",
 	height: 50,
 	accelerationDelay: defaultAccelerationDelay,
+	delayPressIn: defaultDelayPressIn,
+	delayPressOut: defaultDelayPressOut,
 	speed: defaultSpeed,
 	emptied: false,
 	continuity: false,

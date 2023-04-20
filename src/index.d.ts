@@ -53,6 +53,8 @@ export interface ReactNativeInputSpinnerProps {
 	onSubmit?(...args: unknown[]): unknown;
 	onLongPress?(...args: unknown[]): unknown;
 	accelerationDelay?: number;
+	delayPressIn?: number,
+	delayPressOut?: number,
 	speed?: number;
 	emptied?: boolean;
 	continuity?: boolean;
