@@ -48,7 +48,7 @@
 		"prop-types": "^15.7.2"
 	},
 	"devDependencies": {
-		"prettier": "^2.3.1",
+		"prettier": "^3.0.2",
 		"pretty-quick": "^3.1.1"
 	},
 	"bit": {
