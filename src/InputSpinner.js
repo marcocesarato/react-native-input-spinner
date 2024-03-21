@@ -485,7 +485,7 @@ class InputSpinner extends Component {
 		} else {
 			value = String(this._parseNum(value));
 		}
-		let hasPlaceholder = value === "0" && !isEmpty(this.props.placeholder);
+		let hasPlaceholder = !isEmpty(this.props.placeholder);
 		
 		let accountingForDecimals = hasPlaceholder
 		? ""
