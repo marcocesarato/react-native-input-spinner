@@ -1,5 +1,12 @@
 import React, {Component} from "react";
-import {StyleProp, TextProps, ViewStyle} from "react-native";
+import {
+	NativeSyntheticEvent,
+	StyleProp,
+	TextInputFocusEventData,
+	TextInputKeyPressEventData,
+	TextProps,
+	ViewStyle,
+} from "react-native";
 
 export interface ReactNativeInputSpinnerProps {
 	type?: string;
@@ -42,19 +49,19 @@ export interface ReactNativeInputSpinnerProps {
 	returnKeyType?: string;
 	width?: string | number;
 	height?: string | number;
-	onChange?(...args: unknown[]): unknown;
-	onFocus?(...args: unknown[]): unknown;
-	onBlur?(...args: unknown[]): unknown;
-	onKeyPress?(...args: unknown[]): unknown;
-	onMin?(...args: unknown[]): unknown;
-	onMax?(...args: unknown[]): unknown;
-	onIncrease?(...args: unknown[]): unknown;
-	onDecrease?(...args: unknown[]): unknown;
-	onSubmit?(...args: unknown[]): unknown;
-	onLongPress?(...args: unknown[]): unknown;
+	onChange?: (value: number | null) => void | false | number;
+	onFocus?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+	onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+	onKeyPress?: (e: NativeSyntheticEvent<TextInputKeyPressEventData>) => void;
+	onMin?: (value: number) => void;
+	onMax?: (value: number) => void;
+	onIncrease?: (value: number) => void;
+	onDecrease?: (value: number) => void;
+	onSubmit?: (value: number) => void;
+	onLongPress?: (value: number) => void;
 	accelerationDelay?: number;
-	delayPressIn?: number,
-	delayPressOut?: number,
+	delayPressIn?: number;
+	delayPressOut?: number;
 	speed?: number;
 	emptied?: boolean;
 	continuity?: boolean;
@@ -81,6 +88,6 @@ export interface ReactNativeInputSpinnerProps {
 	leftButtonProps?: object;
 	rightButtonProps?: object;
 	buttonTextProps?: TextProps;
-	formatter?(...args: unknown[]): unknown;
+	formatter?: (value: number) => string;
 }
 export default class InputSpinner extends Component<ReactNativeInputSpinnerProps> {}
